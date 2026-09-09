@@ -1,0 +1,1764 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>건국대학교 캠퍼스타운사업 대시보드 · KU 원헬스·AI 이노베이션 허브</title>
+<style>
+  :root{
+    --forest:#0F4D33; --forest-deep:#0A3624; --leaf:#2E8B57; --leaf-light:#DCEEE2;
+    --paper:#F6F7F3; --card:#FFFFFF; --ink:#1B2B22; --ink-soft:#5B6B62; --line:#E2E6E0;
+    --amber:#B8792B; --amber-bg:#FBF0DF; --blue:#2E5FA3; --blue-bg:#E7EEF8;
+    --violet:#6B4FA0; --violet-bg:#EEE8F6; --red:#B4432F; --red-bg:#F8E9E5; --radius:14px;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{font-family:'Pretendard','Apple SD Gothic Neo','Malgun Gothic',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--paper);color:var(--ink);line-height:1.55;}
+  a{color:inherit;}
+  .shell{display:flex;min-height:100vh;}
+  .sidebar{width:264px;flex:0 0 264px;background:var(--forest-deep);color:#EFF6F1;position:sticky;top:0;height:100vh;overflow-y:auto;padding:28px 18px 24px;}
+  .brand{padding:0 8px 22px;border-bottom:1px solid rgba(255,255,255,.14);margin-bottom:18px;}
+  .brand-mark{font-size:12px;letter-spacing:.02em;color:#9FCBAE;font-weight:600;}
+  .brand-title{font-size:19px;font-weight:800;margin-top:6px;line-height:1.35;color:#fff;}
+  .brand-sub{font-size:12.5px;color:#B8D9C4;margin-top:8px;}
+  .navlist{list-style:none;margin:0;padding:0;}
+  .navlist li{margin-bottom:4px;}
+  .navlist button{width:100%;text-align:left;background:none;border:none;color:#DCEEE3;font-size:13.6px;font-weight:600;padding:10px 12px;border-radius:10px;cursor:pointer;display:flex;align-items:center;gap:10px;transition:background .15s ease;}
+  .navlist button .num{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:7px;background:rgba(255,255,255,.10);font-size:11.5px;font-weight:700;color:#B8D9C4;flex:0 0 auto;}
+  .navlist button:hover{background:rgba(255,255,255,.08);}
+  .navlist button.active{background:var(--leaf);color:#fff;}
+  .navlist button.active .num{background:rgba(255,255,255,.25);color:#fff;}
+  .sidebar-foot{margin-top:18px;padding:14px 12px;border-top:1px solid rgba(255,255,255,.14);font-size:11.3px;color:#8FB9A0;}
+  .main{flex:1 1 auto;min-width:0;padding:34px 40px 80px;max-width:1200px;}
+  .view{display:none;}
+  .view.active{display:block;animation:fadein .25s ease;}
+  @keyframes fadein{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:none;}}
+  .view-head{margin-bottom:26px;}
+  .view-kicker{font-size:12.5px;font-weight:700;color:var(--leaf);}
+  .view-title{font-size:26px;font-weight:800;margin:5px 0 8px;color:var(--forest-deep);}
+  .view-desc{font-size:14px;color:var(--ink-soft);max-width:760px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;}
+  .grid{display:grid;gap:16px;}
+  .grid-4{grid-template-columns:repeat(4,1fr);} .grid-3{grid-template-columns:repeat(3,1fr);} .grid-2{grid-template-columns:repeat(2,1fr);}
+  @media (max-width:980px){.grid-4{grid-template-columns:repeat(2,1fr);}.grid-3{grid-template-columns:repeat(2,1fr);}}
+  h2.sec-h{font-size:16.5px;font-weight:800;color:var(--forest-deep);margin:34px 0 14px;padding-top:16px;border-top:1px solid var(--line);}
+  h2.sec-h:first-of-type{border-top:none;margin-top:0;padding-top:0;}
+  h3.sub-h{font-size:13.5px;font-weight:800;color:var(--forest-deep);margin:0 0 10px;}
+  .sec-note{font-size:12.3px;color:var(--ink-soft);margin:-8px 0 16px;}
+  .kpi-card{position:relative;overflow:hidden;}
+  .kpi-tag{font-size:11px;font-weight:700;color:var(--leaf);background:var(--leaf-light);display:inline-block;padding:3px 9px;border-radius:20px;margin-bottom:10px;}
+  .kpi-tag.aut{color:var(--blue);background:var(--blue-bg);}
+  .kpi-name{font-size:13.3px;font-weight:700;color:var(--ink);margin-bottom:12px;min-height:36px;}
+  .kpi-figure{display:flex;align-items:baseline;gap:6px;margin-bottom:4px;}
+  .kpi-figure .cur{font-size:27px;font-weight:800;color:var(--forest-deep);}
+  .kpi-figure .unit{font-size:13px;color:var(--ink-soft);} .kpi-figure .of{font-size:13px;color:var(--ink-soft);}
+  .bar-track{height:8px;background:#EEF1EC;border-radius:6px;overflow:hidden;}
+  .bar-fill{height:100%;background:var(--leaf);border-radius:6px;transition:width .5s ease;}
+  .bar-fill.low{background:var(--red);}
+  .kpi-h2{font-size:11.5px;color:var(--ink-soft);margin-top:9px;}
+  .pct-badge{position:absolute;top:18px;right:18px;font-size:12px;font-weight:800;padding:3px 9px;border-radius:20px;}
+  .pct-good{color:#166B3E;background:#DCF3E4;} .pct-warn{color:var(--amber);background:var(--amber-bg);} .pct-bad{color:var(--red);background:var(--red-bg);}
+  .kpi-groupbar{display:flex;align-items:center;gap:10px;margin:22px 0 14px;}
+  .kpi-groupbar .dot{width:12px;height:12px;border-radius:4px;}
+  .kpi-groupbar .lbl{font-size:14px;font-weight:800;color:var(--forest-deep);}
+  .kpi-groupbar .cnt{font-size:12px;color:var(--ink-soft);}
+  .goal-card{border-left:4px solid var(--leaf);}
+  .goal-num{font-size:11.5px;font-weight:800;color:var(--leaf);}
+  .goal-title{font-size:16px;font-weight:800;margin:6px 0 4px;color:var(--forest-deep);}
+  .goal-target{font-size:13.5px;font-weight:700;color:var(--amber);margin-bottom:10px;}
+  .goal-strats{margin:0;padding-left:0;list-style:none;font-size:12.8px;color:var(--ink-soft);}
+  .goal-strats li{padding-left:16px;position:relative;margin-bottom:6px;}
+  .goal-strats li::before{content:"—";position:absolute;left:0;color:var(--leaf);}
+  .stage-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:22px;}
+  .stage-cell{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px;text-align:center;}
+  .stage-cell .lbl{font-size:11.5px;color:var(--ink-soft);font-weight:700;} .stage-cell .val{font-size:24px;font-weight:800;color:var(--forest-deep);margin-top:4px;}
+  .stage-cell.total{background:var(--forest-deep);} .stage-cell.total .lbl,.stage-cell.total .val{color:#fff;}
+  .funnel{display:flex;gap:10px;margin-top:6px;}
+  .funnel-col{flex:1;background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px;}
+  .funnel-col h4{font-size:13.5px;font-weight:800;margin:0 0 4px;color:var(--forest-deep);}
+  .funnel-col .sub{font-size:11.5px;color:var(--ink-soft);margin-bottom:10px;} .funnel-col p{font-size:12.5px;color:var(--ink);margin:0;}
+  .flow-arrow{display:flex;align-items:center;justify-content:center;padding:0 8px;color:var(--leaf);font-size:18px;font-weight:800;flex:0 0 auto;}
+  .donut-wrap{display:flex;align-items:center;gap:26px;flex-wrap:wrap;}
+  .legend-item{display:flex;align-items:center;gap:8px;font-size:13px;margin-bottom:8px;}
+  .legend-dot{width:11px;height:11px;border-radius:3px;flex:0 0 auto;}
+  table{width:100%;border-collapse:collapse;font-size:13px;}
+  thead th{text-align:left;font-size:11.3px;color:var(--ink-soft);font-weight:700;padding:8px 10px;border-bottom:2px solid var(--line);white-space:nowrap;}
+  tbody td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:middle;}
+  tbody tr:hover{background:#FAFBF8;}
+  .catchip{font-size:10.3px;font-weight:700;padding:3px 8px;border-radius:20px;white-space:nowrap;display:inline-block;}
+  .catchip.공통{color:#166B3E;background:var(--leaf-light);} .catchip.자율{color:var(--blue);background:var(--blue-bg);}
+  .catchip.AI{color:var(--violet);background:var(--violet-bg);} .catchip.ANCHOR{color:var(--amber);background:var(--amber-bg);}
+  .audchip{font-size:10.5px;font-weight:600;padding:3px 8px;border-radius:20px;background:#EEF1EC;color:var(--ink-soft);display:inline-block;margin:0 4px 4px 0;}
+  input.num-in{width:100px;padding:6px 8px;font-size:12.3px;border:1px solid var(--line);border-radius:8px;font-family:inherit;}
+  select.stat-sel{padding:6px 8px;font-size:12.3px;border:1px solid var(--line);border-radius:8px;font-family:inherit;background:#fff;}
+  textarea.fb-in{width:100%;min-height:70px;padding:8px 10px;font-size:12.5px;border:1px solid var(--line);border-radius:8px;font-family:inherit;resize:vertical;}
+  .exec-pct{font-weight:800;font-size:12.3px;}
+  .budget-hero{background:linear-gradient(135deg,var(--forest) 0%,var(--forest-deep) 100%);color:#fff;border-radius:18px;padding:26px 30px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;margin-bottom:22px;}
+  .budget-hero .num-block .big{font-size:38px;font-weight:800;} .budget-hero .num-block .lbl{font-size:12.3px;color:#BFE0CD;margin-top:2px;}
+  .budget-hero .ring-wrap{display:flex;align-items:center;gap:16px;}
+  .ring{width:100px;height:100px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:conic-gradient(#fff var(--p,0%), rgba(255,255,255,.22) 0);position:relative;flex:0 0 auto;}
+  .ring::before{content:"";position:absolute;inset:9px;border-radius:50%;background:var(--forest-deep);}
+  .ring span{position:relative;font-size:18px;font-weight:800;}
+  .cat-row{display:grid;grid-template-columns:1.5fr .8fr .8fr .6fr;gap:10px;align-items:center;padding:12px 14px;border-radius:10px;background:#FAFBF9;margin-bottom:8px;}
+  .cat-row .cat-dot{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:8px;}
+  .cat-row .cat-name{font-size:13.3px;font-weight:700;} .cat-row .cat-figs{font-size:12.3px;color:var(--ink-soft);} .cat-row .cat-pct{font-size:13px;font-weight:800;text-align:right;}
+  .subitem-row{display:grid;grid-template-columns:1.6fr .8fr .8fr .6fr;gap:8px;align-items:center;font-size:12.3px;color:var(--ink-soft);padding:7px 0;border-bottom:1px dashed var(--line);}
+  .subitem-row:last-child{border-bottom:none;}
+  .subitem-head{display:grid;grid-template-columns:1.6fr .8fr .8fr .6fr;gap:8px;font-size:10.8px;color:var(--ink-soft);font-weight:700;padding-bottom:6px;border-bottom:1px solid var(--line);margin-bottom:2px;}
+  .filterbar{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;}
+  .filterbtn{border:1px solid var(--line);background:#fff;border-radius:20px;padding:7px 14px;font-size:12.3px;font-weight:700;cursor:pointer;color:var(--ink-soft);}
+  .filterbtn.active{background:var(--forest-deep);color:#fff;border-color:var(--forest-deep);}
+  .gantt-row{display:grid;grid-template-columns:230px 1fr 100px 60px;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--line);}
+  .gantt-name{font-size:12.6px;font-weight:700;cursor:pointer;}
+  .gantt-name:hover{color:var(--leaf);}
+  .gantt-track{position:relative;height:20px;background:#EEF1EC;border-radius:6px;cursor:pointer;}
+  .gantt-track .months{position:absolute;inset:0;display:grid;grid-template-columns:repeat(12,1fr);}
+  .gantt-track .months div{border-right:1px solid #E2E6E0;} .gantt-track .months div:last-child{border-right:none;}
+  .gantt-bar{position:absolute;top:2px;bottom:2px;border-radius:5px;opacity:.92;}
+  .gantt-status{font-size:11px;font-weight:700;text-align:right;padding-right:2px;cursor:pointer;}
+  .fb-flag{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;background:var(--amber-bg);color:var(--amber);margin-left:auto;cursor:pointer;}
+  .fb-flag.empty{background:#EEF1EC;color:#B9BFB6;cursor:default;}
+  .detail-panel{margin-top:20px;padding:22px 24px;border-radius:16px;border:1.5px solid var(--leaf);background:#F7FBF8;display:none;}
+  .detail-panel.show{display:block;}
+  .detail-top{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:14px;}
+  .detail-title{font-size:16.3px;font-weight:800;color:var(--forest-deep);}
+  .detail-meta{font-size:12px;color:var(--ink-soft);margin-top:4px;}
+  .detail-close{border:none;background:none;font-size:20px;cursor:pointer;color:var(--ink-soft);line-height:1;}
+  .detail-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:18px;}
+  @media (max-width:900px){.detail-grid{grid-template-columns:1fr;}}
+  .detail-block-title{font-size:12px;font-weight:700;color:var(--ink-soft);margin-bottom:6px;}
+  .detail-body{font-size:13.3px;}
+  .mini-input-row{display:flex;gap:10px;align-items:center;margin-top:6px;flex-wrap:wrap;}
+  .mini-input-row label{font-size:12px;color:var(--ink-soft);}
+  .budgetline-row{display:grid;grid-template-columns:1.6fr .8fr .8fr .7fr;gap:8px;align-items:center;padding:6px 0;border-bottom:1px dashed var(--line);font-size:12.3px;}
+  .budgetline-row:last-child{border-bottom:none;}
+  .budgetline-head{display:grid;grid-template-columns:1.6fr .8fr .8fr .7fr;gap:8px;font-size:10.8px;color:var(--ink-soft);font-weight:700;padding-bottom:6px;border-bottom:1px solid var(--line);margin-bottom:2px;}
+  .kpirow{display:grid;grid-template-columns:1.6fr .8fr .8fr .7fr;gap:8px;align-items:center;padding:6px 0;border-bottom:1px dashed var(--line);font-size:12.3px;}
+  .kpirow:last-child{border-bottom:none;}
+  .kpirow-head{display:grid;grid-template-columns:1.6fr .8fr .8fr .7fr;gap:8px;font-size:10.8px;color:var(--ink-soft);font-weight:700;padding-bottom:6px;border-bottom:1px solid var(--line);margin-bottom:2px;}
+  .diff-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+  @media (max-width:980px){.diff-grid{grid-template-columns:repeat(2,1fr);}}
+  .diff-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;}
+  .diff-card .who{font-size:11.3px;font-weight:700;color:var(--leaf);}
+  .diff-card .channel{font-size:15px;font-weight:800;margin:6px 0 8px;color:var(--forest-deep);}
+  .diff-card p{font-size:12.3px;color:var(--ink-soft);margin:0;flex:1;}
+  .linkbtn{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:12.3px;font-weight:700;color:var(--leaf);text-decoration:none;padding:8px 12px;border:1px solid var(--leaf);border-radius:20px;width:fit-content;}
+  .linkbtn:hover{background:var(--leaf-light);}
+  .embed-frame{width:100%;height:820px;border:1px solid var(--line);border-radius:14px;background:#fff;}
+  .embed-toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
+  .openbtn{display:inline-flex;align-items:center;gap:6px;font-size:12.6px;font-weight:700;color:#fff;background:var(--forest-deep);text-decoration:none;padding:9px 16px;border-radius:20px;}
+  .openbtn:hover{background:var(--forest);}
+  .link-hero{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;background:linear-gradient(135deg,var(--forest) 0%,var(--forest-deep) 100%);color:#fff;border-radius:18px;padding:32px 34px;}
+  .link-hero h3{font-size:20px;margin:0 0 8px;}
+  .link-hero p{font-size:13px;color:#CFE7DA;margin:0;max-width:520px;}
+  .fb-summary-bar{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin-bottom:16px;cursor:pointer;}
+  .fb-summary-bar:hover{border-color:var(--amber);}
+  .fb-summary-bar .ico{width:26px;height:26px;border-radius:50%;background:var(--amber-bg);color:var(--amber);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;}
+  .fb-summary-bar .txt{font-size:13px;font-weight:700;color:var(--forest-deep);}
+  .fb-summary-bar .sub{font-size:11.5px;color:var(--ink-soft);}
+  .fb-list{display:none;margin-bottom:18px;}
+  .fb-list.show{display:block;}
+  .fb-item{background:#fff;border:1px solid var(--line);border-left:3px solid var(--amber);border-radius:10px;padding:12px 16px;margin-bottom:8px;cursor:pointer;}
+  .fb-item .nm{font-size:12.8px;font-weight:700;color:var(--forest-deep);}
+  .fb-item .tx{font-size:12.3px;color:var(--ink-soft);margin-top:4px;}
+  .footer-note{margin-top:50px;padding-top:16px;border-top:1px solid var(--line);font-size:11.3px;color:var(--ink-soft);}
+  .topbar{display:flex;justify-content:flex-end;align-items:center;gap:16px;margin:-8px 0 22px;padding-bottom:14px;border-bottom:1px solid var(--line);}
+  .topbar .author{text-align:right;}
+  .topbar .author .nm{font-size:13px;font-weight:800;color:var(--forest-deep);}
+  .topbar .author .mail{font-size:11.8px;color:var(--leaf);text-decoration:none;}
+  .topbar .updated{background:var(--leaf-light);color:#166B3E;font-size:11.8px;font-weight:700;padding:7px 13px;border-radius:20px;white-space:nowrap;}
+  .savebar{display:flex;align-items:center;gap:12px;margin-bottom:18px;flex-wrap:wrap;}
+  .savebtn{background:var(--forest-deep);color:#fff;border:none;font-size:13px;font-weight:700;padding:10px 20px;border-radius:20px;cursor:pointer;}
+  .savebtn:hover{background:var(--forest);}
+  .save-stamp{font-size:12px;color:var(--ink-soft);}
+  .save-stamp.dirty{color:var(--amber);font-weight:700;}
+  .audchip.clickable{cursor:pointer;border:1px solid transparent;transition:.15s;}
+  .audchip.clickable:hover{background:var(--leaf-light);color:#166B3E;}
+  .audchip.clickable.active{background:var(--forest-deep);color:#fff;}
+  .aud-filtered{display:none;margin-top:14px;padding-top:14px;border-top:1px dashed var(--line);}
+  .aud-filtered.show{display:block;}
+  .aud-filtered .hd{font-size:12.3px;font-weight:700;color:var(--forest-deep);margin-bottom:8px;}
+  .aud-filtered ul{margin:0;padding-left:0;list-style:none;}
+  .aud-filtered li{font-size:12.8px;padding:8px 10px;border-radius:8px;cursor:pointer;display:flex;justify-content:space-between;gap:10px;}
+  .aud-filtered li:hover{background:#FAFBF8;}
+  .aud-filtered li .nm{font-weight:700;color:var(--ink);}
+  .aud-filtered li .cat{font-size:10.8px;}
+  .previewcard{background:#fff;border:1px solid var(--line);border-radius:16px;padding:0;overflow:hidden;}
+  .previewcard .shot{background:linear-gradient(135deg,#EEF1EC 0%,#E2E6E0 100%);height:220px;display:flex;align-items:center;justify-content:center;color:#8A9A8E;font-size:13px;font-weight:600;flex-direction:column;gap:8px;}
+  .previewcard .shot .bignote{font-size:34px;}
+  .previewcard .body{padding:22px 24px;}
+  .previewcard .body h4{font-size:15.5px;font-weight:800;color:var(--forest-deep);margin:0 0 8px;}
+  .previewcard .body p{font-size:13px;color:var(--ink-soft);margin:0 0 14px;}
+  .previewcard .body ul{margin:0 0 16px;padding-left:18px;font-size:12.8px;color:var(--ink-soft);}
+  .previewcard .body ul li{margin-bottom:4px;}
+  .notice-inline{font-size:11.8px;color:var(--amber);background:var(--amber-bg);padding:9px 13px;border-radius:10px;margin-top:14px;}
+  .sheets-status{font-size:12.3px;font-weight:700;padding:8px 14px;border-radius:20px;background:#EEF1EC;color:var(--ink-soft);display:inline-block;}
+  .sheets-status.ok{background:var(--leaf-light);color:#166B3E;}
+  .sheets-status.warn{background:var(--amber-bg);color:var(--amber);}
+  .sheets-status.bad{background:var(--red-bg);color:var(--red);}
+  .setup-steps{margin:0;padding-left:20px;font-size:13px;color:var(--ink);}
+  .setup-steps li{margin-bottom:10px;}
+  .codebox{position:relative;background:#0A3624;border-radius:12px;padding:18px 20px;margin:14px 0;}
+  .codebox pre{margin:0;color:#DCEEE2;font-size:11.8px;line-height:1.6;white-space:pre;overflow-x:auto;font-family:'SF Mono',Consolas,Monaco,monospace;}
+  .copybtn{position:absolute;top:12px;right:14px;background:rgba(255,255,255,.14);color:#fff;border:none;font-size:11.5px;font-weight:700;padding:6px 12px;border-radius:16px;cursor:pointer;}
+  .copybtn:hover{background:rgba(255,255,255,.24);}
+  .connectrow{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:10px;}
+  input.url-in{flex:1;min-width:260px;padding:9px 12px;font-size:12.6px;border:1px solid var(--line);border-radius:8px;font-family:inherit;}
+  .sync-badge{font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;background:#EEF1EC;color:var(--ink-soft);margin-left:8px;}
+  .sync-badge.on{background:var(--leaf-light);color:#166B3E;}
+  @media (max-width:860px){
+    .shell{flex-direction:column;} .sidebar{width:100%;flex:none;position:relative;height:auto;padding:16px;}
+    .main{padding:22px 18px 60px;} .grid-4,.grid-3,.grid-2{grid-template-columns:1fr 1fr;}
+    .gantt-row{grid-template-columns:120px 1fr 50px;} .gantt-row .fb-flag{display:none;}
+    .cat-row{grid-template-columns:1fr;} .stage-row{grid-template-columns:repeat(2,1fr);}
+    .budgetline-row,.budgetline-head,.subitem-row,.subitem-head,.kpirow,.kpirow-head{grid-template-columns:1.4fr .7fr .7fr .6fr;font-size:11px;}
+  }
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <nav class="sidebar">
+    <div class="brand">
+      <div class="brand-mark">건국대학교 캠퍼스타운사업본부</div>
+      <div class="brand-title">KU 원헬스·AI<br>이노베이션 허브</div>
+      <div class="brand-sub">2026년 1차년도 사업 대시보드</div>
+    </div>
+    <ul class="navlist" id="navlist">
+      <li><button data-view="v1" class="active"><span class="num">1</span>핵심지표 달성도</button></li>
+      <li><button data-view="v2"><span class="num">2</span>핵심 사업목표</button></li>
+      <li><button data-view="v3"><span class="num">3</span>연차별 시행계획 로드맵</button></li>
+      <li><button data-view="v4"><span class="num">4</span>예산 총괄표</button></li>
+      <li><button data-view="v5"><span class="num">5</span>프로그램 총괄표</button></li>
+      <li><button data-view="v6"><span class="num">6</span>성과확산 전략</button></li>
+      <li><button data-view="v7"><span class="num">7</span>입주기업 현황</button></li>
+      <li><button data-view="v8"><span class="num">8</span>유관기관 캘린더</button></li>
+      <li><button data-view="v9"><span class="num">9</span>사업단 홈페이지</button></li>
+      <li><button data-view="v10"><span class="num">10</span>데이터 저장 연동</button></li>
+    </ul>
+    <div class="sidebar-foot">
+      자료 근거 : 2026년 9월 지표점검회의(2026.8.31 기준) 및 건국대학교 캠퍼스타운사업 세부실행계획서(변경후)<br><br>
+      입력형 항목(집행액·달성값·진행률·기간·환류사항)은 이 브라우저 세션에만 유지되며 새로고침 시 초기화됩니다.
+    </div>
+  </nav>
+
+  <main class="main">
+
+    <div class="topbar">
+      <div class="updated" id="globalUpdatedTxt">저장된 변경사항 없음</div>
+      <div class="author">
+        <div class="nm">캠타김군</div>
+        <a class="mail" href="mailto:coolzet@konkuk.ac.kr">coolzet@konkuk.ac.kr</a>
+      </div>
+    </div>
+
+    <!-- ============ 1. 핵심지표 달성도 ============ -->
+    <section class="view active" id="v1">
+      <div class="view-head">
+        <div class="view-kicker">MONTHLY REVIEW · 2026.8.31 기준</div>
+        <div class="view-title">핵심지표 달성도</div>
+        <div class="view-desc">18과제(서울캠퍼스타운 사업) 1차년도 성과지표를 월간 지표점검회의 보고 기준으로 시각화했습니다. 핵심지표와 자율지표를 구분해 표시합니다.</div>
+      </div>
+      <div class="kpi-groupbar"><span class="dot" style="background:var(--leaf);"></span><span class="lbl">핵심지표</span><span class="cnt">서울캠퍼스타운 사업 필수 관리지표 5종</span></div>
+      <div class="grid grid-4" id="kpiCoreCards"></div>
+      <div class="kpi-groupbar"><span class="dot" style="background:var(--blue);"></span><span class="lbl">자율지표</span><span class="cnt">원헬스(바이오·펫·에코·푸드) 특화 지표 3종</span></div>
+      <div class="grid grid-4" id="kpiAutCards"></div>
+
+      <h2 class="sec-h">실제 성과 사례 (8월 기준)</h2>
+      <div class="sec-note" style="margin-top:0;">위 지표들의 실제 근거가 되는 입주기업 사례입니다 (2026년 9월 지표점검회의 보고 기준).</div>
+      <div class="grid grid-2">
+        <div class="card goal-card" style="border-left-color:var(--amber);">
+          <div class="goal-num" style="color:var(--amber);">성장유망기업 진입</div>
+          <div class="goal-title">에픽카(주)</div>
+          <div class="goal-target">2026년 1~7월 매출 10.8억원 달성</div>
+          <p style="font-size:12.8px;color:var(--ink-soft);margin:0;">캠퍼스타운 성장유망기업 기준(연 매출액 10억 이상 또는 투자유치 3억 이상)을 충족해 진입했습니다. 「핵심② 아기유니콘 육성 노력도」 지표의 실제 성장 사례입니다.</p>
+        </div>
+        <div class="card goal-card" style="border-left-color:var(--blue);">
+          <div class="goal-num" style="color:var(--blue);">Seed 단계 투자 유치</div>
+          <div class="goal-title">위글리</div>
+          <div class="goal-target">투자금액 200,287,500원</div>
+          <p style="font-size:12.8px;color:var(--ink-soft);margin:0;">「자율③ 입주기업 투자 유치 건수」 지표에 반영된 실제 투자 유치 사례입니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 2. 핵심 사업목표 ============ -->
+    <section class="view" id="v2">
+      <div class="view-head">
+        <div class="view-kicker">STRATEGIC GOALS</div>
+        <div class="view-title">KU 원헬스·AI 이노베이션 허브 사업목표</div>
+        <div class="view-desc">4대 사업목표와 연간 정량목표, 목표 달성을 위한 세부 추진전략입니다.</div>
+      </div>
+      <div class="grid grid-2" id="goalCards"></div>
+
+      <h2 class="sec-h">사업본부 수행 역량</h2>
+      <div class="card">
+        <h3 class="sub-h">건국대학교 창업 지원사업 수행 이력</h3>
+        <p style="font-size:12.8px;color:var(--ink-soft);margin:0 0 14px;">2019년 서울시 반려동물 산업과 문예의 거리 캠퍼스타운(단위형) 선정 이후, 예비창업패키지·초기창업패키지·생애최초 청년창업 지원사업 등 정부지원 (예비)창업자 지원사업의 중점 수행기관으로서 실전창업교육→사업화→후속 투자 연계까지 전 단계를 수행한 경험을 보유하고 있습니다.</p>
+        <div class="grid grid-3">
+          <div class="stage-cell">
+            <div class="lbl">예비창업패키지 경쟁률</div>
+            <div class="val" style="font-size:18px;">10:1 → 19:1 → 26.8:1</div>
+            <div class="lbl" style="margin-top:4px;">2023 → 2024 → 2025</div>
+          </div>
+          <div class="stage-cell">
+            <div class="lbl">2025년 캠퍼스타운 경쟁률</div>
+            <div class="val">4:1</div>
+          </div>
+          <div class="stage-cell">
+            <div class="lbl">캠퍼스타운 입주기업(2025년 계약체결 실증 사례)</div>
+            <div class="val" style="font-size:18px;">2곳</div>
+          </div>
+        </div>
+        <div class="sec-note" style="margin-top:14px;">2021년 중소벤처기업부 초기창업패키지 최우수 기관 선정, 창업보육센터 경영평가 A등급, 2022년 실험실 창업 활성화 교육부 장관표창 등 정부 차원의 성과 인증을 받았습니다.</div>
+      </div>
+    </section>
+
+    <!-- ============ 3. 연차별 시행계획 로드맵 ============ -->
+    <section class="view" id="v3">
+      <div class="view-head">
+        <div class="view-kicker">GROWTH ROADMAP</div>
+        <div class="view-title">연차별 세부 시행계획 로드맵</div>
+        <div class="view-desc">창업기업 발굴·육성 계획, KU-VENTURE 성장단계별 관리모델, 분과별 입주기업 선발계획으로 구성했습니다.</div>
+      </div>
+
+      <h2 class="sec-h" style="margin-top:0;">① 창업기업 발굴·육성 계획 (총 60팀 기준)</h2>
+      <div class="stage-row">
+        <div class="stage-cell total"><div class="lbl">전체 입주기업</div><div class="val">60팀</div></div>
+        <div class="stage-cell"><div class="lbl">신규 발굴 기업</div><div class="val">35팀</div></div>
+        <div class="stage-cell"><div class="lbl">집중육성 기업</div><div class="val">20팀</div></div>
+        <div class="stage-cell"><div class="lbl">UP-Scale 진입 기업</div><div class="val">10팀</div></div>
+      </div>
+      <div class="card" style="overflow-x:auto;margin-bottom:26px;">
+        <table>
+          <thead><tr><th>구분</th><th>합계</th><th>KU-VENTURE(예비)</th><th>KU-VENTURE(초기)</th><th>KU-VENTURE(유망)</th></tr></thead>
+          <tbody>
+            <tr><td>전체 입주기업 수</td><td><b>60팀</b></td><td>9팀</td><td>37팀</td><td>19팀</td></tr>
+            <tr><td>신규 발굴 기업 수</td><td><b>35팀</b></td><td>5팀</td><td>25팀</td><td>5팀</td></tr>
+            <tr><td>집중육성 기업 수</td><td><b>20팀</b></td><td>2팀</td><td>8팀</td><td>10팀</td></tr>
+            <tr><td>UP-Scale 진입 기업 수</td><td><b>10팀</b></td><td>2팀</td><td>4팀</td><td>4팀</td></tr>
+          </tbody>
+        </table>
+        <div class="sec-note" style="margin-top:12px;">집중육성 기업 : 성장 가능성이 높다고 판단되어 전담 인력·맞춤 컨설팅·프로그램을 집중 지원하는 핵심 육성대상 기업 &nbsp;|&nbsp; UP-Scale 진입 기업 : 집중육성 단계를 거쳐 투자유치·시장확대·외부연계로 도약이 가능한 기업</div>
+      </div>
+
+      <h2 class="sec-h">② 창업기업 관리 계획 : KU-VENTURE 성장단계</h2>
+      <div class="funnel" style="margin-bottom:26px;">
+        <div class="funnel-col" style="border-top:4px solid #9FCBAE;">
+          <h4>KU-VENTURE (예비)</h4><div class="sub">9팀 · 사업화 기반 구축 단계</div>
+          <p>입주 공간 제공, 창업지원금, 기초 창업교육 및 멘토링을 통해 사업화 기반을 구축하도록 지원합니다.</p>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="funnel-col" style="border-top:4px solid var(--leaf);">
+          <h4>KU-VENTURE (초기)</h4><div class="sub">37팀 · 시장검증 단계</div>
+          <p>투자 연계 IR, 시제품 고도화, 실증 사업 연계 등을 통해 시장 검증과 매출 창출을 지원합니다.</p>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="funnel-col" style="border-top:4px solid var(--forest-deep);">
+          <h4>KU-VENTURE (유망)</h4><div class="sub">19팀 · 스케일업 단계</div>
+          <p>민간 투자사·대기업·공공기관과의 오픈이노베이션 및 후속 투자 연계로 스케일업 단계 도약을 유도합니다.</p>
+        </div>
+      </div>
+      <div class="card" style="margin-bottom:26px;">
+        <div style="font-size:13px;font-weight:800;margin-bottom:8px;color:var(--forest-deep);">입주 기간 중·후 관리 방안</div>
+        <p style="font-size:12.8px;color:var(--ink-soft);margin:0;">분기별 성과 점검(매출·고용·기술개발 현황)을 실시하고 전담 멘토(산학협력중점교수)를 배정하여 맞춤형 컨설팅을 제공합니다. 성과가 미흡한 기업에는 추가 컨설팅을 제공하며, 입주 종료 후에는 졸업기업 성과 모니터링 체계를 구축해 투자·매출·고용 성과를 지속 관리하고, 우수 졸업기업이 후배 창업기업의 멘토로 참여하는 선순환 구조를 강화합니다.</p>
+      </div>
+
+      <h2 class="sec-h">③ 분과별 입주기업 선발 계획 (총 60개사)</h2>
+      <div class="card">
+        <div class="donut-wrap">
+          <div style="width:180px;height:180px;border-radius:50%;flex:0 0 auto;background:conic-gradient(var(--violet) 0% 33.3%, var(--leaf) 33.3% 66.6%, var(--amber) 66.6% 75%, var(--blue) 75% 100%);position:relative;">
+            <div style="position:absolute;inset:30px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;flex-direction:column;">
+              <div style="font-size:24px;font-weight:800;color:var(--forest-deep);">60</div><div style="font-size:11px;color:var(--ink-soft);">개사</div>
+            </div>
+          </div>
+          <div>
+            <div class="legend-item"><span class="legend-dot" style="background:var(--violet);"></span>AI 분과 — 20팀 (AI·데이터, 플랫폼, SW 기반 서비스·기술 중심)</div>
+            <div class="legend-item"><span class="legend-dot" style="background:var(--leaf);"></span>바이오 분과 — 20팀 (바이오·헬스, 의생명 기술사업화·연구 연계)</div>
+            <div class="legend-item"><span class="legend-dot" style="background:var(--amber);"></span>펫 분과 — 5팀 (펫 헬스케어, 펫푸드, 서비스 — 대학 특화 및 시장 성장성)</div>
+            <div class="legend-item"><span class="legend-dot" style="background:var(--blue);"></span>에코·푸드 분과 — 15팀 (친환경, 푸드테크, 지속가능 — 지역·ESG 연계)</div>
+          </div>
+        </div>
+        <p style="font-size:12.5px;color:var(--ink-soft);margin-top:16px;">건국대학교는 바이오·의생명·동물·식품 분야 연구 인프라와 전문 인력을 보유하고 있으며, 사업본부는 이를 기술창업으로 연계하는 창구 역할을 수행합니다. 분과별 전공·연구실·산학협력 네트워크를 활용해 기술 기반 창업기업을 선제적으로 발굴하고, AI–바이오, AI–펫, 에코–푸드 등 융합 창업기업을 육성합니다.</p>
+      </div>
+
+      <h2 class="sec-h">④ 4개년 핵심지표 목표 추이</h2>
+      <div class="card" style="overflow-x:auto;">
+        <table>
+          <thead><tr><th>지표</th><th>2025 기준값</th><th>1차년도(2026)</th><th>2차년도</th><th>3차년도</th><th>4차년도</th></tr></thead>
+          <tbody>
+            <tr><td>아기유니콘 육성 팀수</td><td>—</td><td>—</td><td>1개</td><td>2개</td><td>2개 <span style="color:var(--ink-soft);">(합계 5개)</span></td></tr>
+            <tr><td>아기유니콘 육성 노력도 (매출액)</td><td>58억원</td><td><b>80억원</b></td><td>85억원</td><td>90억원</td><td>110억원</td></tr>
+            <tr><td>　└ 매출 증가율</td><td>—</td><td><b>20%</b></td><td>25%</td><td>30%</td><td>35%</td></tr>
+            <tr><td>창업기업 육성 팀수</td><td>64팀</td><td><b>60팀</b></td><td>60팀</td><td>70팀</td><td>70팀</td></tr>
+            <tr><td>AI 기반 기업 육성</td><td>신규지표</td><td><b>30개</b></td><td>30개</td><td>35개</td><td>35개</td></tr>
+            <tr><td>　└ AI 인재육성(초·중·고급 합계)</td><td>—</td><td><b>160명</b></td><td>180명</td><td>240명</td><td>260명</td></tr>
+            <tr><td>교내창업 기업 발굴 비율</td><td>48.3%</td><td><b>50%</b></td><td>53%</td><td>57%</td><td>64%</td></tr>
+            <tr><td>원헬스 시제품 제작 건수</td><td>50건</td><td><b>50건</b></td><td>50건</td><td>60건</td><td>60건</td></tr>
+            <tr><td>원헬스 IP 출원·등록 건수</td><td>83건</td><td><b>60건</b></td><td>70건</td><td>80건</td><td>90건</td></tr>
+            <tr><td>투자유치 (Seed·Pre-A)</td><td>2건</td><td><b>3건</b></td><td>5건</td><td>5건</td><td>7건</td></tr>
+            <tr><td>투자유치 (TIPS)</td><td>—</td><td><b>2건</b></td><td>2건</td><td>3건</td><td>3건</td></tr>
+          </tbody>
+        </table>
+        <div class="sec-note" style="margin-top:12px;">굵게 표시된 열이 현재(1차년도, 2026년) 목표입니다. 「1. 핵심지표 달성도」의 각 카드는 이 표의 1차년도 열과 8월 말 실적을 비교한 값입니다.</div>
+      </div>
+    </section>
+
+    <!-- ============ 4. 예산 총괄표 ============ -->
+    <section class="view" id="v4">
+      <div class="view-head">
+        <div class="view-kicker">BUDGET OVERVIEW · 2026년(1차년도) 총 15억원</div>
+        <div class="view-title">예산 총괄표</div>
+        <div class="view-desc">사업계획 총괄표(세부실행계획서 28p) 기준 6개 예산 카테고리입니다. 조직운영(간접비 포함)·창업지원시설운영도 항목별로 집행액을 입력할 수 있습니다. 프로그램 집행액은 「5. 프로그램 총괄표」와 값이 연동됩니다.</div>
+      </div>
+
+      <div class="savebar">
+        <button class="savebtn" onclick="saveBudget()">예산 입력값 저장하기</button>
+        <span class="save-stamp dirty" id="budgetSaveStamp">아직 저장하지 않음 · 입력값은 저장 전까지 임시 상태입니다</span>
+        <span class="sync-badge" id="budgetBackendTxt">백엔드 미연결 · 로컬(세션)에만 저장됨</span>
+      </div>
+
+      <div class="budget-hero">
+        <div class="num-block"><div class="big">1,500,000</div><div class="lbl">2026년 총 사업비(천원) · 조직운영~ANCHOR연계 6개 카테고리 합계</div></div>
+        <div class="ring-wrap">
+          <div class="ring" id="totalRing"><span id="totalRingTxt">0%</span></div>
+          <div><div style="font-size:13px;font-weight:700;">전체 예산 소진율</div><div style="font-size:12px;color:#BFE0CD;margin-top:2px;" id="totalExecTxt">집행액 0천원 / 배정 1,500,000천원</div></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="sub-h">6개 카테고리 예산 현황</h3>
+        <div id="catRows"></div>
+      </div>
+
+      <h2 class="sec-h">조직운영 (357,000천원 · 간접비 포함)</h2>
+      <div class="card">
+        <div class="subitem-head"><span>항목</span><span>배정</span><span>집행액 입력</span><span>소진율</span></div>
+        <div id="orgRows"></div>
+      </div>
+
+      <h2 class="sec-h">창업지원시설운영 (225,000천원)</h2>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3 class="sub-h">① 대학소유 (165,700천원)</h3>
+          <div class="subitem-head"><span>공간</span><span>배정</span><span>집행액 입력</span><span>소진율</span></div>
+          <div id="facUnivRows"></div>
+        </div>
+        <div class="card">
+          <h3 class="sub-h">② 자치구(기타)소유 (59,300천원)</h3>
+          <div class="subitem-head"><span>공간</span><span>배정</span><span>집행액 입력</span><span>소진율</span></div>
+          <div id="facGuRows"></div>
+        </div>
+      </div>
+
+      <h2 class="sec-h">프로그램별 예산 상세 (4개 유형 · 14개 프로그램)</h2>
+      <div class="card" style="overflow-x:auto;">
+        <table>
+          <thead><tr><th>분류</th><th>프로그램명</th><th>2026년 배정예산(천원)</th><th>집행액(천원)</th><th>소진율</th></tr></thead>
+          <tbody id="budgetTableBody"></tbody>
+        </table>
+        <div class="sec-note" style="margin-top:10px;">※ 창업기업육성(자율) 카테고리는 세부실행계획서 총괄표 소계(352,600천원)와 개별 프로그램 산출근거 합계(362,650천원) 사이에 원문 자체의 약 1,000만원 반영 시점 차이가 있습니다. 카테고리 소진율은 총괄표 소계 값을 기준으로 계산합니다.</div>
+      </div>
+    </section>
+
+    <!-- ============ 5. 프로그램 총괄표 ============ -->
+    <section class="view" id="v5">
+      <div class="view-head">
+        <div class="view-kicker">PROGRAM MASTER LIST · 14개 프로그램</div>
+        <div class="view-title">프로그램 총괄표</div>
+        <div class="view-desc">육성(공통)·육성(자율)·AI 기반기업 및 인력육성·ANCHOR 연계 4유형으로 구분했습니다. 막대를 클릭하면 지원대상·산출근거별 예산·정량 KPI 전체·환류사항을 아래에서 확인·입력할 수 있습니다.</div>
+      </div>
+
+      <div class="savebar">
+        <button class="savebtn" onclick="saveProgram()">프로그램 입력값 저장하기</button>
+        <span class="save-stamp dirty" id="programSaveStamp">아직 저장하지 않음 · 입력값은 저장 전까지 임시 상태입니다</span>
+        <span class="sync-badge" id="programBackendTxt">백엔드 미연결 · 로컬(세션)에만 저장됨</span>
+      </div>
+
+      <div class="grid grid-4" style="margin-bottom:18px;">
+        <div class="card" style="text-align:center;"><div style="font-size:12px;color:var(--ink-soft);font-weight:700;">계획</div><div style="font-size:26px;font-weight:800;color:var(--ink-soft);margin-top:4px;" id="cnt-계획">14</div></div>
+        <div class="card" style="text-align:center;"><div style="font-size:12px;color:var(--blue);font-weight:700;">진행</div><div style="font-size:26px;font-weight:800;color:var(--blue);margin-top:4px;" id="cnt-진행">0</div></div>
+        <div class="card" style="text-align:center;"><div style="font-size:12px;color:var(--leaf);font-weight:700;">완료</div><div style="font-size:26px;font-weight:800;color:var(--leaf);margin-top:4px;" id="cnt-완료">0</div></div>
+        <div class="card" style="text-align:center;"><div style="font-size:12px;color:var(--ink-soft);font-weight:700;">전체 프로그램</div><div style="font-size:26px;font-weight:800;color:var(--forest-deep);margin-top:4px;">14</div></div>
+      </div>
+
+      <div class="fb-summary-bar" id="fbSummaryBar" onclick="toggleFbList()">
+        <span class="ico">↺</span>
+        <div><div class="txt" id="fbSummaryTxt">환류사항 0건</div><div class="sub">클릭하면 입력된 환류사항 목록을 볼 수 있습니다 · 각 항목·행 옆 환류 아이콘을 누르면 새 창에서 내용이 열립니다</div></div>
+      </div>
+      <div class="fb-list" id="fbList"></div>
+
+      <h3 class="sub-h">지원대상 그룹화 현황</h3>
+      <div class="card" style="margin-bottom:20px;">
+        <div id="audienceGroupBar" style="display:flex;flex-wrap:wrap;gap:10px;"></div>
+        <div class="aud-filtered" id="audFiltered">
+          <div class="hd" id="audFilteredHd"></div>
+          <ul id="audFilteredList"></ul>
+        </div>
+      </div>
+
+      <div class="filterbar" id="filterBar"></div>
+
+      <div class="card">
+        <div style="display:grid;grid-template-columns:230px 1fr 100px 60px;gap:10px;padding:0 0 8px;font-size:11px;font-weight:700;color:var(--ink-soft);">
+          <div>프로그램명 (시행기간)</div>
+          <div>1월 &nbsp;·&nbsp; 시행기간은 항목 클릭 후 직접 입력 가능 &nbsp;·&nbsp; 12월</div>
+          <div style="text-align:right;">진행상태</div>
+          <div style="text-align:right;">환류</div>
+        </div>
+        <div id="ganttWrap"></div>
+      </div>
+
+      <div class="detail-panel" id="detailPanel"></div>
+    </section>
+
+    <!-- ============ 6. 성과확산 전략 ============ -->
+    <section class="view" id="v6">
+      <div class="view-head">
+        <div class="view-kicker">IMPACT DIFFUSION</div>
+        <div class="view-title">성과 지속성 및 확산·환류 전략</div>
+        <div class="view-desc">이해관계자 4대 핵심 타깃별 맞춤형 성과 확산 채널입니다. 지자체 소식지는 실제 홈페이지로 연결됩니다.</div>
+      </div>
+
+      <div class="diff-grid">
+        <div class="diff-card">
+          <div class="who">내부 구성원 (학생·교원·직원)</div>
+          <div class="channel">교내 미디어 · 디지털 현수막</div>
+          <p>교내 미디어와 디지털 현수막을 활용해 사업 성과와 프로그램 소식을 구성원에게 상시 홍보합니다.</p>
+        </div>
+        <div class="diff-card">
+          <div class="who">지역사회 · 지자체 (광진구)</div>
+          <div class="channel">광진 「아차산메아리」</div>
+          <p>광진구 소식지·홈페이지를 통해 지역사회에 캠퍼스타운 성과를 정기적으로 확산합니다.</p>
+          <a class="linkbtn" href="https://gwangjin.go.kr" target="_blank" rel="noopener">광진구청 홈페이지 열기 ↗</a>
+        </div>
+        <div class="diff-card">
+          <div class="who">지역사회 · 지자체 (강남구)</div>
+          <div class="channel">강남 「강남라이프」</div>
+          <p>강남구 월간 소식지 웹진을 통해 지역사회에 캠퍼스타운 성과를 정기적으로 확산합니다.</p>
+          <a class="linkbtn" href="https://www.gangnam.go.kr/gangnamlife/index.htm" target="_blank" rel="noopener">강남라이프 웹진 열기 ↗</a>
+        </div>
+        <div class="diff-card">
+          <div class="who">대기업 · 투자기관</div>
+          <div class="channel">오픈이노베이션 · KU Investment 데모데이</div>
+          <p>오픈이노베이션 행사와 KU Investment 데모데이에 대기업·투자기관을 초청해 후속 투자·판로 연계를 유도합니다.</p>
+        </div>
+      </div>
+
+      <h2 class="sec-h">팝업형 오프라인 홍보공간 조성 계획</h2>
+      <div class="card">
+        <p style="font-size:13px;margin-top:0;">광진구 유동 인구 밀집 지역인 <b>건대입구 스타시티</b>에 팝업공간을 조성합니다. 참여 창업기업의 분야별 제품·서비스 <b>상시전시 ZONE</b>과 <b>분기별 팝업스토어</b>를 운영하며, 지역 주민과 시민이 직접 체험하고 피드백을 남길 수 있는 시민 참여형 공간으로 구성합니다.</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:6px;">
+          <span class="catchip 자율" style="background:var(--blue-bg);color:var(--blue);">환경특화 창업주간</span>
+          <span class="catchip 자율" style="background:var(--amber-bg);color:var(--amber);">반려동물 스타트업 주간</span>
+          <span class="catchip 자율" style="background:var(--leaf-light);color:#166B3E;">푸드테크 스타트업 주간</span>
+        </div>
+        <div class="sec-note" style="margin-top:12px;">팝업존은 정기적으로 테마를 교체 운영합니다. 서울시민 접점은 건국대 창업 SNS·홈페이지 콘텐츠 마케팅으로 병행 확산합니다.</div>
+      </div>
+    </section>
+
+    <!-- ============ 7. 입주기업 현황 ============ -->
+    <section class="view" id="v7">
+      <div class="view-head">
+        <div class="view-kicker">TENANT DIRECTORY · EXTERNAL LINK</div>
+        <div class="view-title">입주기업 현황</div>
+        <div class="view-desc">건국대학교 캠퍼스타운사업단 입주기업 디렉토리(공간별·분야별·오피스구분·교내창업여부 등)를 연계합니다.</div>
+      </div>
+      <div class="previewcard">
+        <div class="shot"><span class="bignote">🏢</span><span>이 환경에서는 외부 사이트 실시간 미리보기가 표시되지 않습니다</span></div>
+        <div class="body">
+          <h4>입주기업 디렉토리 · coolzet-ai.github.io/KU</h4>
+          <p>K-이노베이션 스테이션 센터부터 창의관까지 6개 공간, 총 67개 입주기업(2026.9.9 기준)을 아래 기준으로 조회할 수 있는 외부 디렉토리입니다.</p>
+          <ul>
+            <li>공간별 현황 · 위치 (지도 마커 클릭 시 디렉토리 필터링)</li>
+            <li>분야별 기업 · 오피스 구분(개별/공유) · 사업자 구분(법인/개인/예비창업자)</li>
+            <li>교내창업 여부, 신산업 분야 태그, 입주일 기준 필터</li>
+            <li>기업명 클릭 시 연락처 확인 가능</li>
+          </ul>
+          <a class="openbtn" href="https://coolzet-ai.github.io/KU/" target="_blank" rel="noopener">새 탭에서 디렉토리 열기 ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 8. 유관기관 캘린더 ============ -->
+    <section class="view" id="v8">
+      <div class="view-head">
+        <div class="view-kicker">ECOSYSTEM CALENDAR · EXTERNAL LINK</div>
+        <div class="view-title">유관기관 캘린더</div>
+        <div class="view-desc">서울 창업 생태계 유관기관(서울시캠퍼스타운·중기부 산하기관·서울시 창업지원기관 등 30여 개) 2026년 하반기 프로그램 캘린더를 연계합니다.</div>
+      </div>
+      <div class="previewcard">
+        <div class="shot"><span class="bignote">🗓️</span><span>이 환경에서는 외부 사이트 실시간 미리보기가 표시되지 않습니다</span></div>
+        <div class="body">
+          <h4>유관기관 프로그램 캘린더 · coolzet-ai.github.io/OneHealth</h4>
+          <p>서울캠퍼스타운 참여대학(13개교) 및 중기부 산하기관·AC·VC 등 30여 개 기관을 전수 조사한 2026년 하반기 공고 스냅샷입니다. 종료된 일정은 접속 시점 기준으로 자동 제외됩니다.</p>
+          <ul>
+            <li>서울캠퍼스타운 13개 참여대학 지도 및 성과 배지</li>
+            <li>월·카테고리·창업단계별 필터가 가능한 하반기 확정 일정</li>
+            <li>상시·연중 운영 프로그램(공공기관 / AC / VC 구분)</li>
+            <li>카드 클릭 시 각 기관 원문 공고로 이동</li>
+          </ul>
+          <a class="openbtn" href="https://coolzet-ai.github.io/OneHealth/" target="_blank" rel="noopener">새 탭에서 캘린더 열기 ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 9. 사업단 홈페이지 ============ -->
+    <section class="view" id="v9">
+      <div class="view-head">
+        <div class="view-kicker">OFFICIAL SITE · EXTERNAL LINK</div>
+        <div class="view-title">사업단 홈페이지</div>
+        <div class="view-desc">건국대학교 캠퍼스타운사업본부 공식 홈페이지를 연계합니다.</div>
+      </div>
+      <div class="link-hero" style="margin-bottom:20px;">
+        <div><h3>건국대학교 캠퍼스타운사업본부</h3><p>사업 공고, 입주기업 모집, 프로그램 신청 등 공식 정보는 사업단 홈페이지에서 확인하세요.</p></div>
+        <a class="openbtn" href="https://campustown.konkuk.ac.kr/" target="_blank" rel="noopener" style="background:#fff;color:var(--forest-deep);">campustown.konkuk.ac.kr ↗</a>
+      </div>
+      <div class="previewcard">
+        <div class="shot"><span class="bignote">🌐</span><span>이 환경에서는 외부 사이트 실시간 미리보기가 표시되지 않습니다</span></div>
+        <div class="body">
+          <h4>건국대학교 캠퍼스타운사업본부 공식 홈페이지</h4>
+          <p>사업 공고, 입주기업 모집요강, 프로그램 신청서 접수 등 공식 행정 정보는 사업단 홈페이지에서 확인하실 수 있습니다.</p>
+          <a class="openbtn" href="https://campustown.konkuk.ac.kr/" target="_blank" rel="noopener">새 탭에서 홈페이지 열기 ↗</a>
+        </div>
+      </div>
+      <div class="notice-inline">참고 : 위 3개(입주기업 현황·유관기관 캘린더·사업단 홈페이지) 화면은 보안 정책상 이 대시보드 안에서 실시간으로 불러와 보여줄 수 없어, 새 탭 링크로 안내하는 방식으로 대체했습니다.</div>
+    </section>
+
+    <!-- ============ 10. 데이터 저장 연동 ============ -->
+    <section class="view" id="v10">
+      <div class="view-head">
+        <div class="view-kicker">BACKEND · GITHUB / GOOGLE SHEETS</div>
+        <div class="view-title">데이터 저장 연동</div>
+        <div class="view-desc">이 대시보드의 입력값(예산 집행액·프로그램 KPI·진행상태·환류사항)은 기본적으로 브라우저 세션에만 저장됩니다. 아래 두 방법 중 하나를 연결하면 값이 실제로 저장되어 다른 기기·다음 방문에서도 이어서 볼 수 있습니다. <b>두 방법을 동시에 켜둘 필요는 없고, 마지막으로 연결한 쪽이 저장 대상이 됩니다.</b></div>
+      </div>
+
+      <h2 class="sec-h" style="margin-top:0;">방법 A · GitHub 저장소 (권장 · 배포 과정 없음)</h2>
+      <div class="card" style="margin-bottom:20px;">
+        <p style="font-size:12.8px;color:var(--ink-soft);margin-top:0;">GitHub 저장소에 <code>campustown-data.json</code> 파일 하나를 만들어 두면, 저장하기를 누를 때마다 GitHub API로 그 파일을 갱신(커밋)합니다. Google Apps Script 배포 과정이 필요 없어 설정이 더 간단합니다.</p>
+        <div class="connectrow">
+          <input type="text" class="url-in" id="ghOwner" placeholder="GitHub 계정/organization명 (예: coolzet-ai)" style="flex:1;min-width:160px;">
+          <input type="text" class="url-in" id="ghRepo" placeholder="저장소 이름 (예: campustown-data)" style="flex:1;min-width:160px;">
+        </div>
+        <div class="connectrow">
+          <input type="text" class="url-in" id="ghPath" placeholder="파일 경로 (기본값: campustown-data.json)" style="flex:1;min-width:160px;">
+          <input type="text" class="url-in" id="ghBranch" placeholder="브랜치명 (기본값: main)" style="flex:1;min-width:120px;">
+        </div>
+        <div class="connectrow">
+          <input type="password" class="url-in" id="ghToken" placeholder="Personal Access Token (fine-grained, Contents: Read/Write 권한)">
+          <button class="savebtn" onclick="connectGithub()">연결 및 불러오기</button>
+        </div>
+        <div style="margin-top:12px;">
+          <span class="sheets-status" id="githubStatus">연동되지 않음</span>
+        </div>
+        <div class="connectrow">
+          <button class="savebtn" style="background:var(--leaf);" onclick="loadFromGithub()">지금 GitHub에서 불러오기</button>
+          <button class="savebtn" style="background:var(--blue);" onclick="pushToGithub()">지금 GitHub로 저장하기</button>
+        </div>
+        <div class="notice-inline" style="color:var(--amber);">보안 주의 : 이 토큰은 브라우저에서 GitHub API로 직접 전송됩니다. 반드시 <b>이 저장소 하나에만</b> 쓰기 권한을 준 fine-grained 토큰을 사용하고, 공용 PC에서는 사용을 피하세요. 유출이 의심되면 즉시 GitHub에서 토큰을 삭제(Revoke)하세요.</div>
+      </div>
+
+      <div class="card" style="margin-bottom:26px;">
+        <h3 class="sub-h">토큰 만들기 (최초 1회, 약 3분)</h3>
+        <ol class="setup-steps">
+          <li>GitHub에 로그인 후, 데이터를 저장할 <b>저장소를 하나 생성</b>합니다 (Public/Private 무관, Private 권장). 예: <code>campustown-data</code></li>
+          <li>우측 상단 프로필 → <b>Settings → Developer settings → Personal access tokens → Fine-grained tokens</b>로 이동합니다.</li>
+          <li><b>Generate new token</b> 클릭 → Resource owner는 본인 계정, <b>Repository access</b>는 "Only select repositories"로 방금 만든 저장소만 선택합니다.</li>
+          <li><b>Permissions → Repository permissions → Contents</b>를 <b>Read and write</b>로 설정합니다.</li>
+          <li><b>Generate token</b> 클릭 후 나오는 토큰 문자열을 즉시 복사합니다 (다시 볼 수 없습니다).</li>
+          <li>위 입력창에 계정명·저장소명·토큰을 넣고 "연결 및 불러오기"를 누릅니다. 파일이 아직 없다면 "저장 시 새로 생성됩니다"라고 표시되며, 처음 저장하기를 누르는 순간 파일이 생성됩니다.</li>
+        </ol>
+      </div>
+
+      <h2 class="sec-h">방법 B · Google Sheets (Apps Script 배포 필요)</h2>
+      <div class="card" style="margin-bottom:20px;">
+        <div class="connectrow">
+          <input type="text" class="url-in" id="sheetsUrlInput" placeholder="Apps Script 배포 후 발급된 Web App URL을 붙여넣으세요 (…/exec)">
+          <button class="savebtn" onclick="connectSheets()">연결 및 불러오기</button>
+        </div>
+        <div style="margin-top:12px;">
+          <span class="sheets-status" id="sheetsStatus">연동되지 않음</span>
+        </div>
+        <div class="connectrow">
+          <button class="savebtn" style="background:var(--leaf);" onclick="loadFromSheets()">지금 시트에서 불러오기</button>
+          <button class="savebtn" style="background:var(--blue);" onclick="pushToSheets()">지금 시트로 저장하기</button>
+        </div>
+      </div>
+
+      <h2 class="sec-h">설정 방법 (Google Sheets, 최초 1회, 약 5분)</h2>
+      <div class="card" style="margin-bottom:20px;">
+        <ol class="setup-steps">
+          <li><b>Google Sheets에서 새 스프레드시트</b>를 하나 만듭니다. (제목은 원하는 대로, 예: "캠퍼스타운 대시보드 DB")</li>
+          <li>상단 메뉴에서 <b>확장 프로그램 → Apps Script</b>를 클릭합니다.</li>
+          <li>기본으로 열려있는 <code>Code.gs</code> 내용을 모두 지우고, 아래 코드를 그대로 붙여넣습니다.</li>
+          <li>상단의 <b>저장</b>(💾) 후, <b>배포 → 새 배포</b>를 클릭합니다.</li>
+          <li>유형 선택에서 <b>웹 앱</b>을 고르고, "실행 계정: 나", "액세스 권한: 전체 허용(익명 포함)" 으로 설정한 뒤 <b>배포</b>를 누릅니다.</li>
+          <li>권한 승인 화면이 나오면 본인 계정으로 승인합니다.</li>
+          <li>배포가 끝나면 나오는 <b>웹 앱 URL</b>(…/exec 로 끝나는 주소)을 복사해, 위 입력창에 붙여넣고 "연결 및 불러오기"를 누릅니다.</li>
+        </ol>
+      </div>
+
+      <h2 class="sec-h">Apps Script 코드 (Code.gs)</h2>
+      <div class="codebox">
+        <button class="copybtn" onclick="copyGsCode()">코드 복사</button>
+        <pre id="gsCode"></pre>
+      </div>
+      <div class="sec-note">이 코드는 시트에 <b>OrgFac / Programs / ProgramBudgetItems / ProgramKpis / Meta</b> 5개 탭을 자동으로 만들어 데이터를 저장합니다. 기존 탭 이름과 겹치지 않는 새 스프레드시트에서 사용하는 것을 권장합니다.</div>
+    </section>
+
+    <div class="footer-note">
+      건국대학교 ANCHOR사업단 · 캠퍼스타운사업본부 &nbsp;|&nbsp; 본 대시보드는 「2026년 9월 지표점검회의(최종)」 및 「2026년 건국대학교 캠퍼스타운사업 세부실행계획서(변경후)」 문서를 기초로 제작되었습니다.
+    </div>
+  </main>
+</div>
+
+<script>
+/* =========================================================
+   0. NAVIGATION
+========================================================= */
+const navBtns = document.querySelectorAll('#navlist button');
+navBtns.forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    navBtns.forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+    document.getElementById(btn.dataset.view).classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+});
+
+/* =========================================================
+   1. 핵심지표
+========================================================= */
+const coreKPIs = [
+  {tag:'핵심①', name:'아기유니콘 육성 팀수', unit:'개', target:null, current:null, baseline:null, note:'1차년도 목표값 없음 (2차년도부터 1개씩 육성, 총 사업기간 5개 목표)'},
+  {tag:'핵심②', name:'아기유니콘 육성 노력도 (매출액)', unit:'억원', target:80, current:70.3, baseline:58, note:'매출성장률 목표 20% · 하반기 목표 90억원/25%'},
+  {tag:'핵심③', name:'창업기업 육성 팀수', unit:'팀', target:60, current:67, baseline:64, note:'현재 목표 대비 112% 달성 · 하반기 목표 65팀'},
+  {tag:'핵심④', name:'창업기업 중 AI 기반기업 및 인재육성', unit:'개', target:30, current:36, baseline:null, note:'AI 기반 창업기업 수 기준 · 인재육성 160명 목표 · 2026년 신규 지표(전년 실적 없음)'},
+  {tag:'핵심⑤', name:'창업기업 중 교내창업 기업 발굴 비율', unit:'%', target:50, current:52.2, baseline:48.3, note:'목표 대비 104% 달성 · 하반기 목표 52.2%'},
+];
+const autKPIs = [
+  {tag:'자율①', name:'원헬스 분야 입주기업 시제품 제작 건수', unit:'건', target:50, current:20, baseline:50, note:'바이오·펫·에코·푸드 분야 · 하반기 목표 50건'},
+  {tag:'자율②', name:'원헬스 분야 입주기업 지적재산권 출원·등록 건수', unit:'건', target:60, current:24, baseline:83, note:'바이오·펫·에코·푸드 분야 · 하반기 목표 60건'},
+  {tag:'자율③', name:'입주기업 투자 유치 건수 (Seed·Pre-A)', unit:'건', target:3, current:1, baseline:2, note:'하반기 목표 3건 · TIPS는 별도 2건 목표, 현재 2건(100%) 달성'},
+];
+function pctClass(p){ if(p>=100) return 'pct-good'; if(p>=60) return 'pct-warn'; return 'pct-bad'; }
+function barClass(p){ return p<60 ? 'low' : ''; }
+function renderKpiCards(list, wrapId, tagClass){
+  const wrap = document.getElementById(wrapId);
+  wrap.innerHTML='';
+  list.forEach(k=>{
+    const hasTarget = k.target !== null;
+    const pct = hasTarget ? Math.round((k.current/k.target)*100) : null;
+    const div = document.createElement('div');
+    div.className = 'card kpi-card';
+    div.innerHTML = `
+      ${hasTarget ? `<div class="pct-badge ${pctClass(pct)}">${pct}%</div>` : ''}
+      <div class="kpi-tag ${tagClass}">${k.tag}</div>
+      <div class="kpi-name">${k.name}</div>
+      ${hasTarget ? `
+        <div class="kpi-figure"><span class="cur">${k.current}</span><span class="unit">${k.unit}</span><span class="of">/ 목표 ${k.target}${k.unit}</span></div>
+        <div class="bar-track"><div class="bar-fill ${barClass(pct)}" style="width:${Math.min(pct,100)}%"></div></div>
+        ${k.baseline!==null ? `<div class="kpi-h2" style="color:var(--leaf);font-weight:700;">2025년 기준값 ${k.baseline}${k.unit} → 2026.8월 ${k.current}${k.unit}</div>` : ''}
+        <div class="kpi-h2">${k.note}</div>
+      ` : `
+        <div class="kpi-figure"><span class="cur" style="font-size:19px;">목표값 없음</span></div>
+        <div class="kpi-h2">${k.note}</div>
+      `}
+    `;
+    wrap.appendChild(div);
+  });
+}
+renderKpiCards(coreKPIs, 'kpiCoreCards', '');
+renderKpiCards(autKPIs, 'kpiAutCards', 'aut');
+
+/* =========================================================
+   2. 핵심 사업목표
+========================================================= */
+const goals = [
+ {num:'사업목표 ①', title:'KU 아기유니콘 육성', target:'5개 이상 (총 사업기간 누적)', strats:[
+   '유망기업 유입 : 실험실 창업·예비창업패키지 등 매출·투자가 검증된 우수팀 선별 관리 및 연속 성장 지원',
+   '실증 및 판로 개척 : 우수 입주기업에 대학 실증 및 내부 용역 입찰 우선 기회 제공',
+   '전용 공간 및 조건부 투자 연계 : 스타트업 랩 전용 R&D 공간, 기술지주회사 연계 벤처투자펀드 조건부 투자 연계',
+   '글로벌 진출 기회 제공 : KU 글로벌 프론티어 프로그램 연계, CES 2026 참가 등 해외 VC 매칭 기회',
+ ]},
+ {num:'사업목표 ②', title:'창업기업 육성 팀수', target:'60팀 이상', strats:[
+   '내부 고관여층 대상 타겟마케팅 : 온·오프라인 창업설명회, 창업 교과목·드림학기제(창업형) 정밀 타겟팅',
+   '외부 유망 창업팀 유치 전략 : 원헬스 특화 분야 맞춤형 콘텐츠 마케팅, 우수실적 보유팀 리타겟팅',
+   '전국 단위 특화분야 해커톤 : 수상팀 대상 캠퍼스타운 입주 우선권 부여 및 브랜드 홍보',
+   '투자관심 기반 모집 연계 전략 : VC·AC·SI 투자 방향 피칭 설명회를 통한 투자 연계 창업팀 유입',
+ ]},
+ {num:'사업목표 ③', title:'창업기업 매출액', target:'80억원 이상', strats:[
+   'BM 고도화 및 매출모델 체계화 : BM 진단, 고매출 수익모델 구조 설계·고도화, 대기업(셀트리온 등) 벤치마킹',
+   '공공조달·납품 등 B2G 진입 : 공공기관·지자체 대상 B2G 납품 연계 컨설팅, 광진구·강남구 실무 매칭',
+   'B2B 수요처 발굴 및 매칭 지원 : 협약 기업·네트워크 기반 B2B 구매요청기업 대상 데모데이 개최',
+   '시장 진출 연계, 유통망 진입 : 성숙도에 따른 온·오프라인 유통망 진입 및 크라우드펀딩(와디즈 등) 실행',
+ ]},
+ {num:'사업목표 ④', title:'투자유치 성과', target:'Pre-A 3건 이상 · TIPS 2건 이상', strats:[
+   'IR 전략 고도화 : VC·AC 투자자 전용 온라인 IR 보드 운영 기반 비대면 투자 인게이지먼트 플랫폼 구축',
+   '맞춤형 투자자 셀링포인트 설계 : 특화 분야별 산업동향 리포트 및 타깃 VC 리스트 제공',
+   '해외 VC 글로벌 연계 : CES 2026 참가기업 대상 영어 피칭 영상·브랜드 북 등 맞춤형 콘텐츠 제작 지원',
+   '대학 기반 조건부 계약형 투자 유치 : 우수 입주기업 일정 성과 달성 시 자동 후속 투자 전환 체계 구축',
+ ]},
+];
+const goalWrap = document.getElementById('goalCards');
+goals.forEach(g=>{
+  const div = document.createElement('div');
+  div.className='card goal-card';
+  div.innerHTML = `<div class="goal-num">${g.num}</div><div class="goal-title">${g.title}</div><div class="goal-target">목표 : ${g.target}</div><ul class="goal-strats">${g.strats.map(s=>`<li>${s}</li>`).join('')}</ul>`;
+  goalWrap.appendChild(div);
+});
+
+/* =========================================================
+   4. 예산 데이터 : 조직운영 / 창업지원시설운영 (편집 가능 항목)
+========================================================= */
+const CAT_META = {
+  '공통': {label:'육성(공통)', color:'#2E8B57'},
+  '자율': {label:'육성(자율)', color:'#2E5FA3'},
+  'AI':   {label:'AI 기반기업 및 인력육성', color:'#6B4FA0'},
+  'ANCHOR':{label:'ANCHOR 연계프로그램', color:'#B8792B'},
+};
+const BUDGET_CATS_META = [
+  {key:'orgops', label:'조직운영', amount:357000, color:'#8A8F89'},
+  {key:'facops', label:'창업지원시설운영', amount:225000, color:'#B9BFB6'},
+  {key:'공통', label:'창업기업육성(공통)', amount:406500, color:CAT_META['공통'].color},
+  {key:'자율', label:'창업기업육성(자율)', amount:352600, color:CAT_META['자율'].color},
+  {key:'AI', label:'AI 기반기업 및 인력육성', amount:109600, color:CAT_META['AI'].color},
+  {key:'ANCHOR', label:'ANCHOR 연계프로그램', amount:39200, color:CAT_META['ANCHOR'].color},
+];
+
+const orgItems = [
+  {label:'인건비·법인부담금·퇴직충당금 등', amount:301000, exec:0},
+  {label:'인센티브', amount:20000, exec:0},
+  {label:'간접비 (기타 사업 운영을 위한 비용)', amount:36000, exec:0},
+];
+const facUnivItems = [
+  {label:'스타시티 스타트업 존', amount:88700, exec:0},
+  {label:'K-바이오 이노베이션 허브', amount:23000, exec:0},
+  {label:'KU 스타트업 존', amount:1000, exec:0},
+  {label:'KU청년창업스튜디오', amount:6000, exec:0},
+  {label:'사업본부', amount:32000, exec:0},
+  {label:'창의관 창업지원시설', amount:15000, exec:0},
+];
+const facGuItems = [
+  {label:'K-이노베이션 스테이션 센터', amount:59300, exec:0},
+];
+
+/* =========================================================
+   5. 프로그램 데이터 (전체 KPI 입력형으로 통일)
+========================================================= */
+const programs = [
+ {id:1, cat:'공통', name:'KU 캠퍼스타운 창업경진대회', startMonth:1, endMonth:6,
+  place:'건국대 캠퍼스타운사업본부 창업지원시설',
+  audience:'서울시민·서울 소재 직장 재직자·대학(원)생·예비창업가 및 7년 이하 초기 창업가(대표자 39세 이하). 교내창업(교원·학생·동문)·외국인 유학생 창업은 연령 제한 없음',
+  audienceTags:['예비창업자','대학(원)생','서울시민'],
+  content:'유망 (예비)창업자를 발굴해 캠퍼스타운 창업공간 입주 및 지원 프로그램 참여 기회를 제공합니다. 서류평가→발표평가→사업본부 평가 3단계 심사를 거쳐 최종 5개사(팀) 내외를 선정하고, 창업지원금 적정성 평가를 통해 20팀에 지원금을 지급합니다.',
+  kpis:[{label:'선발 팀 수', target:5, unit:'팀'},{label:'창업지원금 지급 팀수', target:20, unit:'팀'},{label:'만족도', target:4.3, unit:'점'}],
+  note:'2025.12 선발기업 + 2026년 추가선발기업 대상 창업지원금 지급',
+  budget:106900,
+  budgetItems:[{label:'서류평가',amount:280},{label:'발표평가',amount:1200},{label:'창업지원금 적정성평가',amount:420},{label:'경진대회 우수팀 시상금',amount:5000},{label:'창업지원금 지급(20팀)',amount:100000}]},
+
+ {id:2, cat:'공통', name:'KU 캠퍼스타운 창업스쿨', startMonth:3, endMonth:6,
+  place:'창업지원시설 및 온라인 병행 운영',
+  audience:'「학생창업 유망팀 300+ On KONKUK 프로그램」 참여 재학생 및 창업에 관심있는 대학(원)생, 캠퍼스타운 입주기업',
+  audienceTags:['재학생','입주기업'],
+  content:'기초·심화 창업교육(아이디어 발굴→BM Canvas 고도화→시장검증), IR 피칭 역량강화 멘토링 및 데모데이, 대학 실험실 인프라 연계 품질테스트(KU TECH-UP)를 통해 실전 창업역량과 기술 완성도를 제고합니다.',
+  kpis:[{label:'KU IDEA2BIZ 이수자', target:80, unit:'명'},{label:'U300 BIZ챌린지 이수자', target:20, unit:'팀'},{label:'TECH-UP 이수자', target:10, unit:'팀'},{label:'언론보도 건수', target:5, unit:'건'},{label:'만족도', target:4.3, unit:'점'}],
+  note:'건국대 창업지원본부 창업지원센터와 공동 운영',
+  budget:36000,
+  budgetItems:[{label:'IR 데모데이 평가비',amount:3200},{label:'홍보물 제작비',amount:1200},{label:'멘토링(U300+IR+TECH-UP)',amount:10000},{label:'창업스쿨 프로그램 용역',amount:19800},{label:'데모데이 우수팀 시상금',amount:1800}]},
+
+ {id:3, cat:'공통', name:'KU 캠퍼스타운 B·MOTION 프로그램', startMonth:6, endMonth:8,
+  place:'건국대 산학협동관 214호 및 온라인',
+  audience:'캠퍼스타운 입주기업',
+  audienceTags:['입주기업'],
+  content:'스케일업 트랙(글로벌 시장 타겟팅), AI Growth Studio(생성형 AI 마케팅 자동화), IP Shield(BM 보호전략·예비출원 지원) 3개 트랙으로 구성되며, 참여기업당 2회 이상 멘토링을 제공합니다.',
+  kpis:[{label:'BM 개선·리디자인 완료 기업', target:15, unit:'팀'},{label:'IP전략수립·예비출원 지원 기업', target:8, unit:'팀'},{label:'언론보도 건수', target:5, unit:'건'},{label:'만족도', target:4.3, unit:'점'}],
+  note:'ANCHOR과제 18(자율지표②, 지식재산권 출원 8건) KPI와 직접 연동',
+  budget:31600,
+  budgetItems:[{label:'홍보물 제작비',amount:1030},{label:'전문가 강의(스케일업/AI Growth/IP Shield)',amount:2170},{label:'전문가 멘토링(AI Growth+IP Shield)',amount:5400},{label:'프로그램 용역(공간대관·AI툴·홍보)',amount:23000}]},
+
+ {id:4, cat:'공통', name:'KU 캠퍼스타운 사업화 지원 프로그램', startMonth:9, endMonth:12,
+  place:'건국대 창의관, 기업별 사무실',
+  audience:'입주기업 중 신청기업 40팀',
+  audienceTags:['입주기업'],
+  content:'기업당 최대 1,000만원의 시제품 제작·시험인증비를 기업 규모·성장단계·사업참여도에 따라 차등 지원합니다(상위 10팀 1,000만원, 중위 20팀 500만원, 하위 10팀 300만원).',
+  kpis:[{label:'시제품 제작 건수', target:30, unit:'건'},{label:'만족도', target:4.3, unit:'점'}],
+  note:'ANCHOR과제 18(핵심지표②, 시제품 제작 건수 5건 이상) KPI와 직접 연동',
+  budget:232000,
+  budgetItems:[{label:'선발심사비',amount:2000},{label:'시제품제작·시험인증 지원금(40팀 차등)',amount:230000}]},
+
+ {id:5, cat:'자율', name:'KU 캠퍼스타운 쇼케이스', startMonth:9, endMonth:11,
+  place:'창업지원시설 및 광진구 지역축제',
+  audience:'입주기업 및 건국대 자회사, 펫 산업 관련 소비재·디지털 서비스 등 B2C 기업 우선',
+  audienceTags:['입주기업','서울시민'],
+  content:'고객 피드백 설계·사용자 인사이트 분석 워크숍, 스타시티 스타트업 존 상시전시 ZONE 및 분기별 팝업스토어(KUration Market), KU플리마켓·반함축제·KU Dream Fair 부스 운영으로 실전 고객 검증 기회를 제공합니다.',
+  kpis:[{label:'교육 워크숍 참여', target:20, unit:'팀'},{label:'전체 축제 부스 참여기업', target:20, unit:'팀'},{label:'만족도', target:4.3, unit:'점'}],
+  note:'ANCHOR과제 18(핵심②·자율②, 시제품제작·IP출원) KPI와 직접 연동',
+  budget:28600,
+  budgetItems:[{label:'일감호축전·성신예술제 판촉물',amount:5000},{label:'스타시티 KUration Market 용역',amount:12980},{label:'쇼케이스 교육워크숍 강의비',amount:620},{label:'반함축제 용역비',amount:10000}]},
+
+ {id:6, cat:'자율', name:'KU 캠퍼스타운 Global 창업브릿지', startMonth:9, endMonth:11,
+  place:'창업지원시설, 팁스타운(강남구) 등',
+  audience:'(예비) 외국인 창업자 및 건국대 유학생, 글로벌 공동창업 희망 입주기업',
+  audienceTags:['외국인창업자','입주기업'],
+  content:'비자·제도·비즈니스셋업 글로벌 창업 정착교육과, 다국적 창업자·투자자 네트워킹 및 VC 피칭이 이루어지는 GLOBAL 창업 커넥트 데이를 운영합니다.',
+  kpis:[{label:'외국인 창업자 교육 참가', target:30, unit:'팀'},{label:'글로벌 네트워킹 참가자', target:50, unit:'명'},{label:'만족도', target:4.3, unit:'점'}],
+  note:'',
+  budget:31000,
+  budgetItems:[{label:'홍보물 제작비',amount:1000},{label:'글로벌 창업 정착교육',amount:10000},{label:'GLOBAL 창업 커넥트 데이 용역비',amount:20000}]},
+
+ {id:7, cat:'자율', name:'KU 캠퍼스타운 Unicorn Seed 프로그램', startMonth:6, endMonth:12,
+  place:'창업지원시설 및 건국대 기술지주회사 회의실',
+  audience:'기술기반 또는 혁신 아이템을 보유한 입주기업',
+  audienceTags:['입주기업','투자자'],
+  content:'1:1 IR 전문가 컨설팅→KU Investment 데모데이(투자자 10개 기관 이상 초청)→건국대 기술지주회사 연계 후속 투자까지 3단계 투자 연계 프로그램을 운영합니다.',
+  kpis:[{label:'데모데이 참가 기업', target:8, unit:'개사'},{label:'투자유치 총액', target:2, unit:'억원'}],
+  note:'시비 1천만원 + 대응자금 2.8억원(직접투자비)',
+  budget:290000,
+  budgetItems:[{label:'프로그램 운영비(자문·대관·심사·사후관리)',amount:10000},{label:'직접투자비(대응자금)',amount:280000}]},
+
+ {id:8, cat:'자율', name:'캠퍼스타운 대학 연합 창업포럼', startMonth:8, endMonth:10,
+  place:'신용보증기금 광진지점 (NEST COURT)',
+  audience:'건국대·한양대·경희대·연세대 캠퍼스타운 창업기업 및 재학생, 관내 창업기업',
+  audienceTags:['대학연합','재학생'],
+  content:'토크콘서트, 창업기업 데모데이(IR 피칭), 글로벌 창업 Jump-up(해외진출 상담), 기술사업화 전시·상담, 네트워킹 서밋 5개 세션으로 구성된 4개 대학 연합 창업포럼입니다.',
+  kpis:[{label:'총 참여자 수', target:100, unit:'명'},{label:'참여자 만족도조사', target:90, unit:'점'}],
+  note:'위탁(용역) 운영 · 관내 창업기업 대상 확대 진행',
+  budget:8000,
+  budgetItems:[{label:'대학연합행사 운영 용역비',amount:8000}]},
+
+ {id:9, cat:'자율', name:'KU 캠퍼스타운 IP 서포트 프로그램', startMonth:9, endMonth:12,
+  place:'입주기업 사무실 및 용역업체 미팅룸',
+  audience:'입주기업 중 신청기업 15팀',
+  audienceTags:['입주기업'],
+  content:'브랜드 지식재산권 강의(상표권·부정경쟁방지법·디자인권), 전문변리사 1:1 컨설팅, 상표 출원 지원을 15팀 대상으로 제공합니다.',
+  kpis:[{label:'참여 기업', target:15, unit:'개사'},{label:'만족도', target:4.3, unit:'점'}],
+  note:'2026년 신설 프로그램',
+  budget:5050,
+  budgetItems:[{label:'IP 서포트 프로그램 용역(강의+1:1컨설팅+출원지원)',amount:5050}]},
+
+ {id:10, cat:'AI', name:'KU 캠퍼스타운 AI Nest 프로그램', startMonth:8, endMonth:9,
+  place:'건국대 ANCHOR사업단 전산실습실 및 온라인 병행',
+  audience:'입주기업, 건국대 재학생·대학(원)생, 서울시민',
+  audienceTags:['입주기업','재학생','서울시민'],
+  content:'바이오·펫·에코·푸드 분야별 AI 활용 기본교육을 4개 모듈(주 2회, 온·오프라인 병행)로 운영합니다. 비전공자·시민도 참여 가능한 초급 단계 프로그램입니다.',
+  kpis:[{label:'분야별 AI 역량교육 참여자', target:30, unit:'명'},{label:'수료율(70% 이상 출석)', target:80, unit:'%'},{label:'만족도', target:4.3, unit:'점'}],
+  note:'AI 인재육성 초급단계 · ANCHOR 7과제 AI인재양성 지표 연계',
+  budget:28650,
+  budgetItems:[{label:'강사비',amount:3420},{label:'원고비',amount:2000},{label:'AI플랫폼 실습지원비',amount:9000},{label:'줌송출·영상편집비',amount:4730},{label:'실습데이터셋·교재인쇄비',amount:1000},{label:'기타운영비',amount:2000},{label:'오프라인 행사비',amount:3300},{label:'운영 인건비',amount:2500},{label:'홍보비',amount:700}]},
+
+ {id:11, cat:'AI', name:'KU 캠퍼스타운 AI 글로벌 해커톤', startMonth:9, endMonth:12,
+  place:'창업지원시설 및 교외 공간',
+  audience:'입주기업, 서울시 거주 청년, 국내외 대학(원)생(내·외국인)',
+  audienceTags:['입주기업','재학생','서울시민'],
+  content:'팀빌딩(온라인)→AI 프로그램 활용 창업교육(온라인)→팀별 멘토링(온라인)→IR 대회(오프라인) 4단계로 진행되며, 디지털 서비스 등 트랙별 글로벌 시장진출 아이디어를 발굴합니다.',
+  kpis:[{label:'입주기업 참여', target:10, unit:'팀'},{label:'학생 참여', target:30, unit:'명'},{label:'아이디어 제출', target:10, unit:'건'},{label:'만족도', target:4.3, unit:'점'}],
+  note:'AI 인재육성 중급단계',
+  budget:41000,
+  budgetItems:[{label:'해커톤 장소 대관비',amount:3000},{label:'팀별 컨설턴트비',amount:20000},{label:'AI SW실습실 대관비',amount:10000},{label:'플랫폼/AI툴 사용료',amount:2500},{label:'서면심사비',amount:840},{label:'발표심사비',amount:1500},{label:'기타운영비',amount:660},{label:'홍보물 제작비',amount:1000},{label:'우수팀 시상금',amount:1500}]},
+
+ {id:12, cat:'AI', name:'KU 캠퍼스타운 AI-X ScaleUp Lab', startMonth:8, endMonth:11,
+  place:'건국대 공용공간 및 온라인, 외부공간(더클래식500 등)',
+  audience:'AI 기반 창업기업',
+  audienceTags:['입주기업','투자자'],
+  content:'Pre-Lab(사전 진단)→Lab 운영(AI 스케일업 실무교육·해커톤)→오픈이노베이션(대기업·공공기관·VC 매칭)→Post-Lab(창업지원금 차등 지급, 후속 연계) 4단계로 AI 기업 기술·제품을 고도화합니다.',
+  kpis:[{label:'참여 기업', target:30, unit:'개사'},{label:'협업모델 도출', target:5, unit:'건'},{label:'투자유치', target:2, unit:'건'},{label:'만족도', target:4.3, unit:'점'}],
+  note:'AI 인재육성 중·고급 단계',
+  budget:40000,
+  budgetItems:[{label:'홍보물 제작비',amount:1000},{label:'데모데이 발표심사비',amount:3000},{label:'오픈이노베이션 용역비',amount:5000},{label:'스케일업 교육 용역비',amount:10000},{label:'데모데이 우수팀 시상금',amount:1000},{label:'창업지원금 지급(7팀)',amount:20000}]},
+
+ {id:13, cat:'ANCHOR', name:'KU 캠퍼스타운 HEMA-KORO 마라톤 컨설팅', startMonth:5, endMonth:12,
+  place:'창업지원시설 및 건국대 수의대병원',
+  audience:'HEMA(바이오헬스·에코스마트시티·모빌리티ICT·동물바이오) 창업희망팀 30팀, 서울시 펫 관련 산업 기업 10개',
+  audienceTags:['입주기업','지역기업'],
+  content:'HEMA 세션(ICC 교수진 3단계 기술진단·1:1 멘토링)과 KORO 세션(수의대·동물병원 연계 기술진단→고객검증→실증테스트→투자연계 4단계 성장지원)으로 구성됩니다.',
+  kpis:[{label:'HEMA-KORO 참여 기업', target:30, unit:'개팀'},{label:'지역구 펫 관련 참여기업', target:10, unit:'개팀'},{label:'만족도', target:4.3, unit:'점'}],
+  note:'ANCHOR 4과제(산학협력 생태계 활성화) 연계 프로그램',
+  budget:19200,
+  budgetItems:[{label:'홍보물 제작비',amount:1000},{label:'성과발표회 평가비',amount:1500},{label:'멘토링(건국대 교수진+외부전문가)',amount:16000},{label:'데모데이 우수팀 시상금',amount:700}]},
+
+ {id:14, cat:'ANCHOR', name:'KU 캠퍼스타운 공유주방 푸드랩', startMonth:9, endMonth:11,
+  place:'건국대 스타시티 공유주방, 배화여대 쿠킹랩',
+  audience:'입주기업, 배화여대(ANCHOR 4과제 참여대학) 식품·외식 창업 희망자',
+  audienceTags:['입주기업','대학연합'],
+  content:'아이디어 발굴 및 제품 기획→시제품 조리 실습(배화여대 쿠킹랩)→공유주방 실증·고객 반응 테스트(100인 이상 시식)→멘토링 및 브랜드 고도화 4단계 테스트베드를 운영합니다.',
+  kpis:[{label:'개발 시제품 수', target:15, unit:'개'},{label:'참가 팀 수', target:10, unit:'개팀'},{label:'만족도', target:4.3, unit:'점'}],
+  note:'ANCHOR 4과제(배화여대 연계) 프로그램 · 공간관리시스템을 통해 사전 예약 후 테스트베드 사용',
+  budget:20000,
+  budgetItems:[{label:'홍보물 제작비',amount:1000},{label:'프로그램 용역(교육·재료비·시식·멘토링·디자인 등)',amount:19000}]},
+];
+
+// runtime state (in-memory only)
+programs.forEach(p=>{
+  p.status='계획';
+  p.manualProgress=0;
+  p.feedback='';
+  p.kpis.forEach(k=>{ k.achieved = 0; });
+  p.budgetItems.forEach(bi=>{ bi.exec = 0; });
+});
+
+function fmt(n){ return Number(n).toLocaleString('ko-KR'); }
+function programBudgetExecSum(p){ return p.budgetItems.reduce((s,bi)=>s+Number(bi.exec||0),0); }
+function itemsExecSum(list){ return list.reduce((s,it)=>s+Number(it.exec||0),0); }
+
+/* =========================================================
+   저장 / 업데이트 시각 표기
+========================================================= */
+let budgetSavedAt = null;
+let programSavedAt = null;
+function fmtDate(d){
+  const p2 = n=>String(n).padStart(2,'0');
+  return `${d.getFullYear()}.${p2(d.getMonth()+1)}.${p2(d.getDate())} ${p2(d.getHours())}:${p2(d.getMinutes())}`;
+}
+function updateGlobalStamp(){
+  const el = document.getElementById('globalUpdatedTxt');
+  const latest = [budgetSavedAt, programSavedAt].filter(Boolean).sort((a,b)=>b-a)[0];
+  el.textContent = latest ? `업데이트 기준 : ${fmtDate(latest)}` : '저장된 변경사항 없음';
+}
+function markBudgetDirty(){
+  const el = document.getElementById('budgetSaveStamp');
+  if(!el) return;
+  el.textContent = '변경사항 있음 · 아직 저장하지 않음';
+  el.classList.add('dirty');
+}
+function markProgramDirty(){
+  const el = document.getElementById('programSaveStamp');
+  if(!el) return;
+  el.textContent = '변경사항 있음 · 아직 저장하지 않음';
+  el.classList.add('dirty');
+}
+async function saveBudget(){
+  budgetSavedAt = new Date();
+  stampSaved('budgetSaveStamp', budgetSavedAt, '로컬');
+  updateGlobalStamp();
+  if(activeBackend==='github'){ await pushToGithub(); }
+  else if(activeBackend==='sheets'){ await pushToSheets(); }
+}
+async function saveProgram(){
+  programSavedAt = new Date();
+  stampSaved('programSaveStamp', programSavedAt, '로컬');
+  updateGlobalStamp();
+  if(activeBackend==='github'){ await pushToGithub(); }
+  else if(activeBackend==='sheets'){ await pushToSheets(); }
+}
+
+/* =========================================================
+   Google Sheets 연동 (Apps Script Web App 백엔드)
+========================================================= */
+let SHEETS_URL = '';
+let sheetsConnected = false;
+let activeBackend = null; // 'github' | 'sheets' | null
+
+function setSheetsStatus(msg, kind){
+  const el = document.getElementById('sheetsStatus');
+  el.textContent = msg;
+  el.className = 'sheets-status ' + (kind||'');
+}
+
+function buildPayload(){
+  return {
+    updatedAt: new Date().toISOString(),
+    orgFac: {
+      org: orgItems.map(it=>({label:it.label, amount:it.amount, exec:it.exec})),
+      facUniv: facUnivItems.map(it=>({label:it.label, amount:it.amount, exec:it.exec})),
+      facGu: facGuItems.map(it=>({label:it.label, amount:it.amount, exec:it.exec})),
+    },
+    programs: programs.map(p=>({
+      id:p.id, status:p.status, manualProgress:p.manualProgress,
+      startMonth:p.startMonth, endMonth:p.endMonth, feedback:p.feedback,
+      budgetItems: p.budgetItems.map(bi=>({label:bi.label, amount:bi.amount, exec:bi.exec})),
+      kpis: p.kpis.map(k=>({label:k.label, target:k.target, unit:k.unit, achieved:k.achieved}))
+    }))
+  };
+}
+
+function stampSaved(elId, date, label){
+  const el = document.getElementById(elId);
+  if(el){ el.textContent = `마지막 저장 : ${fmtDate(date)} (${label})`; el.classList.remove('dirty'); }
+}
+function refreshBackendLabels(){
+  const txt = activeBackend==='github' ? '저장 시 GitHub로 동기화됨'
+            : activeBackend==='sheets' ? '저장 시 Google Sheets로 동기화됨'
+            : '백엔드 미연결 · 로컬(세션)에만 저장됨';
+  ['budgetBackendTxt','programBackendTxt'].forEach(id=>{
+    const el = document.getElementById(id);
+    if(el){ el.textContent = txt; el.className = 'sync-badge' + (activeBackend ? ' on' : ''); }
+  });
+}
+
+function applyPayload(data){
+  if(!data) return;
+  if(data.orgFac){
+    (data.orgFac.org||[]).forEach((it,idx)=>{ if(orgItems[idx]) orgItems[idx].exec = Number(it.exec)||0; });
+    (data.orgFac.facUniv||[]).forEach((it,idx)=>{ if(facUnivItems[idx]) facUnivItems[idx].exec = Number(it.exec)||0; });
+    (data.orgFac.facGu||[]).forEach((it,idx)=>{ if(facGuItems[idx]) facGuItems[idx].exec = Number(it.exec)||0; });
+  }
+  if(data.programs){
+    data.programs.forEach(dp=>{
+      const p = programs.find(x=>x.id===Number(dp.id));
+      if(!p) return;
+      p.status = dp.status || p.status;
+      p.manualProgress = Number(dp.manualProgress)||0;
+      p.startMonth = Number(dp.startMonth)||p.startMonth;
+      p.endMonth = Number(dp.endMonth)||p.endMonth;
+      p.feedback = dp.feedback || '';
+      (dp.budgetItems||[]).forEach((bi,idx)=>{ if(p.budgetItems[idx]) p.budgetItems[idx].exec = Number(bi.exec)||0; });
+      (dp.kpis||[]).forEach((k,idx)=>{ if(p.kpis[idx]) p.kpis[idx].achieved = Number(k.achieved)||0; });
+    });
+  }
+  renderOrgFacRows(); renderBudget(); renderStatusCounts(); renderGantt(); renderFeedbackSummary();
+}
+
+function connectSheets(){
+  const val = document.getElementById('sheetsUrlInput').value.trim();
+  if(!val){ setSheetsStatus('URL을 입력해주세요', 'warn'); return; }
+  SHEETS_URL = val;
+  sheetsConnected = true;
+  activeBackend = 'sheets';
+  refreshBackendLabels();
+  loadFromSheets();
+}
+
+async function loadFromSheets(){
+  if(!SHEETS_URL){ setSheetsStatus('먼저 Web App URL을 입력하고 연결해주세요', 'warn'); return; }
+  try{
+    setSheetsStatus('불러오는 중…', '');
+    const res = await fetch(SHEETS_URL);
+    if(!res.ok){ throw new Error(`서버 응답 ${res.status} (배포 상태를 확인해주세요)`); }
+    const json = await res.json();
+    if(json.status !== 'ok') throw new Error(json.message || '불러오기 실패');
+    applyPayload(json.data);
+    if(json.updatedAt){
+      budgetSavedAt = new Date(json.updatedAt);
+      programSavedAt = new Date(json.updatedAt);
+      updateGlobalStamp();
+      stampSaved('budgetSaveStamp', budgetSavedAt, 'Sheets');
+      stampSaved('programSaveStamp', programSavedAt, 'Sheets');
+    }
+    setSheetsStatus('연동됨 · 불러오기 완료 ('+fmtDate(new Date())+')', 'ok');
+  }catch(err){
+    setSheetsStatus('불러오기 실패 : '+err.message, 'bad');
+  }
+}
+
+async function pushToSheets(){
+  if(!SHEETS_URL){ setSheetsStatus('먼저 Web App URL을 입력하고 연결해주세요', 'warn'); return {ok:false}; }
+  try{
+    setSheetsStatus('저장 중…', '');
+    const res = await fetch(SHEETS_URL, {
+      method:'POST',
+      headers:{'Content-Type':'text/plain;charset=utf-8'},
+      body: JSON.stringify({action:'save', data: buildPayload()})
+    });
+    if(!res.ok){ throw new Error(`서버 응답 ${res.status} (배포 상태를 확인해주세요)`); }
+    const json = await res.json();
+    if(json.status !== 'ok') throw new Error(json.message || '저장 실패');
+    const savedDate = new Date(json.updatedAt || Date.now());
+    budgetSavedAt = savedDate; programSavedAt = savedDate;
+    stampSaved('budgetSaveStamp', savedDate, 'Sheets');
+    stampSaved('programSaveStamp', savedDate, 'Sheets');
+    updateGlobalStamp();
+    setSheetsStatus('연동됨 · 저장 완료 ('+fmtDate(savedDate)+')', 'ok');
+    return {ok:true, updatedAt: json.updatedAt};
+  }catch(err){
+    setSheetsStatus('저장 실패 : '+err.message, 'bad');
+    return {ok:false};
+  }
+}
+
+/* ---------- GitHub 저장소 백엔드 ---------- */
+const GH = { owner:'', repo:'', path:'campustown-data.json', branch:'main', token:'', sha:null };
+
+function readGithubInputs(){
+  GH.owner = document.getElementById('ghOwner').value.trim();
+  GH.repo = document.getElementById('ghRepo').value.trim();
+  GH.path = document.getElementById('ghPath').value.trim() || 'campustown-data.json';
+  GH.branch = document.getElementById('ghBranch').value.trim() || 'main';
+  GH.token = document.getElementById('ghToken').value.trim();
+}
+function ghApiUrl(){
+  const encodedPath = GH.path.split('/').map(encodeURIComponent).join('/');
+  return `https://api.github.com/repos/${GH.owner}/${GH.repo}/contents/${encodedPath}`;
+}
+function setGithubStatus(msg, kind){
+  const el = document.getElementById('githubStatus');
+  el.textContent = msg;
+  el.className = 'sheets-status ' + (kind||'');
+}
+function b64EncodeUtf8(str){ return btoa(unescape(encodeURIComponent(str))); }
+function b64DecodeUtf8(b64){ return decodeURIComponent(escape(atob(b64.replace(/\n/g,'')))); }
+
+function connectGithub(){
+  readGithubInputs();
+  if(!GH.owner || !GH.repo || !GH.token){ setGithubStatus('저장소 소유자·이름·토큰을 모두 입력해주세요', 'warn'); return; }
+  activeBackend = 'github';
+  refreshBackendLabels();
+  loadFromGithub();
+}
+
+async function loadFromGithub(){
+  readGithubInputs();
+  if(!GH.owner || !GH.repo || !GH.token){ setGithubStatus('먼저 저장소 정보와 토큰을 입력하고 연결해주세요', 'warn'); return; }
+  try{
+    setGithubStatus('불러오는 중…', '');
+    const res = await fetch(`${ghApiUrl()}?ref=${encodeURIComponent(GH.branch)}`, {
+      headers:{ 'Authorization':'Bearer '+GH.token, 'Accept':'application/vnd.github+json' }
+    });
+    if(res.status===404){
+      GH.sha = null;
+      setGithubStatus('연동됨 · 아직 저장된 파일이 없습니다 (처음 저장 시 새로 생성됩니다)', 'warn');
+      return;
+    }
+    if(!res.ok){ throw new Error(`GitHub 응답 ${res.status} (토큰 권한·저장소 이름을 확인해주세요)`); }
+    const json = await res.json();
+    GH.sha = json.sha;
+    const data = JSON.parse(b64DecodeUtf8(json.content));
+    applyPayload(data);
+    if(data.updatedAt){
+      budgetSavedAt = new Date(data.updatedAt);
+      programSavedAt = new Date(data.updatedAt);
+      updateGlobalStamp();
+      stampSaved('budgetSaveStamp', budgetSavedAt, 'GitHub');
+      stampSaved('programSaveStamp', programSavedAt, 'GitHub');
+    }
+    setGithubStatus('연동됨 · 불러오기 완료 ('+fmtDate(new Date())+')', 'ok');
+  }catch(err){
+    setGithubStatus('불러오기 실패 : '+err.message, 'bad');
+  }
+}
+
+async function pushToGithub(){
+  readGithubInputs();
+  if(!GH.owner || !GH.repo || !GH.token){ setGithubStatus('먼저 저장소 정보와 토큰을 입력하고 연결해주세요', 'warn'); return {ok:false}; }
+  try{
+    setGithubStatus('저장 중…', '');
+    const payload = buildPayload();
+    const content = b64EncodeUtf8(JSON.stringify(payload, null, 2));
+    const body = { message:'캠퍼스타운 대시보드 데이터 업데이트 · '+fmtDate(new Date()), content, branch:GH.branch };
+    if(GH.sha) body.sha = GH.sha;
+
+    let res = await fetch(ghApiUrl(), {
+      method:'PUT',
+      headers:{ 'Authorization':'Bearer '+GH.token, 'Accept':'application/vnd.github+json' },
+      body: JSON.stringify(body)
+    });
+
+    if(res.status===409){
+      const refetch = await fetch(`${ghApiUrl()}?ref=${encodeURIComponent(GH.branch)}`, {
+        headers:{ 'Authorization':'Bearer '+GH.token, 'Accept':'application/vnd.github+json' }
+      });
+      if(refetch.ok){
+        const j2 = await refetch.json();
+        GH.sha = j2.sha;
+        body.sha = GH.sha;
+        res = await fetch(ghApiUrl(), {
+          method:'PUT',
+          headers:{ 'Authorization':'Bearer '+GH.token, 'Accept':'application/vnd.github+json' },
+          body: JSON.stringify(body)
+        });
+      }
+    }
+
+    if(!res.ok){
+      const errBody = await res.json().catch(()=>({}));
+      throw new Error(`GitHub 응답 ${res.status}${errBody.message ? ' · '+errBody.message : ''} (토큰 권한·브랜치명을 확인해주세요)`);
+    }
+    const json = await res.json();
+    GH.sha = json.content.sha;
+    const savedDate = new Date(payload.updatedAt);
+    budgetSavedAt = savedDate; programSavedAt = savedDate;
+    stampSaved('budgetSaveStamp', savedDate, 'GitHub');
+    stampSaved('programSaveStamp', savedDate, 'GitHub');
+    updateGlobalStamp();
+    setGithubStatus('연동됨 · 저장 완료 ('+fmtDate(savedDate)+')', 'ok');
+    return {ok:true, updatedAt: payload.updatedAt};
+  }catch(err){
+    setGithubStatus('저장 실패 : '+err.message, 'bad');
+    return {ok:false};
+  }
+}
+
+const GS_CODE = [
+"const SHEET_NAMES = {",
+"  orgFac: 'OrgFac',",
+"  programs: 'Programs',",
+"  budgetItems: 'ProgramBudgetItems',",
+"  kpis: 'ProgramKpis',",
+"  meta: 'Meta'",
+"};",
+"",
+"function doGet(e) {",
+"  return respond_(handleLoad_());",
+"}",
+"",
+"function doPost(e) {",
+"  const body = JSON.parse(e.postData.contents);",
+"  if (body.action === 'save') {",
+"    return respond_(handleSave_(body.data));",
+"  }",
+"  return respond_({status:'error', message:'unknown action'});",
+"}",
+"",
+"function respond_(obj) {",
+"  return ContentService.createTextOutput(JSON.stringify(obj))",
+"    .setMimeType(ContentService.MimeType.JSON);",
+"}",
+"",
+"function getSheet_(name, headers) {",
+"  const ss = SpreadsheetApp.getActiveSpreadsheet();",
+"  let sh = ss.getSheetByName(name);",
+"  if (!sh) {",
+"    sh = ss.insertSheet(name);",
+"    sh.appendRow(headers);",
+"  }",
+"  return sh;",
+"}",
+"",
+"function sheetToObjects_(sheet) {",
+"  const rows = sheet.getDataRange().getValues();",
+"  if (rows.length < 2) return [];",
+"  const headers = rows[0];",
+"  return rows.slice(1)",
+"    .filter(row => row.join('') !== '')",
+"    .map(row => {",
+"      const obj = {};",
+"      headers.forEach((h, i) => obj[h] = row[i]);",
+"      return obj;",
+"    });",
+"}",
+"",
+"function clearDataRows_(sheet) {",
+"  const lastRow = sheet.getLastRow();",
+"  if (lastRow > 1) {",
+"    sheet.getRange(2, 1, lastRow - 1, sheet.getLastColumn()).clearContent();",
+"  }",
+"}",
+"",
+"function setMeta_(sheet, key, value) {",
+"  const rows = sheet.getDataRange().getValues();",
+"  for (let i = 1; i < rows.length; i++) {",
+"    if (rows[i][0] === key) { sheet.getRange(i + 1, 2).setValue(value); return; }",
+"  }",
+"  sheet.appendRow([key, value]);",
+"}",
+"",
+"function handleLoad_() {",
+"  const orgFacSheet = getSheet_(SHEET_NAMES.orgFac, ['type','idx','label','amount','exec']);",
+"  const progSheet   = getSheet_(SHEET_NAMES.programs, ['id','status','manualProgress','startMonth','endMonth','feedback']);",
+"  const biSheet      = getSheet_(SHEET_NAMES.budgetItems, ['programId','idx','label','amount','exec']);",
+"  const kpiSheet      = getSheet_(SHEET_NAMES.kpis, ['programId','idx','label','target','unit','achieved']);",
+"  const metaSheet    = getSheet_(SHEET_NAMES.meta, ['key','value']);",
+"",
+"  const orgFacRows = sheetToObjects_(orgFacSheet);",
+"  const progRows   = sheetToObjects_(progSheet);",
+"  const biRows      = sheetToObjects_(biSheet);",
+"  const kpiRows      = sheetToObjects_(kpiSheet);",
+"  const metaRows    = sheetToObjects_(metaSheet);",
+"",
+"  const data = {",
+"    orgFac: {",
+"      org:     orgFacRows.filter(r => r.type === 'org').map(r => ({label:r.label, amount:Number(r.amount), exec:Number(r.exec)})),",
+"      facUniv: orgFacRows.filter(r => r.type === 'facUniv').map(r => ({label:r.label, amount:Number(r.amount), exec:Number(r.exec)})),",
+"      facGu:   orgFacRows.filter(r => r.type === 'facGu').map(r => ({label:r.label, amount:Number(r.amount), exec:Number(r.exec)}))",
+"    },",
+"    programs: progRows.map(pr => {",
+"      const pid = Number(pr.id);",
+"      return {",
+"        id: pid,",
+"        status: pr.status,",
+"        manualProgress: Number(pr.manualProgress),",
+"        startMonth: Number(pr.startMonth),",
+"        endMonth: Number(pr.endMonth),",
+"        feedback: pr.feedback,",
+"        budgetItems: biRows.filter(b => Number(b.programId) === pid)",
+"          .map(b => ({label:b.label, amount:Number(b.amount), exec:Number(b.exec)})),",
+"        kpis: kpiRows.filter(k => Number(k.programId) === pid)",
+"          .map(k => ({label:k.label, target:Number(k.target), unit:k.unit, achieved:Number(k.achieved)}))",
+"      };",
+"    })",
+"  };",
+"",
+"  const metaMap = {};",
+"  metaRows.forEach(m => { metaMap[m.key] = m.value; });",
+"",
+"  return {status:'ok', data:data, updatedAt: metaMap.updatedAt || null};",
+"}",
+"",
+"function handleSave_(data) {",
+"  const orgFacSheet = getSheet_(SHEET_NAMES.orgFac, ['type','idx','label','amount','exec']);",
+"  const progSheet   = getSheet_(SHEET_NAMES.programs, ['id','status','manualProgress','startMonth','endMonth','feedback']);",
+"  const biSheet      = getSheet_(SHEET_NAMES.budgetItems, ['programId','idx','label','amount','exec']);",
+"  const kpiSheet      = getSheet_(SHEET_NAMES.kpis, ['programId','idx','label','target','unit','achieved']);",
+"  const metaSheet    = getSheet_(SHEET_NAMES.meta, ['key','value']);",
+"",
+"  clearDataRows_(orgFacSheet);",
+"  clearDataRows_(progSheet);",
+"  clearDataRows_(biSheet);",
+"  clearDataRows_(kpiSheet);",
+"",
+"  const orgFac = data.orgFac || {};",
+"  (orgFac.org || []).forEach((it, idx) => orgFacSheet.appendRow(['org', idx, it.label, it.amount, it.exec]));",
+"  (orgFac.facUniv || []).forEach((it, idx) => orgFacSheet.appendRow(['facUniv', idx, it.label, it.amount, it.exec]));",
+"  (orgFac.facGu || []).forEach((it, idx) => orgFacSheet.appendRow(['facGu', idx, it.label, it.amount, it.exec]));",
+"",
+"  (data.programs || []).forEach(p => {",
+"    progSheet.appendRow([p.id, p.status, p.manualProgress, p.startMonth, p.endMonth, p.feedback]);",
+"    (p.budgetItems || []).forEach((bi, idx) => biSheet.appendRow([p.id, idx, bi.label, bi.amount, bi.exec]));",
+"    (p.kpis || []).forEach((k, idx) => kpiSheet.appendRow([p.id, idx, k.label, k.target, k.unit, k.achieved]));",
+"  });",
+"",
+"  const now = new Date().toISOString();",
+"  setMeta_(metaSheet, 'updatedAt', now);",
+"",
+"  return {status:'ok', updatedAt: now};",
+"}"
+].join('\n');
+
+function copyGsCode(){
+  navigator.clipboard.writeText(GS_CODE).then(()=>{
+    const btn = document.querySelector('.copybtn');
+    const old = btn.textContent;
+    btn.textContent = '복사됨!';
+    setTimeout(()=>{ btn.textContent = old; }, 1600);
+  });
+}
+
+/* =========================================================
+   4. 예산 총괄 렌더링 (조직운영·시설운영비 편집 가능)
+========================================================= */
+function renderOrgFacRows(){
+  const orgWrap = document.getElementById('orgRows');
+  orgWrap.innerHTML = orgItems.map((it,idx)=>{
+    const p = it.amount ? Math.round((it.exec||0)/it.amount*1000)/10 : 0;
+    return `<div class="subitem-row"><span>${it.label}</span><span>${fmt(it.amount)}천원</span>
+      <input type="number" min="0" class="num-in" style="width:88px;" value="${it.exec||0}" onchange="updateOrgExec(${idx}, this.value)">
+      <span class="exec-pct" style="color:${p>=100?'#166B3E':'#1B2B22'}">${p}%</span></div>`;
+  }).join('');
+
+  const univWrap = document.getElementById('facUnivRows');
+  univWrap.innerHTML = facUnivItems.map((it,idx)=>{
+    const p = it.amount ? Math.round((it.exec||0)/it.amount*1000)/10 : 0;
+    return `<div class="subitem-row"><span>${it.label}</span><span>${fmt(it.amount)}천원</span>
+      <input type="number" min="0" class="num-in" style="width:88px;" value="${it.exec||0}" onchange="updateFacExec('univ', ${idx}, this.value)">
+      <span class="exec-pct" style="color:${p>=100?'#166B3E':'#1B2B22'}">${p}%</span></div>`;
+  }).join('');
+
+  const guWrap = document.getElementById('facGuRows');
+  guWrap.innerHTML = facGuItems.map((it,idx)=>{
+    const p = it.amount ? Math.round((it.exec||0)/it.amount*1000)/10 : 0;
+    return `<div class="subitem-row"><span>${it.label}</span><span>${fmt(it.amount)}천원</span>
+      <input type="number" min="0" class="num-in" style="width:88px;" value="${it.exec||0}" onchange="updateFacExec('gu', ${idx}, this.value)">
+      <span class="exec-pct" style="color:${p>=100?'#166B3E':'#1B2B22'}">${p}%</span></div>`;
+  }).join('');
+}
+function updateOrgExec(idx, val){ orgItems[idx].exec = Number(val)||0; renderOrgFacRows(); renderBudget(); markBudgetDirty(); }
+function updateFacExec(which, idx, val){
+  if(which==='univ') facUnivItems[idx].exec = Number(val)||0;
+  else facGuItems[idx].exec = Number(val)||0;
+  renderOrgFacRows(); renderBudget(); markBudgetDirty();
+}
+
+function renderBudget(){
+  const orgExec = itemsExecSum(orgItems);
+  const facExec = itemsExecSum(facUnivItems) + itemsExecSum(facGuItems);
+  const progExec = programs.reduce((s,p)=>s+programBudgetExecSum(p),0);
+  const totalExec = orgExec + facExec + progExec;
+  const totalBudget = 1500000;
+  const totalPct = Math.round(totalExec/totalBudget*1000)/10;
+
+  document.getElementById('totalExecTxt').textContent = `집행액 ${fmt(totalExec)}천원 / 배정 ${fmt(totalBudget)}천원`;
+  document.getElementById('totalRingTxt').textContent = totalPct+'%';
+  document.getElementById('totalRing').style.setProperty('--p', Math.min(totalPct,100)+'%');
+
+  const catWrap = document.getElementById('catRows');
+  catWrap.innerHTML='';
+  BUDGET_CATS_META.forEach(c=>{
+    let exec = 0;
+    if(c.key==='orgops') exec = orgExec;
+    else if(c.key==='facops') exec = facExec;
+    else exec = programs.filter(p=>p.cat===c.key).reduce((s,p)=>s+programBudgetExecSum(p),0);
+    const pct = c.amount ? Math.round(exec/c.amount*1000)/10 : 0;
+    const row = document.createElement('div');
+    row.className='cat-row';
+    row.innerHTML = `
+      <div><span class="cat-dot" style="background:${c.color}"></span><span class="cat-name">${c.label}</span></div>
+      <div class="cat-figs">배정 ${fmt(c.amount)}천원</div>
+      <div class="cat-figs">집행 ${fmt(exec)}천원</div>
+      <div class="cat-pct" style="color:${pct>=100?'#166B3E':(pct>0?'#2E5FA3':'#5B6B62')}">${pct}%</div>
+    `;
+    catWrap.appendChild(row);
+  });
+
+  const tbody = document.getElementById('budgetTableBody');
+  tbody.innerHTML='';
+  programs.forEach(p=>{
+    const exec = programBudgetExecSum(p);
+    const pct = p.budget? Math.round(exec/p.budget*1000)/10 : 0;
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><span class="catchip ${p.cat}">${CAT_META[p.cat].label}</span></td>
+      <td style="font-weight:600;">${p.name}</td>
+      <td>${fmt(p.budget)}</td>
+      <td>${fmt(exec)}</td>
+      <td class="exec-pct" style="color:${pct>=100?'#166B3E':'#1B2B22'}">${pct}%</td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+/* =========================================================
+   5. 프로그램 총괄표 (지원대상 그룹화 + 필터 + 로드맵 간트 + 상세패널 + 환류 새창)
+========================================================= */
+let activeFilter = '전체';
+
+let activeAudTag = null;
+function renderAudienceGroups(){
+  const counts = {};
+  programs.forEach(p=> p.audienceTags.forEach(t=>{ counts[t] = (counts[t]||0)+1; }));
+  const wrap = document.getElementById('audienceGroupBar');
+  wrap.innerHTML='';
+  Object.keys(counts).sort((a,b)=>counts[b]-counts[a]).forEach(t=>{
+    const span = document.createElement('span');
+    span.className='audchip clickable'+(activeAudTag===t ? ' active' : '');
+    span.style.fontSize='12px';
+    span.style.padding='7px 13px';
+    span.textContent = `${t} · ${counts[t]}개 프로그램`;
+    span.addEventListener('click', ()=>{
+      activeAudTag = (activeAudTag===t) ? null : t;
+      renderAudienceGroups();
+    });
+    wrap.appendChild(span);
+  });
+  renderAudFiltered();
+}
+function renderAudFiltered(){
+  const box = document.getElementById('audFiltered');
+  if(!activeAudTag){ box.classList.remove('show'); return; }
+  box.classList.add('show');
+  const list = programs.filter(p=>p.audienceTags.includes(activeAudTag));
+  document.getElementById('audFilteredHd').textContent = `'${activeAudTag}' 태그를 가진 프로그램 ${list.length}개`;
+  document.getElementById('audFilteredList').innerHTML = list.map(p=>`
+    <li onclick="openDetail(${p.id})">
+      <span class="nm">${p.name}</span>
+      <span class="catchip ${p.cat} cat">${CAT_META[p.cat].label}</span>
+    </li>`).join('');
+}
+
+function renderFilterBar(){
+  const bar = document.getElementById('filterBar');
+  bar.innerHTML='';
+  const cats = ['전체', ...Object.keys(CAT_META)];
+  cats.forEach(c=>{
+    const btn = document.createElement('button');
+    btn.className = 'filterbtn'+(c===activeFilter?' active':'');
+    btn.textContent = c==='전체' ? '전체 (14)' : `${CAT_META[c].label} (${programs.filter(p=>p.cat===c).length})`;
+    btn.addEventListener('click', ()=>{ activeFilter=c; renderFilterBar(); renderGantt(); });
+    bar.appendChild(btn);
+  });
+}
+
+function renderStatusCounts(){
+  ['계획','진행','완료'].forEach(s=>{
+    document.getElementById('cnt-'+s).textContent = programs.filter(p=>p.status===s).length;
+  });
+}
+
+function renderGantt(){
+  const wrap = document.getElementById('ganttWrap');
+  wrap.innerHTML='';
+  const list = activeFilter==='전체' ? programs : programs.filter(p=>p.cat===activeFilter);
+  list.forEach(p=>{
+    const row = document.createElement('div');
+    row.className='gantt-row';
+    const statusColor = p.status==='완료' ? '#2E8B57' : (p.status==='진행' ? '#2E5FA3' : '#B9BFB6');
+    const statusTxt = p.status==='진행' ? `진행 ${p.manualProgress}%` : p.status;
+    const hasFb = p.feedback && p.feedback.trim();
+    row.innerHTML = `
+      <div class="gantt-name">${p.name}<div style="font-size:10.3px;color:var(--ink-soft);font-weight:400;margin-top:2px;">${p.startMonth}월 ~ ${p.endMonth}월</div></div>
+      <div class="gantt-track">
+        <div class="months">${Array.from({length:12}).map(()=>'<div></div>').join('')}</div>
+        <div class="gantt-bar" style="left:${(p.startMonth-1)/12*100}%; width:${(p.endMonth-p.startMonth+1)/12*100}%; background:${CAT_META[p.cat].color};"></div>
+      </div>
+      <div class="gantt-status" style="color:${statusColor}">${statusTxt}</div>
+      <div class="fb-flag ${hasFb ? '' : 'empty'}" title="${hasFb ? '환류사항 새창으로 보기' : '환류사항 없음'}">${hasFb ? '↗' : '·'}</div>
+    `;
+    row.querySelector('.gantt-name').addEventListener('click', ()=>openDetail(p.id));
+    row.querySelector('.gantt-track').addEventListener('click', ()=>openDetail(p.id));
+    row.querySelector('.gantt-status').addEventListener('click', ()=>openDetail(p.id));
+    const flagEl = row.querySelector('.fb-flag');
+    if(hasFb){ flagEl.addEventListener('click', (e)=>{ e.stopPropagation(); openFeedbackWindow(p.id); }); }
+    wrap.appendChild(row);
+  });
+}
+
+function renderFeedbackSummary(){
+  const withFb = programs.filter(p=>p.feedback && p.feedback.trim());
+  document.getElementById('fbSummaryTxt').textContent = `환류사항 ${withFb.length}건`;
+  const list = document.getElementById('fbList');
+  list.innerHTML = withFb.map(p=>`
+    <div class="fb-item" onclick="openFeedbackWindow(${p.id})">
+      <div class="nm">${p.name} <span style="font-weight:400;color:var(--ink-soft);">↗ 새창에서 보기</span></div>
+      <div class="tx">${p.feedback.length>120 ? p.feedback.slice(0,120)+'…' : p.feedback}</div>
+    </div>
+  `).join('');
+}
+function toggleFbList(){ document.getElementById('fbList').classList.toggle('show'); }
+
+function openFeedbackWindow(id){
+  const p = programs.find(x=>x.id===id);
+  if(!p || !p.feedback || !p.feedback.trim()){ return; }
+  const html = '<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8">'
+    + '<title>환류사항 · '+p.name+'</title>'
+    + '<style>'
+    + 'body{font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",-apple-system,sans-serif;background:#F6F7F3;color:#1B2B22;margin:0;padding:40px;}'
+    + '.wrap{max-width:640px;margin:0 auto;background:#fff;border:1px solid #E2E6E0;border-radius:16px;padding:32px 36px;}'
+    + '.kicker{font-size:12px;font-weight:700;color:#2E8B57;margin-bottom:8px;}'
+    + 'h1{font-size:20px;font-weight:800;color:#0A3624;margin:0 0 16px;}'
+    + '.meta{font-size:12.5px;color:#5B6B62;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid #E2E6E0;}'
+    + '.content{font-size:14.5px;line-height:1.8;white-space:pre-wrap;color:#1B2B22;}'
+    + '.foot{margin-top:28px;font-size:11.5px;color:#8FB9A0;}'
+    + '</style></head>'
+    + '<body><div class="wrap">'
+    + '<div class="kicker">환류사항 · KU 캠퍼스타운사업</div>'
+    + '<h1>'+p.name+'</h1>'
+    + '<div class="meta">분류 : '+CAT_META[p.cat].label+' &nbsp;|&nbsp; 시행기간 : '+p.startMonth+'월 ~ '+p.endMonth+'월 &nbsp;|&nbsp; 진행상태 : '+p.status+(p.status==='진행' ? ' ('+p.manualProgress+'%)' : '')+'</div>'
+    + '<div class="content">'+p.feedback.replace(/</g,'&lt;')+'</div>'
+    + '<div class="foot">건국대학교 캠퍼스타운사업본부 대시보드에서 생성됨</div>'
+    + '</div></body></html>';
+  const blob = new Blob([html], {type:'text/html'});
+  const url = URL.createObjectURL(blob);
+  window.open(url, '_blank', 'noopener,width=720,height=640');
+}
+
+function openDetail(id){
+  const p = programs.find(x=>x.id===id);
+  const panel = document.getElementById('detailPanel');
+  panel.classList.add('show');
+
+  const execSum = programBudgetExecSum(p);
+  const pct = p.budget ? Math.round(execSum/p.budget*1000)/10 : 0;
+
+  const budgetRows = p.budgetItems.map((bi,idx)=>{
+    const ipct = bi.amount ? Math.round((bi.exec||0)/bi.amount*1000)/10 : 0;
+    return `<div class="budgetline-row"><span>${bi.label}</span><span>${fmt(bi.amount)}천원</span>
+      <input type="number" min="0" class="num-in" style="width:82px;" value="${bi.exec||0}" onchange="updateBudgetItem(${p.id}, ${idx}, this.value)">
+      <span class="exec-pct" style="color:${ipct>=100?'#166B3E':'#1B2B22'}">${ipct}%</span></div>`;
+  }).join('');
+
+  const kpiRows = p.kpis.map((k,idx)=>{
+    const kpct = k.target ? Math.round((k.achieved||0)/k.target*1000)/10 : 0;
+    return `<div class="kpirow"><span>${k.label}</span><span>${k.target}${k.unit}</span>
+      <input type="number" min="0" step="0.1" class="num-in" style="width:82px;" value="${k.achieved||0}" onchange="updateKpiAch(${p.id}, ${idx}, this.value)">
+      <span class="exec-pct" style="color:${kpct>=100?'#166B3E':'#1B2B22'}">${kpct}%</span></div>`;
+  }).join('');
+
+  const hasFb = p.feedback && p.feedback.trim();
+
+  panel.innerHTML = `
+    <div class="detail-top">
+      <div>
+        <span class="catchip ${p.cat}">${CAT_META[p.cat].label}</span>
+        <div class="detail-title" style="margin-top:8px;">${p.name}</div>
+        <div class="detail-meta">${p.place}</div>
+      </div>
+      <button class="detail-close" onclick="closeDetail()">✕</button>
+    </div>
+    <div class="detail-grid">
+      <div>
+        <div class="detail-block-title">지원대상</div>
+        <div class="detail-body" style="margin-bottom:8px;">${p.audience}</div>
+        <div style="margin-bottom:14px;">${p.audienceTags.map(t=>`<span class="audchip">${t}</span>`).join('')}</div>
+
+        <div class="detail-block-title">주요내용</div>
+        <div class="detail-body" style="margin-bottom:14px;">${p.content}</div>
+
+        ${p.note ? `<div class="detail-block-title">비고</div><div class="detail-body" style="margin-bottom:14px;">${p.note}</div>` : ''}
+
+        <div class="detail-block-title" style="display:flex;justify-content:space-between;align-items:center;">
+          <span>환류사항</span>
+          <button id="fbOpenBtn-${p.id}" style="border:none;background:none;color:${hasFb ? 'var(--leaf)' : '#B9BFB6'};font-size:11.5px;font-weight:700;cursor:${hasFb?'pointer':'default'};">${hasFb ? '새창에서 보기 ↗' : '입력된 내용 없음'}</button>
+        </div>
+        <textarea class="fb-in" placeholder="점검회의 등에서 확인된 이슈·개선사항을 기재하세요" onchange="updateFeedback(${p.id}, this.value)">${p.feedback}</textarea>
+      </div>
+      <div>
+        <div class="card" style="background:#fff;margin-bottom:14px;">
+          <div class="detail-block-title">사업 시행기간 (2026년 기준 월)</div>
+          <div class="mini-input-row">
+            <label>시작월</label>
+            <input type="number" min="1" max="12" class="num-in" style="width:64px;" value="${p.startMonth}" onchange="updatePeriod(${p.id},'start',this.value)">
+            <label>종료월</label>
+            <input type="number" min="1" max="12" class="num-in" style="width:64px;" value="${p.endMonth}" onchange="updatePeriod(${p.id},'end',this.value)">
+          </div>
+          <div class="sec-note" style="margin:8px 0 0;">변경 시 상단 로드맵 막대에 즉시 반영됩니다.</div>
+        </div>
+
+        <div class="card" style="background:#fff;margin-bottom:14px;">
+          <div class="detail-block-title">완료 여부</div>
+          <select class="stat-sel" onchange="updateStatus(${p.id}, this.value)">
+            <option value="계획" ${p.status==='계획'?'selected':''}>계획</option>
+            <option value="진행" ${p.status==='진행'?'selected':''}>진행</option>
+            <option value="완료" ${p.status==='완료'?'selected':''}>완료</option>
+          </select>
+          ${p.status==='진행' ? `
+            <div class="mini-input-row">
+              <label>진행률(%) 수기입력</label>
+              <input type="number" min="0" max="100" class="num-in" style="width:70px;" value="${p.manualProgress}" onchange="updateProgress(${p.id}, this.value)">
+            </div>
+          ` : ''}
+        </div>
+
+        <div class="card" style="background:#fff;margin-bottom:14px;">
+          <div class="detail-block-title">소요예산 · 산출근거별 집행 현황</div>
+          <div class="budgetline-head"><span>산출근거 항목</span><span>배정</span><span>집행액 입력</span><span>소진율</span></div>
+          ${budgetRows}
+          <div class="budgetline-row" style="font-weight:800;border-top:1px solid var(--line);margin-top:4px;padding-top:8px;">
+            <span>합계</span><span>${fmt(p.budget)}천원</span><span>${fmt(execSum)}천원</span>
+            <span class="exec-pct" style="color:${pct>=100?'#166B3E':'#1B2B22'}">${pct}%</span>
+          </div>
+          <div style="margin-top:10px;"><div class="bar-track"><div class="bar-fill" style="width:${Math.min(pct,100)}%"></div></div></div>
+        </div>
+
+        <div class="card" style="background:#fff;">
+          <div class="detail-block-title">정량적 KPI 전체 · 달성값 입력</div>
+          <div class="kpirow-head"><span>지표</span><span>목표</span><span>달성값 입력</span><span>달성률</span></div>
+          ${kpiRows}
+        </div>
+      </div>
+    </div>
+  `;
+  const fbBtn = document.getElementById('fbOpenBtn-'+p.id);
+  if(hasFb){ fbBtn.addEventListener('click', ()=>openFeedbackWindow(p.id)); }
+  panel.scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+function closeDetail(){ document.getElementById('detailPanel').classList.remove('show'); }
+
+function updateStatus(id, val){ programs.find(p=>p.id===id).status = val; renderStatusCounts(); renderGantt(); openDetail(id); markProgramDirty(); }
+function updateProgress(id, val){ programs.find(p=>p.id===id).manualProgress = Math.max(0,Math.min(100,Number(val)||0)); renderGantt(); markProgramDirty(); }
+function updateBudgetItem(id, idx, val){ const p=programs.find(p=>p.id===id); p.budgetItems[idx].exec = Number(val)||0; renderBudget(); openDetail(id); markProgramDirty(); }
+function updateKpiAch(id, idx, val){ const p=programs.find(p=>p.id===id); p.kpis[idx].achieved = Number(val)||0; openDetail(id); markProgramDirty(); }
+function updatePeriod(id, which, val){
+  const p = programs.find(p=>p.id===id);
+  let v = Math.max(1, Math.min(12, Number(val)||1));
+  if(which==='start'){ p.startMonth = v; if(p.startMonth>p.endMonth) p.endMonth=p.startMonth; }
+  else { p.endMonth = v; if(p.endMonth<p.startMonth) p.startMonth=p.endMonth; }
+  renderGantt(); markProgramDirty();
+}
+function updateFeedback(id, val){ programs.find(p=>p.id===id).feedback = val; renderGantt(); renderFeedbackSummary(); markProgramDirty(); }
+
+/* =========================================================
+   INIT
+========================================================= */
+renderOrgFacRows();
+renderBudget();
+renderAudienceGroups();
+renderFilterBar();
+renderStatusCounts();
+renderGantt();
+renderFeedbackSummary();
+updateGlobalStamp();
+refreshBackendLabels();
+document.getElementById('gsCode').textContent = GS_CODE;
+</script>
+</body>
+</html>

@@ -192,6 +192,26 @@
   .previewcard .body ul{margin:0 0 16px;padding-left:18px;font-size:12.8px;color:var(--ink-soft);}
   .previewcard .body ul li{margin-bottom:4px;}
   .notice-inline{font-size:11.8px;color:var(--amber);background:var(--amber-bg);padding:9px 13px;border-radius:10px;margin-top:14px;}
+  .stars{color:var(--amber);font-size:15px;letter-spacing:1px;white-space:nowrap;}
+  .stars .dim{color:#E2E6E0;}
+  .gov-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-bottom:12px;}
+  .gov-card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap;}
+  .gov-dept{font-size:10.8px;font-weight:700;color:var(--blue);background:var(--blue-bg);padding:3px 9px;border-radius:20px;display:inline-block;margin-bottom:8px;}
+  .gov-name{font-size:15px;font-weight:800;color:var(--forest-deep);}
+  .gov-money{font-size:13px;font-weight:700;color:var(--ink);margin-top:2px;}
+  .gov-type{font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:12px;margin-left:6px;white-space:nowrap;display:inline-block;}
+  .gov-type.신규{background:var(--red-bg);color:var(--red);}
+  .gov-type.확대{background:var(--leaf-light);color:#166B3E;}
+  .gov-type.계속{background:#EEF1EC;color:var(--ink-soft);}
+  .gov-desc{font-size:12.6px;color:var(--ink-soft);margin:10px 0 6px;}
+  .gov-link{font-size:12.2px;font-weight:700;color:var(--leaf);}
+  .gov-filterbar{display:flex;gap:8px;margin:14px 0;flex-wrap:wrap;}
+  .stat-hero{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px;}
+  @media (max-width:980px){.stat-hero{grid-template-columns:repeat(2,1fr);}}
+  .stat-hero .card{text-align:center;}
+  .stat-hero .card .big{font-size:24px;font-weight:800;color:var(--forest-deep);}
+  .stat-hero .card .lbl{font-size:11.3px;color:var(--ink-soft);margin-top:4px;}
+  .stat-hero .card .yoy{font-size:11.5px;font-weight:700;color:var(--leaf);margin-top:6px;}
   .sheets-status{font-size:12.3px;font-weight:700;padding:8px 14px;border-radius:20px;background:#EEF1EC;color:var(--ink-soft);display:inline-block;}
   .sheets-status.ok{background:var(--leaf-light);color:#166B3E;}
   .sheets-status.warn{background:var(--amber-bg);color:var(--amber);}
@@ -206,6 +226,28 @@
   input.url-in{flex:1;min-width:260px;padding:9px 12px;font-size:12.6px;border:1px solid var(--line);border-radius:8px;font-family:inherit;}
   .sync-badge{font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;background:#EEF1EC;color:var(--ink-soft);margin-left:8px;}
   .sync-badge.on{background:var(--leaf-light);color:#166B3E;}
+  .sesac-map{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;padding:20px 22px;background:#fff;transition:.15s;}
+  .sesac-map:hover{border-color:var(--leaf);box-shadow:0 2px 10px rgba(46,139,87,.12);}
+  .sesac-map-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;}
+  .sesac-map-head .title{font-size:14px;font-weight:800;color:var(--forest-deep);}
+  .sesac-map-head .link{font-size:11.5px;font-weight:700;color:var(--leaf);}
+  .sesac-zone{background:#F7FBF8;border:1px solid var(--leaf-light);border-radius:10px;padding:10px 12px;}
+  .sesac-zone .zname{font-size:10.5px;font-weight:800;color:#166B3E;margin-bottom:6px;}
+  .sesac-zone .gu{display:inline-flex;align-items:center;gap:3px;font-size:11px;font-weight:600;background:#fff;border:1px solid var(--leaf-light);color:var(--ink);padding:3px 7px;border-radius:20px;margin:0 4px 4px 0;}
+  .sesac-zone .gu::before{content:"📍";font-size:9px;}
+  .sesac-grid{display:grid;grid-template-columns:1fr 1fr 1fr;grid-template-areas:"nw center ne" "sw center se";gap:10px;}
+  .sesac-grid .z-nw{grid-area:nw;} .sesac-grid .z-ne{grid-area:ne;} .sesac-grid .z-center{grid-area:center;}
+  .sesac-grid .z-sw{grid-area:sw;} .sesac-grid .z-se{grid-area:se;}
+  @media (max-width:860px){.sesac-grid{grid-template-columns:1fr;grid-template-areas:"nw" "center" "ne" "sw" "se";}}
+  .strategy-chip{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;color:var(--forest-deep);background:var(--leaf-light);border:1px solid #BFE0CD;padding:3px 10px;border-radius:20px;text-decoration:none;margin:7px 6px 0 0;}
+  .strategy-chip:hover{background:var(--leaf);color:#fff;border-color:var(--leaf);}
+  .strategy-chip::before{content:"🔗";font-size:9px;}
+  .chip-row{margin-top:2px;}
+  .point-badge{display:inline-block;font-size:10.5px;font-weight:800;color:var(--blue);background:var(--blue-bg);padding:2px 8px;border-radius:12px;margin-left:6px;white-space:nowrap;}
+  .kv{display:flex;gap:18px;font-size:12.8px;padding:9px 0;border-bottom:1px dashed var(--line);align-items:baseline;}
+  .kv:last-child{border-bottom:none;}
+  .kv b{flex:0 0 116px;color:var(--ink-soft);font-weight:700;font-size:11.8px;letter-spacing:.01em;}
+  .kv span{color:var(--ink);line-height:1.65;}
   @media (max-width:860px){
     .shell{flex-direction:column;} .sidebar{width:100%;flex:none;position:relative;height:auto;padding:16px;}
     .main{padding:22px 18px 60px;} .grid-4,.grid-3,.grid-2{grid-template-columns:1fr 1fr;}
@@ -235,6 +277,13 @@
       <li><button data-view="v8"><span class="num">8</span>유관기관 캘린더</button></li>
       <li><button data-view="v9"><span class="num">9</span>사업단 홈페이지</button></li>
       <li><button data-view="v10"><span class="num">10</span>데이터 저장 연동</button></li>
+      <li style="border-top:1px solid rgba(255,255,255,.14);margin-top:10px;padding-top:10px;">
+        <button data-view="v11" style="padding-left:12px;">[참고] 2027 정부 예산안 분석</button>
+      </li>
+      <li><button data-view="v12" style="padding-left:12px;">[참고] 2026 서울시 예산안 분석</button></li>
+      <li><button data-view="v13" style="padding-left:12px;">[참고] 서울경제진흥원(SBA)</button></li>
+      <li><button data-view="v14" style="padding-left:12px;">[참고] 글로벌창업</button></li>
+      <li><button data-view="v15" style="padding-left:12px;">[참고] IR</button></li>
     </ul>
     <div class="sidebar-foot">
       자료 근거 : 2026년 9월 지표점검회의(2026.8.31 기준) 및 건국대학교 캠퍼스타운사업 세부실행계획서(변경후)<br><br>
@@ -246,6 +295,7 @@
 
     <div class="topbar">
       <div class="updated" id="globalUpdatedTxt">저장된 변경사항 없음</div>
+      <div class="updated" style="background:var(--blue-bg);color:var(--blue);">콘텐츠 최종 업데이트 : 2026.09.10</div>
       <div class="author">
         <div class="nm">캠타김군</div>
         <a class="mail" href="mailto:coolzet@konkuk.ac.kr">coolzet@konkuk.ac.kr</a>
@@ -704,6 +754,635 @@
         <pre id="gsCode"></pre>
       </div>
       <div class="sec-note">이 코드는 시트에 <b>OrgFac / Programs / ProgramBudgetItems / ProgramKpis / Meta</b> 5개 탭을 자동으로 만들어 데이터를 저장합니다. 기존 탭 이름과 겹치지 않는 새 스프레드시트에서 사용하는 것을 권장합니다.</div>
+    </section>
+
+    <!-- ============ 11. 정부·지자체 예산안 분석 (2027년) ============ -->
+    <section class="view" id="v11">
+      <div class="view-head">
+        <div class="view-kicker">[참고] GOVERNMENT BUDGET · 2027년 예산안</div>
+        <div class="view-title">[참고] 2027 정부 예산안 분석</div>
+        <div class="view-desc">중소벤처기업부·교육부·과학기술정보통신부·기획예산처 2027년 예산안 중 창업지원 관련 사업을 정리하고, <b>KU 캠퍼스타운사업(원헬스·AI 특화)</b>과의 연계 가능성을 별점(★1~5)으로 평가했습니다. 기준일 2026.09.01 (국무회의 의결).</div>
+      </div>
+
+      <h2 class="sec-h" style="margin-top:0;">① 캠퍼스타운사업 연계 우선순위</h2>
+      <div class="sec-note" style="margin-top:0;">별점이 높을수록 캠퍼스타운 프로그램(창업지원금·투자연계·오픈이노베이션 등)과 직접 연계했을 때 시너지가 큰 사업입니다. 연계도 ★4 이상만 표시합니다.</div>
+      <div id="govPriorityCards"></div>
+
+      <h2 class="sec-h">② 전체 예산 개요</h2>
+      <div class="stat-hero">
+        <div class="card"><div class="big">820.9조원</div><div class="lbl">정부 총지출</div><div class="yoy">+12.8% (전년 727.9조)</div></div>
+        <div class="card"><div class="big">18조 724억</div><div class="lbl">중기부 예산</div><div class="yoy">+9.4% (전년 16조 5,233억)</div></div>
+        <div class="card"><div class="big">4.5조원</div><div class="lbl">모두의 창업 혁신생태계</div><div class="yoy">+73% (전년 2.6조)</div></div>
+        <div class="card"><div class="big">5조 7,743억</div><div class="lbl">창업 및 벤처 분야</div><div class="yoy">+46.1% (전년 3조 9,512억)</div></div>
+      </div>
+
+      <h2 class="sec-h">③ 사업별 상세 목록 (전체 24건)</h2>
+      <div class="gov-filterbar" id="govFilterBar"></div>
+      <div class="card" style="overflow-x:auto;">
+        <table>
+          <thead><tr><th>사업명</th><th>부처</th><th>유형</th><th>'26년</th><th>'27년(안)</th><th>증감</th><th>선발규모</th><th>연계도</th></tr></thead>
+          <tbody id="govTableBody"></tbody>
+        </table>
+      </div>
+
+      <h2 class="sec-h">출처</h2>
+      <div class="card">
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <a class="gov-link" href="https://www.korea.kr/briefing/pressReleaseView.do?newsId=156776382" target="_blank" rel="noopener">1. 기획예산처 '27년 예산안 및 국가재정운용계획 ↗</a>
+          <a class="gov-link" href="https://www.korea.kr/briefing/pressReleaseView.do?newsId=156776399" target="_blank" rel="noopener">2. 중기부 '27년 예산안 18조 724억원 ↗</a>
+          <a class="gov-link" href="https://www.korea.kr/briefing/pressReleaseView.do?newsId=156776371" target="_blank" rel="noopener">3. 교육부 '27년 예산안 117.6조원 ↗</a>
+          <a class="gov-link" href="https://www.korea.kr/briefing/pressReleaseView.do?newsId=156776742" target="_blank" rel="noopener">4. 과기정통부 R&D 5년 200조 중장기 투자전략 ↗</a>
+          <a class="gov-link" href="https://www.korea.kr/briefing/pressReleaseView.do?newsId=156776745" target="_blank" rel="noopener">5. 기획예산처 2027년 청년정책 주요내용 개요도 ↗</a>
+        </div>
+        <div class="sec-note" style="margin-top:14px;">연계도(★) 평가는 건국대학교 캠퍼스타운사업본부(원헬스·AI 특화)의 자체 판단이며, 정부 발표 자료에 포함된 공식 순위가 아닙니다.</div>
+      </div>
+
+      <h2 class="sec-h">예산 흐름 차트</h2>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3 class="sub-h">부처별 창업 관련 사업 예산 '26 vs '27</h3>
+          <div class="sec-note" style="margin-top:0;">본 리스트 22개 사업 기준 합계이며, 부처 전체 예산이 아닙니다.</div>
+          <div id="deptFlowChart"></div>
+        </div>
+        <div class="card">
+          <h3 class="sub-h">신규사업 TOP 10 (예산 규모순)</h3>
+          <div class="sec-note" style="margin-top:0;">단위 : 억원</div>
+          <div id="newProgramChart"></div>
+        </div>
+      </div>
+
+      <h2 class="sec-h">④ 2027년 사업성과 극대화를 위한 건국대학교 핵심전략</h2>
+      <div class="banner">위 「① 캠퍼스타운사업 연계 우선순위」에서 확인된 2027년 정부 예산안 사업들을 실제로 확보·활용하기 위한 대응 전략입니다.</div>
+      <div class="card">
+        <ol class="setup-steps">
+          <li><b>모두의 창업(예비창업패키지 통합) 후속 파이프라인 구축</b> — 「KU 캠퍼스타운 창업경진대회」 선발팀·수료팀을 예창패로 자동 추천하는 절차를 사업본부-창업지원본부 간에 사전 마련</li>
+          <li><b>청년창업패키지(기획예산처, 200명·1인당 1.5억원) 선발 대응</b> — Unicorn Seed·AI-X ScaleUp Lab에서 성장 중인 유망 학생창업자를 사전 발굴해 추천서·실적 자료를 미리 준비</li>
+          <li><b>민관협력 오픈이노베이션(543억, +124%) 공동사업 제안</b> — AI-X ScaleUp Lab 오픈이노베이션 세션을 정부 사업과 매칭한 공동 기획서를 중기부에 제출 검토</li>
+          <li><b>AX혁신기업 창의기술개발사업(75억, 신규) 신청 준비</b> — AI-X ScaleUp Lab 소속 AI 기반 입주기업을 대상으로 사전 컨설팅 및 신청서 작성 지원</li>
+          <li><b>실험실 특화형 창업선도대학 재도전</b> — 건국대는 2021년 수도권 5개 대학 중 하나로 이미 선정된 이력이 있어, 이 트랙레코드를 근거로 재신청 전략을 별도 수립</li>
+          <li><b>모태펀드·창업펀드 확대(1조3천억·4,800억) 대응</b> — Unicorn Seed 데모데이에 해당 펀드를 운용하는 VC를 우선 초청해 투자 매칭 기회를 선점</li>
+          <li><b>지역창업패키지(1,700억, 10개 도시) 선정 모니터링</b> — 서울(광진구) 선정 여부를 상시 확인하고, 선정 시 캠퍼스타운 입주기업을 즉시 연계 신청</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ [참고] 2026 서울시 예산안 분석 ============ -->
+    <section class="view" id="v12">
+      <div class="view-head">
+        <div class="view-kicker">[참고] SEOUL METROPOLITAN BUDGET · 2026년 예산</div>
+        <div class="view-title">[참고] 2026 서울시 예산안 분석</div>
+        <div class="view-desc">서울시 2026년도 본예산(2025.10.30 발표) 및 제2회 추가경정예산(2026.8.10 발표) 중 창업·미래산업(RISE)·캠퍼스타운사업 관련 내용을 정리했습니다. 2027년 서울시 예산안은 통상 10월 말 서울시의회 제출 시점에 발표되며, <b>발표 시 이 섹션을 업데이트할 예정</b>입니다.</div>
+      </div>
+
+      <h2 class="sec-h" style="margin-top:0;">① 서울시 예산 개요</h2>
+      <div class="stat-hero">
+        <div class="card"><div class="big">51조 5,060억</div><div class="lbl">2026년 본예산(총계)</div><div class="yoy">+7.0% (전년 48조 1,145억)</div></div>
+        <div class="card"><div class="big">46조 547억</div><div class="lbl">2026년 본예산(순계)</div><div class="yoy">+5.4% (전년 43조 6,948억)</div></div>
+        <div class="card"><div class="big">28조 7,683억</div><div class="lbl">정책사업비</div><div class="yoy">+5.7% (전년 27조 2,233억)</div></div>
+        <div class="card"><div class="big">56조 5,735억</div><div class="lbl">2차 추경 반영 최종 규모</div><div class="yoy">기정예산 대비 +2조 8,061억(+5.2%)</div></div>
+      </div>
+      <div class="sec-note" style="margin-top:-6px;">채무 규모는 11조 6,518억원(2025년 말 전망 수준)으로 동결 유지 — 오세훈 시장 "미래세대가 갚아야 할 빚은 늘리지 않겠다"</div>
+
+      <h2 class="sec-h">② 창업·미래산업(RISE) 관련 사업 — 캠퍼스타운 연계도</h2>
+      <div class="sec-note" style="margin-top:0;">2026년 본예산 '매력서울(신성장동력)' 분야 및 2차 추경 '성장하는 서울' 분야에서 확인된 사업입니다. 별점은 KU 캠퍼스타운사업(ANCHOR/RISE형) 관점의 자체 평가입니다.</div>
+
+      <div class="gov-card">
+        <div class="gov-card-top">
+          <div><span class="gov-dept">서울시 · 2차 추경</span><span class="gov-type 신규">신규</span>
+            <div class="gov-name">서울 지역혁신중심 대학지원체계(RISE) 추진</div>
+            <div class="gov-money">17억원</div>
+          </div>
+          <span class="stars">★★★★★</span>
+        </div>
+        <div class="gov-desc">"대학 중심 이론 교육과 현장 실습, 일자리 매칭의 선순환 체계 강화"를 목표로 한 사업으로, <b>건국대학교 ANCHOR사업단이 수행 중인 RISE형 캠퍼스타운사업과 정책 라인이 동일</b>합니다. 서울시 차원의 RISE 예산 확대 흐름을 보여주는 직접적인 근거입니다.</div>
+      </div>
+      <div class="gov-card" style="border:2px solid var(--red);background:var(--red-bg);">
+        <div class="gov-card-top">
+          <div><span class="gov-dept">서울시 · 본예산</span><span class="gov-type 신규">신규</span>
+            <div class="gov-name" style="color:var(--red);">RISE10 (대학 R&D 10년 안정 투자) — 건국대학교 미선정</div>
+            <div class="gov-money">신규 추진</div>
+          </div>
+          <span class="stars">★★★★★</span>
+        </div>
+        <div class="gov-desc">10년간 안정적으로 대학 R&D에 투자하는 신규 정책 프레임입니다. 캠퍼스타운(RISE형) 사업이 속한 상위 정책 구조 자체로, 향후 4개년 사업 지속성과 예산 확대의 근거가 됩니다. <b>2026년 기준 건국대학교는 이 사업에 선정되지 않았습니다.</b> 서울대·한양대 등 경쟁 대학은 RISE 연계를 전면에 내세운 사업계획서로 캠퍼스타운·RISE10을 동시 확보한 반면, 건국대는 캠퍼스타운(RISE형)만 확보한 상태입니다. 아래 「⑤ 2027년 사업성과 극대화 전략」에서 대응 방안을 다룹니다.</div>
+      </div>
+      <div class="gov-card">
+        <div class="gov-card-top">
+          <div><span class="gov-dept">서울시 · 본예산</span><span class="gov-type 신규">신규</span>
+            <div class="gov-name">홍릉 첨단바이오헬스센터·스타트업 랩 조성</div>
+            <div class="gov-money">신규 추진</div>
+          </div>
+          <span class="stars">★★★★☆</span>
+        </div>
+        <div class="gov-desc">AI 외에 바이오 등 신산업 육성을 위한 서울시 인프라 조성 사업입니다. 캠퍼스타운 바이오 분과(20팀) 입주기업의 후속 실증·확장 공간으로 연계 검토가 가능합니다.</div>
+      </div>
+      <div class="gov-card">
+        <div class="gov-card-top">
+          <div><span class="gov-dept">서울시 · 본예산</span><span class="gov-type 확대">확대</span>
+            <div class="gov-name">AI·이공계 인재양성 3종세트 (청년취업사관학교·RISE·이공계장학금)</div>
+            <div class="gov-money">1,315억원</div>
+          </div>
+          <span class="stars">★★★★☆</span>
+        </div>
+        <div class="gov-desc">미래산업 R&D 예산 497억원 중 100억원이 AI 분야에 투입됩니다. 「AI Nest 프로그램」·「AI 글로벌 해커톤」 등 캠퍼스타운 AI 인재육성 트랙과 정책 방향이 일치합니다.</div>
+      </div>
+      <div class="gov-card">
+        <div class="gov-card-top">
+          <div><span class="gov-dept">서울시 · 2차 추경</span><span class="gov-type 신규">신규</span>
+            <div class="gov-name">청년 AI 성장권 지원</div>
+            <div class="gov-money">56억원</div>
+          </div>
+          <span class="stars">★★★☆☆</span>
+        </div>
+        <div class="gov-desc">19~29세 학생·취업준비생 등 50만명에게 코딩·에이전트 등 고급 생성형 AI 이용권을 1년간 지원합니다. 캠퍼스타운 AI 관련 프로그램 참가자에게 안내할 수 있는 실질적 혜택입니다.</div>
+      </div>
+      <div class="gov-card">
+        <div class="gov-card-top">
+          <div><span class="gov-dept">서울시 · 본예산</span><span class="gov-type 확대">확대</span>
+            <div class="gov-name">소상공인 신규 융자 확대</div>
+            <div class="gov-money">487억원</div>
+          </div>
+          <span class="stars">★★☆☆☆</span>
+        </div>
+        <div class="gov-desc">소상공인 종합지원(311억원)과 함께 확대 편성. 캠퍼스타운 졸업기업 중 소상공인 형태로 전환하는 경우 참고할 수 있는 융자 창구입니다.</div>
+      </div>
+
+      <h2 class="sec-h">③ 서울캠퍼스타운사업 예산 구조 (2026~)</h2>
+      <div class="card" style="overflow-x:auto;margin-bottom:20px;">
+        <table>
+          <thead><tr><th>구분</th><th>내용</th></tr></thead>
+          <tbody>
+            <tr><td>선정 대학 수</td><td>13개 대학 (2026년 신규 선정, 건국대학교 포함)</td></tr>
+            <tr><td>사업 기간</td><td>기본 2년('26.1~'28.2) + 중간평가 통과 시 연장 2년('28.3~'30.2), 최대 4년</td></tr>
+            <tr><td>1·2차년도 예산</td><td>대학별 연 12억원 일괄 지원</td></tr>
+            <tr><td>3차년도 이후</td><td>중간평가 결과에 따라 우수대학(3개소 내외) 연 13억원까지 차등 지급, 미흡 대학(전체 30%)은 사업 중단·재공모</td></tr>
+            <tr><td>직전 사이클 비교</td><td>2025년까지는 20개 대학·총 212억원 규모(대학당 평균 약 10.6억원) → 2026년 13개 대학으로 선정 규모는 줄었으나 대학당 지원액은 12억원으로 늘어 <b>선택과 집중 구조로 개편</b></td></tr>
+            <tr><td>누적 성과(2017~2025)</td><td>39개 대학 참여, 스타트업 3,761개 발굴, 청년 일자리 14,838개 창출</td></tr>
+          </tbody>
+        </table>
+        <div class="sec-note" style="margin-top:10px;">건국대학교 캠퍼스타운사업의 2026년 총사업비는 15억원(「4. 예산 총괄표」 참고)으로, 위 서울시 보조금(연 12억) 외에 시비·대응자금·자치구 매칭분이 더해진 규모입니다.</div>
+      </div>
+
+      <h2 class="sec-h">④ 2027년 예산 추이 및 예상 분석</h2>
+      <div class="card" style="margin-bottom:20px;">
+        <p style="font-size:12.8px;color:var(--ink-soft);margin-top:0;">서울시 예산은 최근 수년간 연 5~7%대 증가세를 유지하고 있습니다(2025년 48조 1,145억 → 2026년 51조 5,060억, +7.0%). 이 추세가 유지될 경우 2027년 서울시 예산은 <b>약 54~55조원대</b>로 편성될 가능성이 있습니다. 다만 서울시는 채무 규모를 2025년 말 전망 수준(11조 6,518억원)으로 동결하는 건전재정 기조를 명확히 하고 있어, 총액 증가가 곧 재량 사업비의 비례 확대를 의미하지는 않습니다.</p>
+        <p style="font-size:12.8px;color:var(--ink-soft);">서울캠퍼스타운사업은 2026~2027년(1·2차년도) 동안 대학별 연 12억원 지원이 이미 확정된 구조이므로, 2027년 건국대학교 배정액 자체는 큰 변동 없이 유지될 것으로 예상됩니다. RISE10·홍릉 첨단바이오헬스센터 등 2026년 신규 편성된 미래산업 인프라 사업들은 다년도 사업 특성상 2027년에도 예산이 이어지거나 확대될 가능성이 높습니다.</p>
+        <div class="notice-inline">이 전망은 최근 예산 증가율에 기반한 단순 추정이며, 실제 2027년 예산안과 다를 수 있습니다. 2026년 10월 말 서울시의회 제출 시점에 공식 수치로 교체할 예정입니다.</div>
+      </div>
+
+      <h2 class="sec-h">⑤ 2026년 하반기 사업성과 극대화를 위한 건국대학교 핵심전략</h2>
+      <div class="banner">RISE10 미선정을 계기로, 2026년 캠퍼스타운 주관대학으로 함께 선정된 서울대·한양대·서울시립대·동국대·국민대의 공개된 사업계획을 조사해 건국대학교와 비교했습니다. 사업계획서 문면(공개된 보도자료·홈페이지 기준)을 비교한 것으로, 실제 심사에 사용된 원본 계획서 전문을 비교한 것은 아닙니다.</div>
+
+      <div class="card" style="overflow-x:auto;margin-bottom:20px;">
+        <table>
+          <thead><tr><th>대학</th><th>비전/브랜드 슬로건</th><th>정량 임팩트 목표</th><th>예산·기간</th><th>트랙레코드</th></tr></thead>
+          <tbody>
+            <tr><td><b>건국대</b></td><td>KU 원헬스·AI 이노베이션 허브</td><td>60팀, 아기유니콘 5개(4년), AI인재 260명(4년)</td><td>4년 15억원/년(대응자금 포함)</td><td>ANCHOR(RISE) 수행 중, 이번이 첫 개별 주관대학 캠퍼스타운</td></tr>
+            <tr><td>서울대</td><td>"2030 10-100-300-1000 프로젝트"</td><td>아기유니콘 10개·딥테크 100개·글로벌기업 300개·AI인재 1,000명</td><td>4년 12억원/년, 누적 316팀·2,407명 고용·1,579억원 투자유치(기존)</td><td>2017단위형→2020종합형→2024창업형, 2년 연속 최우수대학</td></tr>
+            <tr><td>한양대</td><td>"한양-성동 넥스트 유니콘 캠퍼스"</td><td>AI인재 660명(4년), 아기유니콘 4개+, 연 55개 유망기업 육성</td><td>4년 48억원(연12억), 창업공간 1만5천㎡</td><td>2020단위형→2023창업형→2024최우수대학평가</td></tr>
+            <tr><td>서울시립대</td><td>"Seoul Impact 2.0"</td><td>성장단계별 스케일업, 도시문제해결형 창업모델</td><td>연 12억원(최대4년)</td><td>2024평가 최우수등급(A+)</td></tr>
+            <tr><td>동국대</td><td>"HAI STARTUP TOWN"</td><td>AI-X·바이오메디·케어테크·디지털문화콘텐츠 4대 분야</td><td>연 12억원(최대4년)</td><td>2년 연속 우수사례대학(2023·2024)</td></tr>
+            <tr><td>국민대</td><td>(별도 브랜드명 미확인)</td><td>매년 50팀+, 자체 벤처투자조합(KMU-MBV) 조성</td><td>2년 24억원(연12억)</td><td>2023단위형→2024 A+평가, 서울RISE 4개 과제 기수행 중</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="grid grid-2" style="margin-bottom:20px;">
+        <div class="card" style="border-left:4px solid var(--leaf);">
+          <h3 class="sub-h" style="color:#166B3E;">건국대의 강점</h3>
+          <ul class="goal-strats">
+            <li>원헬스(바이오·펫·에코푸드) 니치 특화 — 타 대학은 대부분 "AI-X" 범용 특화(동국대 AI-X/바이오메디, 서울시립대 AI+X)에 그쳐, 펫·에코푸드처럼 구체적 세그먼트를 가진 대학은 사실상 건국대가 유일</li>
+            <li>KU-VENTURE 예비·초기·유망 3단계 성장관리 모델이 이미 구조화되어 있음</li>
+            <li>ANCHOR(RISE) 사업단을 통한 대학 R&D-창업 연계 실무 경험 보유</li>
+          </ul>
+        </div>
+        <div class="card" style="border-left:4px solid var(--red);">
+          <h3 class="sub-h" style="color:var(--red);">건국대의 약점 (우수대학 대비)</h3>
+          <ul class="goal-strats">
+            <li>비전 슬로건에 정량 임팩트가 없음 — 서울대·한양대는 숫자를 브랜드화(10-100-300-1000, 660명)했지만 건국대는 서술형 브랜드명에 그침</li>
+            <li>누적 성과 스토리텔링 부족 — 서울대는 "316팀·1,579억원 투자유치"를 전면에 내세우는데, 건국대는 개별 사례(에픽카·위글리)는 있으나 총계형 지표 노출이 약함</li>
+            <li>자체 투자조합(펀드) 부재 — 국민대 KMU-MBV 같은 대학 주도 벤처투자조합 사례 없음</li>
+            <li>대학-자치구 결합 브랜드 부재 — 한양대 "한양-성동", 서울대 "서울대-관악"처럼 대학명+자치구명 결합 네이밍이 트렌드인데 건국대·광진구 결합 브랜드 없음</li>
+            <li>RISE10 미선정 — 서울시 신규 대학 R&D 10년 투자 프레임에 아직 포함되지 못함</li>
+            <li>공공시장(B2G) 전용 트랙 부재 — 서울대는 관악구·관악중소벤처진흥원과 공공테스트베드를 명시적으로 운영 중</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="sub-h">핵심 7대 전략</h3>
+        <ol class="setup-steps">
+          <li><b>정량 임팩트 브랜드 슬로건 신설</b> — "KU 원헬스·AI 이노베이션 허브"에 숫자를 결합한 자체 프로젝트명을 만들어(예: 아기유니콘 5·딥테크 30·AI인재 260 등 목표 수치를 하나의 슬로건으로) 서울대식 브랜딩 효과를 확보</li>
+          <li><b>건국-광진 결합 브랜드 네이밍 도입</b> — 한양대·서울대 사례처럼 대학명+자치구명을 결합한 고유 브랜드를 만들어 지역 파트너십을 시각적으로 강조</li>
+          <li><b>누적 성과 총계 지표 상시 공개</b> — 개별 사례(에픽카·위글리)뿐 아니라 총 투자유치액·총 고용창출·총 매출 등 총계형 KPI를 대시보드·홍보자료 전면에 상시 노출</li>
+          <li><b>원헬스 니치 전면화</b> — 타 대학이 갖지 못한 펫·에코푸드 세부 트랙을 언론홍보·데모데이에서 차별화 소재로 적극 활용</li>
+          <li><b>공공시장(B2G) 전용 트랙 신설</b> — 광진구·서울시 산하기관과 협력한 공공테스트베드·행정수요 기반 실증 프로그램을 별도 편성(사업목표③ B2G 진입과 연계)</li>
+          <li><b>자체 투자조합 조성 검토</b> — 국민대 KMU-MBV 사례를 참고해 원헬스 특화 벤처투자조합(가칭 KU-Bio Ventures) 조성을 중장기 과제로 검토</li>
+          <li><b>RISE10 재도전 전략 수립</b> — 미선정 원인을 자체 분석하고, 캠퍼스타운(RISE형) 운영 실적을 근거로 차기 RISE10 공모 대응 계획을 별도 수립</li>
+        </ol>
+      </div>
+
+      <h2 class="sec-h">예산 흐름 차트</h2>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3 class="sub-h">창업 관련 예산 변화 (서울캠퍼스타운 기준)</h3>
+          <div class="sec-note" style="margin-top:0;">단위 : 억원 · 공개 확인된 자료 기준</div>
+          <div id="seoulFlowChart"></div>
+        </div>
+        <div class="card">
+          <h3 class="sub-h">신규·개편 사업</h3>
+          <div class="sec-note" style="margin-top:0;">2026년 예산(본예산·추경)에 반영된 신규 시책</div>
+          <div id="seoulNewChart"></div>
+        </div>
+      </div>
+
+      <h2 class="sec-h">원문 출처</h2>
+      <div class="card">
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <a class="gov-link" href="https://www.seoul.go.kr/news/news_report.do?bbsNo=158&nttNo=445654&cntPerPage=10&curPage=1&srchText=%EC%98%88%EC%82%B0%EC%95%88" target="_blank" rel="noopener">1. (2026년도 예산안) 일상 기초부터 미래비전까지…서울시, '26년 예산안 51조5천억 원 편성 (2025.10.30) ↗</a>
+          <a class="gov-link" href="https://www.seoul.go.kr/news/news_report.do?bbsNo=158&nttNo=463601&cntPerPage=10&curPage=1&srchText=%EC%98%88%EC%82%B0%EC%95%88" target="_blank" rel="noopener">2. (제2회 추경) 서울시, 2조 8,061억원 두 번째 추경…필수경비 반영하고 민생·미래 투자 (2026.8.10) ↗</a>
+        </div>
+        <div class="sec-note" style="margin-top:14px;">본 저작물은 서울특별시가 공공누리 제4유형(출처표시+상업적 이용금지+변경금지) 조건으로 개방한 자료를 인용했습니다.</div>
+      </div>
+      <div class="sec-note" style="margin-top:14px;">서울시 창업지원 예산은 캠퍼스타운사업·RISE 외에도 서울창업허브, TIPS타운 등 여러 사업으로 구성되어 있으나, 세부 사업별 2026년 예산 배정액은 서울시 예산서 원문에서 별도 확인이 필요합니다. 확인되는 대로 이 섹션에 추가하겠습니다.</div>
+    </section>
+
+    <!-- ============ [참고] 서울경제진흥원(SBA) ============ -->
+    <section class="view" id="v13">
+      <div class="view-head">
+        <div class="view-kicker">[참고] SEOUL BUSINESS AGENCY (SBA)</div>
+        <div class="view-title">[참고] 서울경제진흥원(SBA)</div>
+        <div class="view-desc">서울경제진흥원(SBA)은 서울시 출연기관으로, 창업·수출·인재양성·기술사업화·지식재산권 등 서울 기업 전 주기를 지원합니다. 캠퍼스타운사업과 직접 연계 가능한 SBA 사업을 골라 연계도 순으로 정렬했습니다.</div>
+      </div>
+
+      <h2 class="sec-h" style="margin-top:0;">① SBA 사업 전체보기 — 캠퍼스타운사업 연계성 정렬</h2>
+      <div class="sec-note" style="margin-top:0;">SBA 사업안내(창업·보육/매출·수출/인재양성/기업경쟁력강화/창조산업/산업거점/뷰티패션 7개 대분류) 중 캠퍼스타운 연계 가능성이 있는 사업만 선별했습니다. 전체 사업은 하단 링크에서 확인할 수 있습니다.</div>
+      <div class="card" style="overflow-x:auto;">
+        <table>
+          <thead><tr><th>사업명</th><th>대분류</th><th>캠퍼스타운 연계 포인트</th><th>연계도</th></tr></thead>
+          <tbody>
+            <tr><td><a href="https://www.sba.seoul.kr/Pages/BizGuide/D/bizd4.aspx#business04" target="_blank" rel="noopener" style="font-weight:800;color:var(--forest-deep);">바이오·의료 기술사업화 지원</a></td><td>기업경쟁력 강화</td><td>바이오 분과(20팀) 입주기업 후속 기술사업화 직결</td><td><span class="stars">★★★★★</span></td></tr>
+            <tr><td><a href="https://www.sba.seoul.kr/Pages/BizGuide/D/bizd4.aspx#business05" target="_blank" rel="noopener" style="font-weight:800;color:var(--forest-deep);">인공지능(AI) 기술사업화 지원</a></td><td>기업경쟁력 강화</td><td>AI 분과(20팀) 입주기업, AI-X ScaleUp Lab 후속 연계</td><td><span class="stars">★★★★★</span></td></tr>
+            <tr><td><a href="https://www.sba.seoul.kr/Pages/BizGuide/D/bizd1.aspx#business04" target="_blank" rel="noopener" style="font-weight:800;color:var(--forest-deep);">개방형 혁신 (오픈이노베이션)</a></td><td>창업 및 보육지원</td><td>AI-X ScaleUp Lab 오픈이노베이션 세션과 사업 구조 동일</td><td><span class="stars">★★★★★</span></td></tr>
+            <tr><td><a href="https://www.sba.seoul.kr/Pages/BizGuide/D/bizd4.aspx#business11" target="_blank" rel="noopener" style="font-weight:800;color:var(--forest-deep);">서울형 민간투자연계 기술사업화</a></td><td>기업경쟁력 강화</td><td>Unicorn Seed 프로그램 후속 민간투자 연계</td><td><span class="stars">★★★★<span class="dim">★</span></span></td></tr>
+            <tr><td><a href="https://www.sba.seoul.kr/Pages/BizGuide/D/bizd1.aspx#business03" target="_blank" rel="noopener" style="font-weight:800;color:var(--forest-deep);">서울창업허브 스케일업센터</a></td><td>창업 및 보육지원</td><td>KU-VENTURE '유망' 단계 기업의 후속 스케일업 공간</td><td><span class="stars">★★★★<span class="dim">★</span></span></td></tr>
+            <tr><td><a href="https://www.sba.seoul.kr/Pages/BizGuide/D/bizd4.aspx#business02" target="_blank" rel="noopener" style="font-weight:800;color:var(--forest-deep);">테스트베드 서울 실증지원</a></td><td>기업경쟁력 강화</td><td>HEMA-KORO·공유주방 푸드랩 실증 프로그램과 연계</td><td><span class="stars">★★★★<span class="dim">★</span></span></td></tr>
+            <tr><td><a href="https://www.sba.seoul.kr/Pages/BizGuide/D/bizd4.aspx#business13" target="_blank" rel="noopener" style="font-weight:800;color:var(--forest-deep);">지식재산권 창출지원 / IP디딤돌</a></td><td>기업경쟁력 강화</td><td>KU 캠퍼스타운 IP 서포트 프로그램과 직접 연계</td><td><span class="stars">★★★★<span class="dim">★</span></span></td></tr>
+            <tr><td><a href="https://www.sba.seoul.kr/Pages/BizGuide/D/bizd3.aspx#business01" target="_blank" rel="noopener" style="font-weight:800;color:var(--forest-deep);">청년취업사관학교 새싹(SeSAC)</a></td><td>기업인재양성 및 채용</td><td>AI Nest·AI 글로벌 해커톤 참가자 취업 연계처</td><td><span class="stars">★★★<span class="dim">★★</span></span></td></tr>
+            <tr><td><a href="https://www.sba.seoul.kr/Pages/BizGuide/D/bizd1.aspx#business06" target="_blank" rel="noopener" style="font-weight:800;color:var(--forest-deep);">스타트업플러스</a></td><td>창업 및 보육지원</td><td>KU-VENTURE '유망' 단계 우수기업 추천 대상</td><td><span class="stars">★★★<span class="dim">★★</span></span></td></tr>
+            <tr><td><a href="https://www.sba.seoul.kr/Pages/BizGuide/D/bizd1.aspx#business05" target="_blank" rel="noopener" style="font-weight:800;color:var(--forest-deep);">CES서울통합관</a></td><td>창업 및 보육지원</td><td>Unicorn Seed 프로그램의 CES 2026 참가 목표와 연계</td><td><span class="stars">★★★<span class="dim">★★</span></span></td></tr>
+            <tr><td><a href="https://www.sba.seoul.kr/Pages/BizGuide/D/bizd1.aspx#business15" target="_blank" rel="noopener" style="font-weight:800;color:var(--forest-deep);">초격차 개방형 혁신 주관기관</a></td><td>창업 및 보육지원</td><td>AI·바이오 딥테크 기업 스케일업 연계</td><td><span class="stars">★★★<span class="dim">★★</span></span></td></tr>
+            <tr><td><a href="https://www.sba.seoul.kr/Pages/BizGuide/D/bizd1.aspx#business08" target="_blank" rel="noopener" style="font-weight:800;color:var(--forest-deep);">서울창업허브 공덕·성수 / 서울창업센터 동작</a></td><td>창업 및 보육지원</td><td>입주공간 부족 시 후속 이전 공간으로 연계 가능</td><td><span class="stars">★★★<span class="dim">★★</span></span></td></tr>
+            <tr><td><a href="https://www.sba.seoul.kr/Pages/BizGuide/D/bizd2.aspx#business01" target="_blank" rel="noopener" style="font-weight:800;color:var(--forest-deep);">글로벌마케팅센터</a></td><td>기업 매출(수출)증대 지원</td><td>Global 창업브릿지 참가기업 해외마케팅 연계</td><td><span class="stars">★★<span class="dim">★★★</span></span></td></tr>
+            <tr><td><a href="https://www.sba.seoul.kr/Pages/BizGuide/D/bizd4.aspx#business03" target="_blank" rel="noopener" style="font-weight:800;color:var(--forest-deep);">약자를 위한 기술개발 지원</a></td><td>기업경쟁력 강화</td><td>사회적 가치 지향 원헬스 기업과 부분 연계 가능</td><td><span class="stars">★★<span class="dim">★★★</span></span></td></tr>
+            <tr><td><a href="https://www.sba.seoul.kr/Pages/BizGuide/D/bizd2.aspx#business10" target="_blank" rel="noopener" style="font-weight:800;color:var(--forest-deep);">하이서울기업 인증</a></td><td>기업 매출(수출)증대 지원</td><td>졸업기업의 성장 단계 인증 트랙으로 참고</td><td><span class="stars">★★<span class="dim">★★★</span></span></td></tr>
+          </tbody>
+        </table>
+        <div class="sec-note" style="margin-top:10px;">뷰티·패션산업 육성, 창조산업 육성(미디어콘텐츠 등), 산업거점 활성화(마곡·DMC·G밸리) 분야는 캠퍼스타운 특화분야(원헬스·AI)와 직접 연계성이 낮아 표에서 제외했습니다.</div>
+        <div style="margin-top:14px;"><a class="gov-link" href="https://www.sba.seoul.kr/Pages/BizGuide/SBABizGuide.aspx" target="_blank" rel="noopener">SBA 사업 전체보기 (공식 페이지) ↗</a></div>
+      </div>
+
+      <h2 class="sec-h">② 서울경제진흥원 2026년 예산안 분석 및 사업 우선순위</h2>
+      <div class="banner">SBA는 서울시 예산서와 별도로 통합된 "전체 예산 총액"을 공개 보도자료로 발표하지 않아, 사업본부별로 확인 가능한 개별 사업 실적·예산만 정리했습니다. 전체 기관 예산 총액은 서울시 출연금 예산서 원문에서 별도 확인이 필요합니다.</div>
+      <div class="grid grid-2" style="margin-bottom:20px;">
+        <div class="card"><div class="big" style="font-size:22px;font-weight:800;color:var(--forest-deep);">69억원 → 5,710억원</div><div class="lbl" style="font-size:11.3px;color:var(--ink-soft);margin-top:4px;">마케팅본부 수출지원 예산 대비 성과(2025년)</div><div class="yoy" style="font-size:11.5px;color:var(--leaf);margin-top:6px;">4년 새 성과 47배, 예산 대비 83배 · 2026년 목표 5,500억원</div></div>
+        <div class="card"><div class="big" style="font-size:22px;font-weight:800;color:var(--forest-deep);">840개사</div><div class="lbl" style="font-size:11.3px;color:var(--ink-soft);margin-top:4px;">2026년 해외 온라인 시장 진출 지원</div><div class="yoy" style="font-size:11.5px;color:var(--leaf);margin-top:6px;">2025년 매출 2,589억원(+33%) 기반 확대</div></div>
+      </div>
+
+      <h3 class="sub-h">청년취업사관학교(SeSAC) — 서울 25개 전 자치구 완비 현황</h3>
+      <a class="sesac-map" href="https://sesac.seoul.kr/" target="_blank" rel="noopener">
+        <div class="sesac-map-head">
+          <span class="title">📍 1자치구 1캠퍼스 · 25/25 완료 (2025.11.2 중랑캠퍼스 개관으로 전 자치구 완비)</span>
+          <span class="link">새싹(SeSAC) 홈페이지 바로가기 ↗</span>
+        </div>
+        <div class="sesac-grid">
+          <div class="sesac-zone z-nw"><div class="zname">서북권</div><span class="gu">은평</span><span class="gu">서대문</span><span class="gu">마포</span></div>
+          <div class="sesac-zone z-ne"><div class="zname">동북권</div><span class="gu">도봉</span><span class="gu">노원</span><span class="gu">강북</span><span class="gu">성북</span><span class="gu">중랑</span><span class="gu">동대문</span><span class="gu">성동</span><span class="gu">광진</span></div>
+          <div class="sesac-zone z-center"><div class="zname">도심권</div><span class="gu">종로</span><span class="gu">중구</span><span class="gu">용산</span></div>
+          <div class="sesac-zone z-sw"><div class="zname">서남권</div><span class="gu">양천</span><span class="gu">강서</span><span class="gu">구로</span><span class="gu">금천</span><span class="gu">영등포</span><span class="gu">동작</span><span class="gu">관악</span></div>
+          <div class="sesac-zone z-se"><div class="zname">동남권</div><span class="gu">서초</span><span class="gu">강남</span><span class="gu">송파</span><span class="gu">강동</span></div>
+        </div>
+      </a>
+      <div class="sec-note">서울시 공식 5개 생활권역(도심·동북·서북·서남·동남) 기준 배치이며, 각 구 안에서의 정확한 좌표를 나타낸 지도는 아닙니다. 2021년 영등포캠퍼스(1호)를 시작으로 2025.11.2 중랑캠퍼스(25호) 개관으로 서울 전 자치구에 1개씩 완비되었습니다. AI Nest·AI 글로벌 해커톤 수료생을 인근 자치구 캠퍼스로 안내할 수 있습니다.
+      </div>
+      <div class="card" style="margin-bottom:20px;">
+        <h3 class="sub-h">사업 우선순위 (캠퍼스타운 연계 + 확인된 예산·성과 기준)</h3>
+        <ol class="setup-steps">
+          <li><b>인공지능(AI)·바이오·의료 기술사업화 지원</b> — 확인된 예산 규모는 없으나 캠퍼스타운 AI·바이오 분과와 분야가 완전히 일치해 최우선 협력 대상</li>
+          <li><b>개방형 혁신(오픈이노베이션)</b> — AI-X ScaleUp Lab과 사업모델이 동일해 공동 매칭 펀드·공동 데모데이 형태의 협력 우선 검토</li>
+          <li><b>청년취업사관학교(SeSAC)</b> — 2025.11월 서울 25개 전 자치구 완비가 완료되어(1자치구 1캠퍼스), AI Nest·AI 해커톤 수료생을 인근 자치구 캠퍼스로 즉시 연계 가능</li>
+          <li><b>테스트베드 서울 실증지원</b> — HEMA-KORO·공유주방 푸드랩의 실증 단계에 공동 활용 가능한 서울시 인프라</li>
+          <li><b>CES서울통합관·글로벌마케팅센터</b> — Unicorn Seed의 CES 2026 참가, Global 창업브릿지의 해외 마케팅 단계와 연계</li>
+        </ol>
+      </div>
+
+      <h2 class="sec-h">③ 서울경제진흥원 소식지</h2>
+      <div class="card">
+        <p style="font-size:13px;margin-top:0;">SBA는 매주 화요일 사업소식지(뉴스레터)를 발행합니다. 캠퍼스타운 입주기업에게 안내하거나, 사업본부 실무진이 신규 공고를 상시 확인하는 용도로 활용할 수 있습니다.</p>
+        <a class="linkbtn" href="https://www.sba.seoul.kr/Pages/AboutSBA/SbaNewsLetter.aspx" target="_blank" rel="noopener">지난 소식지 보기 ↗</a>
+        <a class="linkbtn" href="https://page.stibee.com/subscriptions/285860" target="_blank" rel="noopener">소식지 구독 신청 ↗</a>
+      </div>
+
+      <h2 class="sec-h">④ 2026년 하반기 사업성과 극대화를 위한 건국대학교 핵심전략</h2>
+      <div class="banner">SBA 사업 중 2026년 하반기에 즉시 신청·연계 가능한 것을 기준으로 정리했습니다.</div>
+      <div class="card">
+        <ol class="setup-steps">
+          <li><b>SeSAC 취업 연계 즉시 가동</b> — 서울 25개 전 자치구 완비를 활용해 「AI Nest」·「AI 글로벌 해커톤」 수료생을 인근 자치구 캠퍼스(잡 코디·매칭데이)로 즉시 연계
+            <div class="chip-row"><a class="strategy-chip" href="https://www.sba.seoul.kr/Pages/BizGuide/D/bizd3.aspx#business01" target="_blank" rel="noopener">청년취업사관학교 새싹(SeSAC)</a></div></li>
+          <li><b>테스트베드 서울 실증지원 하반기 공고 신청</b> — 「HEMA-KORO 마라톤 컨설팅」·「공유주방 푸드랩」에서 이미 확보한 실증 데이터를 근거자료로 활용해 신청
+            <div class="chip-row"><a class="strategy-chip" href="https://www.sba.seoul.kr/Pages/BizGuide/D/bizd4.aspx#business02" target="_blank" rel="noopener">테스트베드 서울 실증지원</a></div></li>
+          <li><b>IP디딤돌 프로그램 이중 지원</b> — 「KU 캠퍼스타운 IP 서포트 프로그램」 참여 15개사를 SBA IP디딤돌에도 함께 신청해 지원 폭 확대
+            <div class="chip-row"><a class="strategy-chip" href="https://www.sba.seoul.kr/Pages/BizGuide/D/bizd4.aspx#business19" target="_blank" rel="noopener">IP디딤돌 프로그램</a></div></li>
+          <li><b>서울창업허브 스케일업센터 입주 검토</b> — KU-VENTURE '유망' 단계 기업의 후속 성장 공간으로 하반기 모집 시 신청 검토
+            <div class="chip-row"><a class="strategy-chip" href="https://www.sba.seoul.kr/Pages/BizGuide/D/bizd1.aspx#business03" target="_blank" rel="noopener">서울창업허브 스케일업센터</a></div></li>
+          <li><b>오픈이노베이션 하반기 공고 모니터링</b> — 「AI-X ScaleUp Lab」(8~11월 운영) 일정에 맞춰 SBA 오픈이노베이션 공고를 상시 확인·신청
+            <div class="chip-row"><a class="strategy-chip" href="https://www.sba.seoul.kr/Pages/BizGuide/D/bizd1.aspx#business04" target="_blank" rel="noopener">개방형 혁신(오픈이노베이션)</a></div></li>
+          <li><b>CES서울통합관 사전 등록 준비</b> — 「Unicorn Seed 프로그램」의 CES 2026 참가 목표 기업을 대상으로 SBA 참가기업 모집 공고 사전 파악
+            <div class="chip-row"><a class="strategy-chip" href="https://www.sba.seoul.kr/Pages/BizGuide/D/bizd1.aspx#business05" target="_blank" rel="noopener">CES서울통합관</a></div></li>
+        </ol>
+      </div>
+
+      <h2 class="sec-h">⑤ 2027년 사업성과 극대화를 위한 건국대학교 핵심전략</h2>
+      <div class="banner">SBA의 2027년 확대 방향(수출 목표 5,500억원, 해외 온라인 진출 840개사 등)에 맞춰 중장기적으로 준비할 과제입니다.</div>
+      <div class="card">
+        <ol class="setup-steps">
+          <li><b>글로벌마케팅센터 사전 협력체계 구축</b> — 「Global 창업브릿지」 참가기업의 해외 수출을 지원할 수 있도록 SBA와 협력 MOU 체결 검토
+            <div class="chip-row"><a class="strategy-chip" href="https://www.sba.seoul.kr/Pages/BizGuide/D/bizd2.aspx#business01" target="_blank" rel="noopener">글로벌마케팅센터</a></div></li>
+          <li><b>해외 온라인 시장 진출 지원(840개사) 연계</b> — 원헬스(펫·에코푸드) 소비재 성격의 입주기업을 우선 후보로 발굴해 다음 회차 모집에 추천
+            <div class="chip-row"><a class="strategy-chip" href="https://www.sba.seoul.kr/Pages/BizGuide/D/bizd2.aspx#business03" target="_blank" rel="noopener">해외 온라인 판로 지원</a></div></li>
+          <li><b>AI·바이오 기술사업화 공동기획 제안</b> — 캠퍼스타운 AI·바이오 분과와 SBA 간 공동 R&D 매칭펀드 조성을 SBA에 제안
+            <div class="chip-row">
+              <a class="strategy-chip" href="https://www.sba.seoul.kr/Pages/BizGuide/D/bizd4.aspx#business05" target="_blank" rel="noopener">인공지능(AI) 기술사업화 지원</a>
+              <a class="strategy-chip" href="https://www.sba.seoul.kr/Pages/BizGuide/D/bizd4.aspx#business04" target="_blank" rel="noopener">바이오·의료 기술사업화 지원</a>
+            </div></li>
+          <li><b>서울형 민간투자연계 기술사업화 사전 컨설팅</b> — 「Unicorn Seed 프로그램」 후속 성장기업을 대상으로 신청 자격 요건을 미리 점검
+            <div class="chip-row"><a class="strategy-chip" href="https://www.sba.seoul.kr/Pages/BizGuide/D/bizd4.aspx#business11" target="_blank" rel="noopener">서울형 민간투자연계 기술사업화</a></div></li>
+          <li><b>초격차 개방형 혁신 주관기관 지정 신청 검토</b> — 원헬스 특화 분야(바이오·펫·에코푸드)로 지정 신청 가능성을 검토
+            <div class="chip-row"><a class="strategy-chip" href="https://www.sba.seoul.kr/Pages/BizGuide/D/bizd1.aspx#business15" target="_blank" rel="noopener">초격차 개방형 혁신 주관기관</a></div></li>
+          <li><b>스타트업플러스 후보 기업 상시 관리</b> — KU-VENTURE '유망' 단계 기업 명단을 사전에 관리해 공고 즉시 대응 가능하도록 준비
+            <div class="chip-row"><a class="strategy-chip" href="https://www.sba.seoul.kr/Pages/BizGuide/D/bizd1.aspx#business06" target="_blank" rel="noopener">스타트업플러스</a></div></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ [참고] 글로벌창업 ============ -->
+    <section class="view" id="v14">
+      <div class="view-head">
+        <div class="view-kicker">[참고] GLOBAL STARTUP INFRASTRUCTURE</div>
+        <div class="view-title">[참고] 글로벌창업</div>
+        <div class="view-desc">외국인 창업자를 지원하는 서울시·정부 인프라 2곳(서울글로벌센터, OASIS 창업이민종합지원시스템)을 분석하고, 「KU 캠퍼스타운 Global 창업브릿지」 프로그램과의 연계 전략을 정리했습니다.</div>
+      </div>
+
+      <h2 class="sec-h" style="margin-top:0;">① 서울글로벌센터 분석</h2>
+      <div class="card" style="margin-bottom:20px;">
+        <div class="kv"><b>운영기관</b><span>SBA(서울경제진흥원) 글로벌센터팀</span></div>
+        <div class="kv"><b>소재지</b><span>서울 종로구 종로38 5층 (2008년 개소) · 강남·여의도·동대문 글로벌비즈니스센터 별도 운영</span></div>
+        <div class="kv"><b>대상</b><span>서울 거주 외국인 예비창업자 및 창업 1년 미만 초기창업자</span></div>
+        <div class="kv"><b>핵심 서비스</b><span>창업서비스·교육·입주(인큐베이션 오피스)·멘토링·컨설팅·창업행사·네트워크</span></div>
+        <div class="kv"><b>인큐베이션 오피스</b><span>무료 사무공간 최대 12개월(6개월+연장), 월 1회 정기 비즈니스 코칭 포함</span></div>
+        <div class="kv"><b>대표 행사</b><span>외국인 창업기업 비즈니스 페어(국내기업과의 교류·협업 매칭)</span></div>
+        <a class="linkbtn" href="https://seoulglobalcenter.startup-plus.kr/" target="_blank" rel="noopener">서울글로벌센터 홈페이지 ↗</a>
+      </div>
+
+      <h2 class="sec-h">② OASIS(창업이민종합지원시스템) 분석</h2>
+      <div class="card" style="margin-bottom:14px;">
+        <div class="kv"><b>정식명칭</b><span>Overall Assistance for Start-up Immigration System</span></div>
+        <div class="kv"><b>운영기관</b><span>법무부장관·중소벤처기업부장관 지정 「글로벌창업이민센터」(한국생산성본부 KPC 운영)</span></div>
+        <div class="kv"><b>소재지</b><span>서울 마포구 마포대로 122 프론트원 3층</span></div>
+        <div class="kv"><b>목적</b><span>기술기반 외국인 창업자에게 창업지원 + 창업비자(D-8-4)를 동시 제공 (2013년~) · 무역비자(D-9-1)도 별도 지원</span></div>
+        <div class="kv"><b>허가요건</b><span>학사학위(국내 전문대졸 이상) 또는 센터 추천서 + <b>OASIS 60점 이상</b> + 법인설립</span></div>
+      </div>
+      <div class="card" style="overflow-x:auto;margin-bottom:20px;">
+        <h3 class="sub-h">OASIS 1~9 교육·지원과정 (점수제)</h3>
+        <table>
+          <thead><tr><th>과정</th><th>내용</th><th>점수</th></tr></thead>
+          <tbody>
+            <tr><td>OASIS-1</td><td>지식재산권 소양 기초교육 (12시간)</td><td><span class="point-badge">10점</span></td></tr>
+            <tr><td>OASIS-2</td><td>지식재산권 소양 심화교육 (20시간)</td><td><span class="point-badge">10점</span></td></tr>
+            <tr><td>OASIS-3</td><td>지식재산권 출원지원 (우수 수료자 대상)</td><td><span class="point-badge">-</span></td></tr>
+            <tr><td>OASIS-4</td><td>창업 소양교육 (20시간 · 사업계획서 작성법 등)</td><td><span class="point-badge">10점</span></td></tr>
+            <tr><td>OASIS-5</td><td>창업 코칭 및 멘토링 (1:1 전문 코칭)</td><td><span class="point-badge">15점</span></td></tr>
+            <tr><td>OASIS-6</td><td>발명·창업 대전 (아이템 발굴·투자연계)</td><td><span class="point-badge">30점</span></td></tr>
+            <tr><td>OASIS-7</td><td>창업 인큐베이션 졸업 (창업공간 제공)</td><td><span class="point-badge">15점</span></td></tr>
+            <tr><td>OASIS-8</td><td>법인설립 지원</td><td><span class="point-badge">15점</span></td></tr>
+            <tr><td>OASIS-9</td><td>창업 아이템 사업화 지원 (R&D 연계 등)</td><td><span class="point-badge">30점</span></td></tr>
+          </tbody>
+        </table>
+        <div class="sec-note" style="margin-top:10px;">필수항목(180점 중 최소 1개, 예: 지식재산권 보유 30~60점) + 선택항목(OASIS 각 과정 10~20점, 한국어능력 10~20점)을 합산해 60점을 넘기면 창업비자(D-8-4) 신청 자격을 얻습니다.</div>
+        <a class="linkbtn" href="https://www.oasisvisa.com/kor/index.html" target="_blank" rel="noopener">OASIS 홈페이지 ↗</a>
+      </div>
+
+      <h2 class="sec-h">③ 우수 참고사례 및 성과자료</h2>
+
+      <h3 class="sub-h">정부부처·공공기관</h3>
+      <div class="gov-card">
+        <div class="gov-card-top">
+          <div><span class="gov-dept">법무부·중기부</span><span class="gov-type 확대">확대</span>
+            <div class="gov-name">글로벌창업이민센터 전국 확대</div>
+            <div class="gov-money">서울 4곳 → 전북(2025.3) → 충북(2026.4) → 부산(2026.7.20, 동남권 최초)</div>
+          </div>
+        </div>
+        <div class="gov-desc">기관 인프라·인적자원·실적·예산을 심사해 법무부·중기부가 공동 지정. 국가균형발전 기조에 따라 지방으로 확산 중이며, 부산은 부산기술창업투자원이 운영기관으로 선정돼 5월부터 창업소양교육·1:1 상담을 선제 운영했습니다.</div>
+        <a class="gov-link" href="https://m.go.seoul.co.kr/news/2026/07/21/20260721016004" target="_blank" rel="noopener">관련 보도자료 보기 ↗</a>
+      </div>
+      <div class="gov-card">
+        <div class="gov-card-top">
+          <div><span class="gov-dept">SBA·서울글로벌센터</span><span class="gov-type 확대">확대</span>
+            <div class="gov-name">OASIS 프로그램 누적 성과 (2026.6월 기준)</div>
+            <div class="gov-money">외국인 예비창업자 529명 배출 · 외국인 대표 기업 27곳 · 법인 21개 설립 지원</div>
+          </div>
+        </div>
+        <div class="gov-desc">창업 교육-전문가 1:1 컨설팅-지식재산권 출원-창업 인큐베이팅까지 전 과정을 아우르며, 최근에는 AI 기반 통번역 서비스·디지털 헬스케어 분야에서 성공 사례가 나오고 있습니다. 서울시는 2026년부터 창업소양교육 신설, 발명·창업대전을 새롭게 운영하며 프로그램을 확대합니다.</div>
+        <a class="gov-link" href="https://www.ngonews.kr/news/articleView.html?idxno=231681" target="_blank" rel="noopener">관련 보도자료 보기 ↗</a>
+      </div>
+      <div class="gov-card">
+        <div class="gov-card-top">
+          <div><span class="gov-dept">서울글로벌센터</span><span class="gov-type 계속">계속</span>
+            <div class="gov-name">입주기업 성공 사례 (누적)</div>
+            <div class="gov-money">4년간 161개 스타트업 지원 · 117팀 보육 · 41개팀 성공창업(투자유치 34억원)</div>
+          </div>
+        </div>
+        <div class="gov-desc">대표 성공사례 — <b>레지(Rezi)</b>: 해외취업 이력서 자동번역·작성 서비스 / <b>글롭스(Globs)</b>: 유학정보 O2O 매칭 플랫폼 / <b>큐펫(Q-PET)</b>: 코딩교육용 모형자동차, 2016 외국인 발명·창업대전 금상 / <b>오이스터테이블</b>: 입주 후 매출 2억원 · 투자유치 0.5억원 / <b>셔틀(Shuttle)</b>: 음식배달 플랫폼, 입주 후 매출 5.7억원 · 신규고용 18명</div>
+        <a class="gov-link" href="https://news.seoul.go.kr/economy/archives/506614" target="_blank" rel="noopener">관련 보도자료 보기 ↗</a>
+      </div>
+
+      <h3 class="sub-h">대학 우수사례</h3>
+      <div class="gov-card">
+        <div class="gov-card-top">
+          <div><span class="gov-dept">교육부 공모전</span><span class="gov-type 신규">대상</span>
+            <div class="gov-name">경희대학교 — 외국인 유학생 핵심역량 인증제</div>
+            <div class="gov-money">2026년 외국인 유학생 취·창업 지원 우수사례 공모전 대상(일반대 부문)</div>
+          </div>
+        </div>
+        <div class="gov-desc">교육부가 취업지원·창업지원·정주지원·글로벌 네트워크 구축 4개 분야를 전략성·구체성·효과성·확산가능성 기준으로 평가(총 27건 응모, 일반대 20교·전문대 7교)해 선정. 경희대는 학업적응부터 진로설계·취업준비까지 단계별 프로그램을 이수 결과와 연동해 역량을 인증하는 제도를 도입했습니다. 우수상은 강원대·경성대·충남대(일반대), 경복대(전문대)가 수상했습니다.</div>
+        <a class="gov-link" href="https://www.kcue.or.kr/_upload/high/2026/07/27/application_ea2d91e0a975b2f25baa64f1d23aa785.pdf" target="_blank" rel="noopener">교육부 공모전 결과 원문 보기 ↗</a>
+      </div>
+      <div class="gov-card">
+        <div class="gov-card-top">
+          <div><span class="gov-dept">연세대학교 창업지원단</span><span class="gov-type 계속">계속</span>
+            <div class="gov-name">OASIS 프로그램 직접 연계 운영</div>
+            <div class="gov-money">2026년 OASIS-1·OASIS-2 과정을 창업지원단 홈페이지에서 상시 모집·안내</div>
+          </div>
+        </div>
+        <div class="gov-desc">연세대는 자체 캠퍼스타운·창업지원 채널을 통해 글로벌창업이민센터의 OASIS-1(지식재산권 소양 기초, 12시간)·OASIS-2(심화, 20시간) 모집공고를 학내에 직접 게시하고 있습니다. <b>이는 저희가 제안한 "OASIS 포인트 사전 확보 프로그램 연계" 전략을 이미 실행 중인 실제 사례로, 건국대가 벤치마킹할 수 있는 가장 가까운 선례입니다.</b></div>
+        <a class="gov-link" href="https://venture.yonsei.ac.kr/community/external/323" target="_blank" rel="noopener">연세대 창업지원단 공지 보기 ↗</a>
+      </div>
+      <div class="sec-note" style="margin-top:8px;">위 사례는 캠퍼스타운·외국인 창업 지원 관련 공개 보도자료·대학 홈페이지 공지를 기준으로 정리했으며, 최신 수치는 출처 원문에서 다시 확인하시기 바랍니다.</div>
+
+      <h2 class="sec-h">④ 캠퍼스타운 사업 연계 전략</h2>
+      <div class="banner">두 기관 모두 「KU 캠퍼스타운 Global 창업브릿지」(외국인 창업자·유학생 대상, 비자·제도·비즈니스셋업 교육)와 지원 대상·목적이 정확히 겹칩니다.</div>
+      <div class="card">
+        <ol class="setup-steps">
+          <li><b>OASIS 포인트 사전 확보 프로그램으로 재설계</b> — 「Global 창업브릿지」의 비자·제도 교육을 OASIS-1·2·4 과정과 매핑해, 캠퍼스타운 수료가 OASIS 점수(각 10점)로 인정되도록 글로벌창업이민센터와 협의</li>
+          <li><b>서울글로벌센터 인큐베이션 오피스 후속 연계</b> — 캠퍼스타운 졸업 예정 외국인 창업기업을 서울글로벌센터 무료 인큐베이션 오피스(최대 12개월)로 이전 연계</li>
+          <li><b>D-8-4 창업비자 취득 지원 세션 신설</b> — 건국대 유학생 창업자를 위한 OASIS 비자 신청 가이드 상담을 「Global 창업브릿지」 정규 세션으로 편성</li>
+          <li><b>발명·창업대전(OASIS-6, 30점) 참가 연계</b> — 「GLOBAL 창업 커넥트 데이」 참가기업을 OASIS-6 발명·창업대전에 함께 출품하도록 안내(투자연계 기회 동시 확보)</li>
+          <li><b>서울글로벌센터 네트워킹 행사 공동 개최</b> — 서울글로벌센터의 외국인 창업기업 비즈니스 페어와 캠퍼스타운 데모데이를 연계한 공동 행사 기획</li>
+          <li><b>법인설립 지원(OASIS-8) 실무 연계</b> — 캠퍼스타운 입주 예정 외국인 창업팀의 법인설립 절차를 OASIS-8 프로그램과 병행 지원해 입주 전 행정 부담 완화</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ [참고] IR ============ -->
+    <section class="view" id="v15">
+      <div class="view-head">
+        <div class="view-kicker">[참고] IR · INVESTOR RELATIONS</div>
+        <div class="view-title">[참고] IR</div>
+        <div class="view-desc">투자유치(IR) 관련 정부부처·공공기관·정책금융기관·AC·VC·대학의 우수사례와 성과자료를 정리하고, 캠퍼스타운 사업 연계 전략을 제시합니다.</div>
+      </div>
+
+      <h2 class="sec-h" style="margin-top:0;">① 정부부처 — TIPS(팁스)</h2>
+      <div class="gov-card">
+        <div class="gov-card-top">
+          <div><span class="gov-dept">중소벤처기업부</span><span class="gov-type 확대">확대</span>
+            <div class="gov-name">TIPS (Tech Incubator Program for Startup)</div>
+            <div class="gov-money">13년간 누적 4,400여개 기업 참여 · 후속투자 유치액 20조원 돌파(2026년)</div>
+          </div>
+        </div>
+        <div class="gov-desc">민간 투자사(TIPS 운영사)가 먼저 유망 스타트업을 발굴·투자하면 정부가 R&D·사업화 자금을 연계 지원하는 민관협력형 프로그램입니다. 2026년 R&D 일반트랙 지원단가를 13년 만에 처음으로 2년 5억원→8억원으로 상향했고, 규모도 700개사→800개사로 확대했습니다. 비수도권에 50% 우선 할당, 기후테크·소셜벤처 등 ESG 기업에 10% 우선 할당하는 등 지역·사회가치 배분도 강화했습니다.</div>
+        <a class="gov-link" href="https://heraldk.com/?p=2662217" target="_blank" rel="noopener">TIPS 성과공유회 보도자료 보기 ↗</a>
+      </div>
+
+      <h2 class="sec-h">② 정책금융기관 우수사례</h2>
+      <div class="gov-card" style="border:2px solid var(--amber);background:var(--amber-bg);">
+        <div class="gov-card-top">
+          <div><span class="gov-dept">신용보증기금 · 광진구</span><span class="gov-type 신규">2026 신규</span>
+            <div class="gov-name">광진 NEST — "SET PLAY in NEST COURT" 데모데이</div>
+            <div class="gov-money">2026.5 광진 NEST 개소 → 2026.6 광진경제허브센터와 첫 공동 데모데이 개최</div>
+          </div>
+        </div>
+        <div class="gov-desc"><b>신용보증기금의 스타트업 육성 거점 'NEST'가 건국대와 같은 광진구에 있습니다.</b> 데모데이에서 시드~시리즈 A·B 단계 스타트업 14개사가 국내 VC·AC 7개사(로간벤처스, MYSC, 더벤처스, 와이앤아처, 롯데벤처스, 우리기술투자, 신용보증기금) 앞에서 IR을 진행했습니다. 신보는 이 외에도 Start-up NEST(금융·비금융 패키지 지원), 혁신아이콘 지원 프로그램(스케일업 전담육성), 혁신스타트업 성장지원 프로그램(딥테크 전용 트랙)을 운영합니다.</div>
+        <a class="gov-link" href="https://www.mt.co.kr/future/2026/06/22/2026061915045526933" target="_blank" rel="noopener">관련 보도자료 보기 ↗</a>
+      </div>
+      <div class="gov-card">
+        <div class="gov-card-top">
+          <div><span class="gov-dept">기술보증기금</span><span class="gov-type 계속">계속</span>
+            <div class="gov-name">2026년 서울시 소셜벤처 IR 데모데이(도약단계)</div>
+            <div class="gov-money">Series A 이상 목표 기업 대상 · 예선(9월)·본선(10월) · 10개사 내외 선발</div>
+          </div>
+        </div>
+        <div class="gov-desc">기술보증기금이 소셜벤처로 판별한 서울 소재 기업을 대상으로 기업진단→투자라운드 연계→데모데이(예선·본선) 3단계로 지원합니다. 원헬스 분야 중 사회적 가치를 지향하는 입주기업이 있다면 신청 자격을 갖출 수 있습니다.</div>
+        <a class="gov-link" href="https://dreamstartup.co.kr/gov/search/detail/178262" target="_blank" rel="noopener">모집공고 보기 ↗</a>
+      </div>
+      <div class="gov-card">
+        <div class="gov-card-top">
+          <div><span class="gov-dept">한국벤처투자(KVIC) · 한국산업은행</span><span class="gov-type 계속">계속</span>
+            <div class="gov-name">모태펀드 정책출자 · 벤처투자종합포털(VCS)</div>
+            <div class="gov-money">한국모태펀드 등 7개 계정 운용 · 산업은행은 리벨리온 등 다수 스타트업에 정책출자자로 참여</div>
+          </div>
+        </div>
+        <div class="gov-desc">한국벤처투자는 한국모태펀드·일자리창출펀드·산업기술사업화 모펀드 등을 통해 개별 VC 펀드에 출자하고, 벤처투자종합포털(VCS)에서 지역별 AI·ICT 지원사업 등을 상시 공고합니다. 한국산업은행은 캡스톤파트너스 등 다수 VC의 정책출자자이자 리벨리온(AI 유니콘) 등에 직접 투자한 이력이 있어, 「Unicorn Seed 프로그램」 후속 투자 유치 시 최종 라운드에서 만날 가능성이 높은 기관입니다.</div>
+        <a class="gov-link" href="https://kvic.or.kr/" target="_blank" rel="noopener">한국벤처투자 홈페이지 ↗</a>
+      </div>
+
+      <h2 class="sec-h">③ AC·VC 우수사례</h2>
+      <div class="gov-card">
+        <div class="gov-card-top">
+          <div><span class="gov-dept">2026 올해의 팁스</span><span class="gov-type 계속">시상</span>
+            <div class="gov-name">올해의 팁스 기업 / 운영사</div>
+            <div class="gov-money">기업 : 리벨리온(국내 최초 AI 유니콘)·비트센싱·드림에이스 / 운영사 : 서울대기술지주·퓨처플레이·충북창조경제혁신센터</div>
+          </div>
+        </div>
+        <div class="gov-desc">중기부가 TIPS 13년 성과를 공유하며 처음으로 신설한 시상 부문입니다. 대학기술지주회사(서울대기술지주)가 우수 운영사로 선정된 사례는, 건국대 기술지주회사를 활용하는 「Unicorn Seed 프로그램」의 벤치마킹 대상이 됩니다. 더브이씨(The VC)의 데이터 기반 성과분석, 앤톡의 AI 기반 '팁스 성장지원시스템' 등 민간 협업 모델도 함께 공개됐습니다.</div>
+        <a class="gov-link" href="https://heraldk.com/?p=2662217" target="_blank" rel="noopener">관련 보도자료 보기 ↗</a>
+      </div>
+      <div class="gov-card">
+        <div class="gov-card-top">
+          <div><span class="gov-dept">카카오벤처스</span><span class="gov-type 계속">CVC</span>
+            <div class="gov-name">AI 유니콘 리벨리온 투자자 · 실무형 교육 세션 운영</div>
+            <div class="gov-money">리벨리온 투자자(SK텔레콤·KT·한국산업은행 등과 공동) · K뷰티 스타트업 '6펜스'와 AI 활용 세션 '뷰티 빌드 스프린트' 진행</div>
+          </div>
+        </div>
+        <div class="gov-desc">카카오의 CVC로, 투자를 넘어 포트폴리오 기업 실무진 대상 AI 활용 워크숍을 직접 운영하는 것이 특징입니다. 「AI-X ScaleUp Lab」의 오픈이노베이션 세션에 이런 'VC 주도형 실무 워크숍' 포맷을 벤치마킹할 수 있습니다.</div>
+        <a class="gov-link" href="https://thevc.kr/kakaoventures" target="_blank" rel="noopener">기업 정보 보기 ↗</a>
+      </div>
+
+      <h2 class="sec-h">④ 대학 우수사례</h2>
+      <div class="gov-card" style="border:2px solid var(--leaf);background:#F7FBF8;">
+        <div class="gov-card-top">
+          <div><span class="gov-dept">건국대학교 (자체 사례)</span><span class="gov-type 신규">2026 신규</span>
+            <div class="gov-name">2026 KU 캠퍼스타운 창업스쿨 IR 실전 데모데이</div>
+            <div class="gov-money">2026.5.22 개최 · 총 107명 학생 창업가·예비창업자 참여</div>
+          </div>
+        </div>
+        <div class="gov-desc">건국대 RISE사업단 캠퍼스타운사업본부가 챠밍카이브(팀합소)와 함께 '2026 학생창업유망팀 300+ on 건국'의 일환으로 개최한 실제 행사입니다. 창업 특강-전문가 멘토링-모의 IR 발표로 이어지는 실전형 과정으로 진행됐으며, 심사위원이 투자자 관점에서 실질적 피드백을 제공했습니다.<br><br>
+        <b>수상팀</b> — 대상 : REBLOCK(김민찬) · 최우수상 : 로봇컴(김재훈) · 우수상 : 벳츄원 VetU1(인준환, 「HEMA-KORO 마라톤 컨설팅」 펫 분과 참여기업과 동일 팀)</div>
+        <a class="gov-link" href="https://www.businesskorea.co.kr/news/articleView.html?idxno=271058" target="_blank" rel="noopener">관련 보도자료 보기 ↗</a>
+      </div>
+      <div class="gov-card">
+        <div class="gov-card-top">
+          <div><span class="gov-dept">서울대학교</span><span class="gov-type 신규">2026 신규</span>
+            <div class="gov-name">1대1 커넥트 IR (서울대기술지주 × CJ인베스트먼트)</div>
+            <div class="gov-money">2026.9.7 발표 · 대기업 CVC와 공동 개최</div>
+          </div>
+        </div>
+        <div class="gov-desc">서울대 구성원이 창업한 예비·초기기업을 대상으로 대학 기술지주회사와 대기업 CVC(CJ인베스트먼트)가 공동으로 1:1 기업설명회를 개최했습니다. 이 외에도 '1:1 투자멘토링'(펀드 보유 투자사 매칭+IR 고도화 컨설팅), '데모데이 프로그램'(기업역량진단+IR데스크 고도화+1:1투자상담회)을 상시 운영하며, 서울대 기술지주회사가 연간 3억원 규모 시드투자 확약과 TIPS 연계까지 지원합니다.</div>
+        <a class="gov-link" href="https://www.mt.co.kr/future/2026/09/07/2026090709145348847" target="_blank" rel="noopener">관련 보도자료 보기 ↗</a>
+      </div>
+      <div class="gov-card">
+        <div class="gov-card-top">
+          <div><span class="gov-dept">한양대학교</span><span class="gov-type 계속">계속</span>
+            <div class="gov-name">캠퍼스타운 입주기업 '휴젝트' — 트라이 에브리싱 2026 참가</div>
+            <div class="gov-money">2026.9.9~10 DDP · SBA 주관 국제 스타트업 축제</div>
+          </div>
+        </div>
+        <div class="gov-desc">한양대 SEED Lab의 에너지 하베스팅 기술로 2020년 설립된 실험실창업기업 '휴젝트'(한국전력공사 오픈이노베이션 선정 이력)가, 서울시·매경미디어그룹 주최·SBA 주관의 '트라이 에브리싱 2026'에 전시부스로 참가해 국내외 투자자·기업과 IR·1:1 밋업을 진행했습니다. 대학 실험실창업 기술이 SBA의 국제 행사까지 연결된 사례입니다.</div>
+        <a class="gov-link" href="https://www.veritas-a.com/news/articleView.html?idxno=626550" target="_blank" rel="noopener">관련 보도자료 보기 ↗</a>
+      </div>
+      <div class="gov-card">
+        <div class="gov-card-top">
+          <div><span class="gov-dept">순천향대학교</span><span class="gov-type 확대">확대</span>
+            <div class="gov-name">SCH Value-UP 투자유치 고도화 정기 IR 데모데이</div>
+            <div class="gov-money">2026년 연말까지 총 8회 정기 개최 (SCH RGB X스테이션)</div>
+          </div>
+        </div>
+        <div class="gov-desc">중기부 초기창업패키지 주관기관인 순천향대 창업지원단이 대학 혁신 창업 플랫폼 'SCH RGB X스테이션'에서 매월 정기 개최합니다. 글로컬대학사업·RISE 등 정부 재정지원사업과 연계해 투자 성과 창출을 상시적으로 지원하는 구조가 특징입니다.</div>
+        <a class="gov-link" href="https://www.veritas-a.com/news/articleView.html?idxno=612050" target="_blank" rel="noopener">관련 보도자료 보기 ↗</a>
+      </div>
+      <div class="gov-card">
+        <div class="gov-card-top">
+          <div><span class="gov-dept">동국대학교</span><span class="gov-type 신규">2026 신규</span>
+            <div class="gov-name">TIPS 연계 투자 프로그램</div>
+            <div class="gov-money">2026년 서울캠퍼스타운(HAI STARTUP TOWN) 신규 편성</div>
+          </div>
+        </div>
+        <div class="gov-desc">기존 우수사례로 선정된 프로그램에 투자 지원을 확대하며 'AX-Meta 창업자 지원 프로그램'과 함께 TIPS 연계 투자 프로그램을 신규 운영합니다. 캠퍼스타운 사업 자체를 TIPS 신청 전 단계로 명시적으로 설계한 사례입니다.</div>
+        <a class="gov-link" href="https://www.dongguk.edu/article/SCHOOLNEWS/detail/26761859" target="_blank" rel="noopener">관련 보도자료 보기 ↗</a>
+      </div>
+
+      <h2 class="sec-h">⑤ 캠퍼스타운 사업 연계 전략</h2>
+      <div class="banner">건국대는 이미 자체 IR 데모데이를 성공적으로 운영한 실적이 있고, 신용보증기금 '광진 NEST'가 같은 광진구에 있다는 지리적 이점도 있습니다. 이를 상설·제도화하고 정책금융기관·VC 생태계와 연결하는 것이 다음 단계입니다.</div>
+      <div class="card">
+        <ol class="setup-steps">
+          <li><b>신용보증기금 광진 NEST와 직접 협력체계 구축</b> — 같은 광진구 소재라는 지리적 이점을 살려, 「캠퍼스타운 대학 연합 창업포럼」(신보 광진지점 NEST COURT에서 기개최)을 넘어 정기 협력사업으로 격상하고 광진 NEST의 VC 네트워크(로간벤처스·MYSC·더벤처스 등)를 캠퍼스타운 입주기업에 상시 연결</li>
+          <li><b>IR 실전 데모데이 정례화</b> — 연 1회성 행사(창업스쿨 5월 개최)를 순천향대 SCH RGB X스테이션처럼 「Unicorn Seed 프로그램」과 통합해 연 4~8회 정기 시리즈로 확대</li>
+          <li><b>서울대·한양대식 '대기업 CVC·산업체 오픈이노베이션 연계 IR' 도입</b> — 서울대기술지주×CJ인베스트먼트 1대1 커넥트 IR, 한양대 휴젝트의 한전 오픈이노베이션 사례처럼 원헬스 분야(펫·에코푸드) 대기업과의 CVC 매칭 IR을 기획</li>
+          <li><b>SBA '트라이 에브리싱' 참가 트랙 신설</b> — 한양대 휴젝트 사례처럼 「Unicorn Seed 프로그램」 우수기업을 SBA 주관 국제 스타트업 축제(DDP)에 전시부스로 참가시켜 노출도 확대</li>
+          <li><b>데모데이 수상팀 TIPS 신청 트랙 신설</b> — REBLOCK·로봇컴·벳츄원 등 수상팀을 대상으로 TIPS 신청 전용 사전 컨설팅(운영사 매칭, 지분요건 30% 이하 등 실무 교육) 제공</li>
+          <li><b>기술보증기금 소셜벤처 IR 데모데이 신청 검토</b> — 원헬스 분야 중 사회적 가치를 지향하는 입주기업을 발굴해 9월 예선에 지원</li>
+          <li><b>상설 IR 공간(가칭 KU IR 스테이션) 조성 검토</b> — 순천향대 SCH RGB X스테이션 모델을 벤치마킹해 상시 IR 피칭·투자자 미팅이 가능한 전용 공간 조성 검토</li>
+        </ol>
+      </div>
     </section>
 
     <div class="footer-note">
@@ -1425,6 +2104,236 @@ function copyGsCode(){
 }
 
 /* =========================================================
+   11. 정부·지자체 예산안 분석 (2027년)
+========================================================= */
+const govPrograms = [
+ {name:'대학 창업교육 기반 고도화', dept:'교육부', type:'신규', y26:'—', y27:'300억 / 100개교', delta:'신규', scale:'100개교', score:5,
+  link:'https://www.korea.kr/briefing/pressReleaseView.do?newsId=156776371',
+  desc:'신규·100개교 규모로 선정 가능성 높음. 창업교육 고도화 취지가 「KU 캠퍼스타운 창업스쿨」·「AI Nest」 등 기존 교육 프로그램 확장과 직접 맞닿아 있어 사업계획 사전 준비가 필요합니다.'},
+ {name:'모두의 창업 (혁신창업사업화 통합, 예비창업패키지 포함)', dept:'중기부', type:'확대', y26:'2,631억(추경포함)', y27:'4,411억 / 2만명', delta:'+1,780억 (+67.7%)', scale:'1.5만→2만명', score:5,
+  link:'https://www.korea.kr/briefing/pressReleaseView.do?newsId=156776399',
+  desc:'「KU 캠퍼스타운 창업경진대회」로 발굴한 예비창업팀의 자연스러운 후속 지원사업입니다. 예창패 통합 흐름 확인 필요. 사업화자금 1단계 500만원/2단계 3,000만원.'},
+ {name:'민관협력 오픈이노베이션', dept:'중기부', type:'확대', y26:'242억', y27:'543억', delta:'+301억 (+124.4%)', scale:'—', score:5,
+  link:'https://www.korea.kr/briefing/pressReleaseView.do?newsId=156776399',
+  desc:'2배 이상 확대. 「AI-X ScaleUp Lab」 오픈이노베이션 세션(대기업·공공기관·VC 매칭)과 사업 구조가 거의 동일해 공동 기획·매칭 펀드 활용 여지가 큽니다.'},
+ {name:'청년창업패키지', dept:'기획예산처', type:'신규', y26:'—', y27:'300억(200명·1인당 1.5억, 추정)', delta:'신규', scale:'200명 소수정예', score:4,
+  link:'https://www.korea.kr/briefing/pressReleaseView.do?newsId=156776745',
+  desc:'소수정예 신규 트랙. 「Unicorn Seed 프로그램」·「AI-X ScaleUp Lab」에서 성장 중인 유망 학생창업자를 추천·매칭할 수 있습니다. 총액은 선발인원(200명)과 1인당 한도(1.5억원)를 곱한 추정치이며, 공식 총예산은 아닙니다.'},
+ {name:'모태펀드 출자', dept:'중기부', type:'확대', y26:'8,200억', y27:'1조 3,000억', delta:'+4,800억 (+58.5%)', scale:'—', score:4,
+  link:'https://www.korea.kr/briefing/pressReleaseView.do?newsId=156776399',
+  desc:'역대 최대 규모 출자. 「Unicorn Seed 프로그램」의 KU Investment 데모데이 이후 후속 투자 재원 풀이 넓어지는 효과가 기대됩니다.'},
+ {name:'창업펀드 출자', dept:'중기부', type:'확대', y26:'2,400억', y27:'4,800억', delta:'+2,400억 (+100.0%)', scale:'—', score:4,
+  link:'https://www.korea.kr/briefing/pressReleaseView.do?newsId=156776399',
+  desc:'2배 확대. 입주기업 투자유치 파이프라인(Pre-A·TIPS 등) 확대에 우호적인 환경입니다.'},
+ {name:'초격차 스타트업 프로젝트', dept:'중기부', type:'확대', y26:'1,456억', y27:'1,563억', delta:'+107억 (+7.3%)', scale:'6대 전략산업', score:4,
+  link:'https://www.korea.kr/briefing/pressReleaseView.do?newsId=156776399',
+  desc:'6대 전략산업·12대 분야 딥테크 확대. AI·바이오 분과 입주기업의 스케일업 단계 연계 재원으로 검토할 만합니다.'},
+ {name:'기술사업화패키지', dept:'중기부', type:'확대', y26:'240억', y27:'540억', delta:'+300억 (+125.0%)', scale:'—', score:4,
+  link:'https://www.korea.kr/briefing/pressReleaseView.do?newsId=156776399',
+  desc:'2.25배 확대. 「Unicorn Seed」·「HEMA-KORO 마라톤 컨설팅」의 기술사업화 성과를 후속 확산하는 재원으로 연계 가능합니다.'},
+ {name:'신성장분야 혁신기업 육성', dept:'중기부', type:'신규', y26:'—', y27:'100억 / 300개사', delta:'신규', scale:'300개사', score:4,
+  link:'https://www.korea.kr/briefing/pressReleaseView.do?newsId=156776399',
+  desc:'신안보·기후테크·제약바이오·K소비재 4대 분야. 기후테크는 에코·푸드 분과, 제약바이오는 바이오 분과 입주기업과 직접 맞닿아 있습니다.'},
+ {name:'창업중심대학', dept:'중기부', type:'확대', y26:'883억', y27:'1,083억', delta:'+200억 (+22.7%)', scale:'—', score:3,
+  link:'https://www.korea.kr/briefing/pressReleaseView.do?newsId=156776399',
+  desc:'딥테크 중심 확대, 미래대응기금 재원으로 이관되어 공고 방식 변화 주시 필요. 캠퍼스타운과는 별도 트랙이나 교내 창업 인프라를 공유할 여지가 있습니다.'},
+ {name:'지역창업패키지', dept:'중기부', type:'신규', y26:'511억(추경)', y27:'1,700억', delta:'+1,189억 (+232.7%)', scale:'10개 도시 · 500개사', score:3,
+  link:'https://www.korea.kr/briefing/pressReleaseView.do?newsId=156776399',
+  desc:'기업당 최대 5억원. 서울(광진구) 지역이 선정될 경우 캠퍼스타운 입주기업의 추가 자금줄로 활용 가능합니다.'},
+ {name:'지역성장펀드', dept:'중기부', type:'확대', y26:'2,000억', y27:'2,850억', delta:'+850억 (+42.5%)', scale:'—', score:3,
+  link:'https://www.korea.kr/briefing/pressReleaseView.do?newsId=156776399',
+  desc:'전국 확산. 광진구 등 지역 연계 투자재원으로 간접 활용 가능성이 있습니다.'},
+ {name:'경력창업지원사업', dept:'중기부', type:'신규', y26:'—', y27:'166억', delta:'신규', scale:'—', score:2,
+  link:'https://www.korea.kr/briefing/pressReleaseView.do?newsId=156776399',
+  desc:'보도자료에 창업보육센터 수행기관 명시, 고경력자 대상. 캠퍼스타운 입주공간 활용 여지는 있으나 대상층(청년 중심)이 다릅니다.'},
+ {name:'창업기업 규제 합리화', dept:'중기부', type:'신규', y26:'—', y27:'31억', delta:'신규', scale:'—', score:2,
+  link:'https://www.korea.kr/briefing/pressReleaseView.do?newsId=156776399',
+  desc:'규제애로 발굴·공동실증 참여 검토. 입주기업의 규제 샌드박스 신청을 지원하는 정도의 간접 연계입니다.'},
+ {name:'창업기업 지원융자', dept:'중기부', type:'확대', y26:'1.3조원', y27:'1.7조원', delta:'+4,000억 (+30.8%)', scale:'—', score:2,
+  link:'https://www.korea.kr/briefing/pressReleaseView.do?newsId=156776399',
+  desc:'창업기업지원자금 16,898억원. 입주기업 운전자금 융자 창구로 간접 안내 가능한 수준입니다.'},
+ {name:'재도전성공학교', dept:'중기부', type:'신규', y26:'—', y27:'595억', delta:'신규', scale:'전국 19개 · 500개사', score:2,
+  link:'https://www.korea.kr/briefing/pressReleaseView.do?newsId=156776399',
+  desc:'실패원인 진단·입주·보육. 캠퍼스타운 졸업기업 중 재기가 필요한 경우에 한해 간접 활용 가능합니다.'},
+ {name:'창업도시', dept:'중기부', type:'확대', y26:'4개소', y27:'10개소', delta:'확대', scale:'비수도권', score:1,
+  link:'https://www.korea.kr/briefing/pressReleaseView.do?newsId=156776399',
+  desc:'비수도권 지역 도시 단위 사업으로 대학 캠퍼스타운과 사업 결이 다릅니다.'},
+ {name:'재도전 응원 프로젝트', dept:'중기부', type:'신규', y26:'—', y27:'334억', delta:'신규', scale:'130개사', score:1,
+  link:'https://www.korea.kr/briefing/pressReleaseView.do?newsId=156776399',
+  desc:'최대 2억원. 재도전 창업자 대상으로 캠퍼스타운의 신규 청년창업 발굴 초점과는 거리가 있습니다.'},
+ {name:'재도전 성공패키지', dept:'중기부', type:'확대', y26:'—', y27:'469억', delta:'185→320개사', scale:'320개사', score:1,
+  link:'https://www.korea.kr/briefing/pressReleaseView.do?newsId=156776399',
+  desc:'한도 1억→1.5억원, 위기기업 포함. 캠퍼스타운 대상과 결이 다릅니다.'},
+ {name:'대·중소 공동사업전환', dept:'중기부', type:'신규', y26:'—', y27:'300억', delta:'신규', scale:'100개사', score:1,
+  link:'https://www.korea.kr/briefing/pressReleaseView.do?newsId=156776399',
+  desc:'대·중소기업 상생 사업전환 지원으로 캠퍼스타운 초기 창업 지원과는 성격이 다릅니다.'},
+ {name:'중소기업 재기지원', dept:'중기부', type:'확대', y26:'150억', y27:'1,398억', delta:'+1,248억 (+832.0%)', scale:'총 950개사', score:1,
+  link:'https://www.korea.kr/briefing/pressReleaseView.do?newsId=156776399',
+  desc:'재도전 성장사다리. 캠퍼스타운의 신규 창업 발굴 초점과는 거리가 있습니다.'},
+ {name:'재도약지원자금 (융자)', dept:'중기부', type:'확대', y26:'6,125억', y27:'8,400억', delta:'+2,275억 (+37.1%)', scale:'—', score:1,
+  link:'https://www.korea.kr/briefing/pressReleaseView.do?newsId=156776399',
+  desc:'융자 프로그램으로 캠퍼스타운사업본부가 직접 대응할 사업은 아닙니다.'},
+ {name:'AX혁신기업 창의기술개발사업', dept:'과기정통부', type:'신규', y26:'—', y27:'75억', delta:'신규', scale:'—', score:4,
+  link:'https://www.korea.kr/briefing/pressReleaseView.do?newsId=156776742',
+  desc:'2026년 신규 추진된 AI 전환(AX) 기업 대상 기술개발 지원사업으로, 2027년에도 이어질 것으로 예상됩니다. AI-X ScaleUp Lab 대상 기업의 후속 R&D 자금 연계처로 검토할 만합니다.'},
+ {name:'대학·실험실 기반 기술창업 지원 (창업탐색지원·실험실특화형 등)', dept:'과기정통부', type:'계속', y26:'846억(통합공고 총액)', y27:'미발표', delta:'—', scale:'—', score:3,
+  link:'https://www.korea.kr/briefing/pressReleaseView.do?newsId=156776742',
+  desc:'공공기술기반 시장연계 창업탐색지원(326억), 실험실 특화형 창업선도대학(148억) 등을 포함한 과기정통부 창업지원사업 전체 규모(2026년 통합공고 기준 846억원)입니다. 건국대학교는 2021년 이 사업(실험실 특화형 창업선도대학)에 신규 선정된 이력이 있어 접점이 있습니다. 2027년 개별 사업비는 아직 공개되지 않았습니다.'},
+];
+
+function starsHtml(n){
+  let s = '';
+  for(let i=1;i<=5;i++){ s += `<span class="${i<=n?'':'dim'}">★</span>`; }
+  return `<span class="stars">${s}</span>`;
+}
+
+let activeGovFilter = '전체';
+function renderGovPriorityCards(){
+  const wrap = document.getElementById('govPriorityCards');
+  const list = govPrograms.filter(g=>g.score>=4).sort((a,b)=>b.score-a.score);
+  wrap.innerHTML = list.map(g=>`
+    <div class="gov-card">
+      <div class="gov-card-top">
+        <div>
+          <span class="gov-dept">${g.dept}</span><span class="gov-type ${g.type}">${g.type}</span>
+          <div class="gov-name">${g.name}</div>
+          <div class="gov-money">${g.y27}${g.delta && g.delta!=='신규' && g.delta!=='확대' ? ' · '+g.delta : ''}</div>
+        </div>
+        ${starsHtml(g.score)}
+      </div>
+      <div class="gov-desc">${g.desc}</div>
+      <a class="gov-link" href="${g.link}" target="_blank" rel="noopener">관련 보도자료 보기 ↗</a>
+    </div>
+  `).join('');
+}
+
+function renderGovFilterBar(){
+  const bar = document.getElementById('govFilterBar');
+  const types = ['전체','신규','확대','계속'];
+  bar.innerHTML = '';
+  types.forEach(t=>{
+    const btn = document.createElement('button');
+    btn.className = 'filterbtn'+(t===activeGovFilter?' active':'');
+    const cnt = t==='전체' ? govPrograms.length : govPrograms.filter(g=>g.type===t).length;
+    btn.textContent = `${t} (${cnt})`;
+    btn.addEventListener('click', ()=>{ activeGovFilter=t; renderGovFilterBar(); renderGovTable(); });
+    bar.appendChild(btn);
+  });
+}
+
+function renderGovTable(){
+  const tbody = document.getElementById('govTableBody');
+  const list = activeGovFilter==='전체' ? govPrograms : govPrograms.filter(g=>g.type===activeGovFilter);
+  tbody.innerHTML = list.slice().sort((a,b)=>b.score-a.score).map(g=>`
+    <tr>
+      <td style="font-weight:600;">${g.name.replace(/\s*\(/, '<br>(')}</td>
+      <td>${g.dept}</td>
+      <td><span class="gov-type ${g.type}">${g.type}</span></td>
+      <td>${g.y26}</td>
+      <td><b>${g.y27}</b></td>
+      <td>${g.delta}</td>
+      <td>${g.scale}</td>
+      <td>${starsHtml(g.score)}</td>
+    </tr>
+  `).join('');
+}
+
+function parseEok(str){
+  if(!str || str==='—') return 0;
+  const s = str.split('/')[0].trim();
+  let m = s.match(/([\d,.]+)\s*조\s*([\d,]+)?\s*억?/);
+  if(m){
+    const jo = parseFloat(m[1].replace(/,/g,''))||0;
+    const eok = m[2] ? parseFloat(m[2].replace(/,/g,''))||0 : 0;
+    return jo*10000 + eok;
+  }
+  let m2 = s.match(/([\d,.]+)\s*억/);
+  if(m2){ return parseFloat(m2[1].replace(/,/g,''))||0; }
+  return 0;
+}
+
+function renderDeptFlowChart(){
+  const depts = {};
+  govPrograms.forEach(g=>{
+    if(g.dept==='기획예산처') return; // 요청에 따라 제외
+    if(!depts[g.dept]) depts[g.dept] = {y26:0,y27:0};
+    depts[g.dept].y26 += parseEok(g.y26);
+    depts[g.dept].y27 += parseEok(g.y27);
+  });
+  const max = Math.max(1, ...Object.values(depts).map(d=>Math.max(d.y26,d.y27)));
+  document.getElementById('deptFlowChart').innerHTML = Object.keys(depts).map(d=>{
+    const v = depts[d];
+    const isKosti = d==='과기정통부';
+    const y27Row = isKosti
+      ? `<div style="font-size:11px;color:var(--ink-soft);margin-top:2px;">'27년 : AX혁신기업 창의기술개발(75억) 확인 · 나머지 사업(창업탐색지원·실험실특화형 등) 세부 미발표</div>`
+      : `<div style="display:flex;align-items:center;gap:8px;">
+          <span style="font-size:10.5px;color:var(--ink-soft);width:30px;">'27년</span>
+          <div class="bar-track" style="flex:1;"><div class="bar-fill" style="width:${v.y27/max*100}%;"></div></div>
+          <span style="font-size:11px;font-weight:700;width:78px;text-align:right;">${fmt(v.y27)}억원</span>
+        </div>`;
+    return `
+      <div style="margin-bottom:14px;">
+        <div style="font-size:12.6px;font-weight:700;margin-bottom:4px;">${d}</div>
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:3px;">
+          <span style="font-size:10.5px;color:var(--ink-soft);width:30px;">'26년</span>
+          <div class="bar-track" style="flex:1;"><div class="bar-fill" style="width:${v.y26/max*100}%;background:#B9BFB6;"></div></div>
+          <span style="font-size:11px;font-weight:700;width:78px;text-align:right;">${isKosti? fmt(v.y26)+'억원(통합공고 총액)' : fmt(v.y26)+'억원'}</span>
+        </div>
+        ${y27Row}
+      </div>
+    `;
+  }).join('') + `<div class="sec-note" style="margin-top:6px;">본 표에 있는 사업만 합산한 수치로, 부처 전체 창업지원 예산과는 다릅니다. 기획예산처(청년창업패키지)는 총액 추정치라 부처 비교에서 제외했습니다.</div>`;
+}
+
+function renderNewProgramChart(){
+  const list = govPrograms.filter(g=>g.type==='신규')
+    .map(g=>({name:g.name, dept:g.dept, val:parseEok(g.y27)}))
+    .filter(x=>x.val>0).sort((a,b)=>b.val-a.val).slice(0,10);
+  const max = Math.max(1, ...list.map(x=>x.val));
+  document.getElementById('newProgramChart').innerHTML = list.map(x=>`
+    <div style="margin-bottom:10px;">
+      <div style="font-size:12px;font-weight:600;margin-bottom:3px;">${x.name} <span style="color:var(--ink-soft);font-weight:400;">(${x.dept})</span></div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <div class="bar-track" style="flex:1;"><div class="bar-fill" style="width:${x.val/max*100}%;background:var(--violet);"></div></div>
+        <span style="font-size:11.5px;font-weight:700;width:64px;text-align:right;">${fmt(x.val)}억원</span>
+      </div>
+    </div>
+  `).join('') + `<div class="sec-note" style="margin-top:8px;">청년창업패키지는 선발인원×1인당 한도 기준 추정 총액입니다.</div>`;
+}
+
+/* ---------- [참고] 2026 서울시 예산안 차트 ---------- */
+function renderSeoulFlowChart(){
+  const data = [
+    {label:"2025년 (20개교, 사이클 종료)", val:212},
+    {label:"2026년 (13개교, 신규 사이클)", val:156},
+  ];
+  const max = Math.max(1, ...data.map(d=>d.val));
+  document.getElementById('seoulFlowChart').innerHTML = data.map(d=>`
+    <div style="margin-bottom:12px;">
+      <div style="font-size:12.3px;font-weight:600;margin-bottom:4px;">${d.label}</div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <div class="bar-track" style="flex:1;"><div class="bar-fill" style="width:${d.val/max*100}%;"></div></div>
+        <span style="font-size:11.5px;font-weight:700;width:74px;text-align:right;">${d.val}억원</span>
+      </div>
+    </div>
+  `).join('') + `<div class="sec-note" style="margin-top:8px;">대학당 평균 지원액 : 2025년 약 10.6억원 → 2026년 12억원 (선정 대학 수는 줄었으나 대학당 지원액은 증가한 '선택과 집중' 구조)</div>`;
+}
+function renderSeoulNewChart(){
+  const items = [
+    {name:'서울 지역혁신중심 대학지원체계(RISE) 추진', dept:'서울시·2차 추경', note:'17억원 · ANCHOR/캠퍼스타운과 동일 정책 라인'},
+    {name:'RISE10 (대학 R&D 10년 안정 투자)', dept:'서울시·본예산', note:'신규 추진 · 다년도 정책 프레임'},
+    {name:'홍릉 첨단바이오헬스센터·스타트업 랩', dept:'서울시·본예산', note:'신규 조성 · 바이오 신산업 육성'},
+    {name:'청년 AI 성장권 지원', dept:'서울시·2차 추경', note:'56억원 · 50만명 대상 생성형AI 이용권 1년'},
+  ];
+  document.getElementById('seoulNewChart').innerHTML = items.map(it=>`
+    <div style="padding:10px 0;border-bottom:1px dashed var(--line);">
+      <div style="font-size:12.6px;font-weight:700;">${it.name} <span style="font-weight:400;color:var(--ink-soft);">(${it.dept})</span></div>
+      <div style="font-size:11.8px;color:var(--ink-soft);margin-top:2px;">${it.note}</div>
+    </div>
+  `).join('');
+}
+
+/* =========================================================
    4. 예산 총괄 렌더링 (조직운영·시설운영비 편집 가능)
 ========================================================= */
 function renderOrgFacRows(){
@@ -1759,6 +2668,13 @@ renderFeedbackSummary();
 updateGlobalStamp();
 refreshBackendLabels();
 document.getElementById('gsCode').textContent = GS_CODE;
+renderGovPriorityCards();
+renderGovFilterBar();
+renderGovTable();
+renderDeptFlowChart();
+renderNewProgramChart();
+renderSeoulFlowChart();
+renderSeoulNewChart();
 </script>
 </body>
 </html>

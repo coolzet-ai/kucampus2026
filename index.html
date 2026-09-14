@@ -104,6 +104,7 @@
   .cat-row .cat-dot{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:8px;}
   .cat-row .cat-name{font-size:13.3px;font-weight:700;} .cat-row .cat-figs{font-size:12.3px;color:var(--ink-soft);} .cat-row .cat-pct{font-size:13px;font-weight:800;text-align:right;}
   .subitem-row{display:grid;grid-template-columns:1.4fr .7fr .7fr .55fr .55fr;gap:8px;align-items:center;font-size:12.3px;color:var(--ink-soft);padding:7px 0;border-bottom:1px dashed var(--line);}
+  .subitem-row.org-row{padding:15px 0;line-height:1.6;}
   .subitem-row:last-child{border-bottom:none;}
   .subitem-head{display:grid;grid-template-columns:1.4fr .7fr .7fr .55fr .55fr;gap:8px;font-size:10.8px;color:var(--ink-soft);font-weight:700;padding-bottom:6px;border-bottom:1px solid var(--line);margin-bottom:2px;}
   .filterbar{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;}
@@ -439,6 +440,15 @@
       <div class="card">
         <div class="subitem-head"><span>항목</span><span>배정</span><span>집행액 입력</span><span style="text-align:center;">집행률</span><span style="text-align:right;">잔여</span></div>
         <div id="orgRows"></div>
+      </div>
+
+      <h2 class="sec-h">대학 대응자금 투입 및 자치구 사업비 지원 (300,000천원)</h2>
+      <div class="card" style="margin-bottom:20px;">
+        <div class="sec-note" style="margin-top:0;">대학 대응자금 투입 시기('26.4월 완료) 기준 집행 현황입니다. 배정 금액은 「Unicorn Seed 프로그램」 및 창업지원시설운영(스타시티 스타트업 존·K-이노베이션 스테이션 센터) 예산 중 대응자금으로 배정된 부분입니다.</div>
+        <table>
+          <thead><tr><th>항목</th><th>프로그램명</th><th style="text-align:right;">배정(천원)</th><th style="text-align:right;">집행(천원)</th><th style="text-align:center;">집행률</th><th style="text-align:right;">잔여(천원)</th></tr></thead>
+          <tbody id="counterpartRows"></tbody>
+        </table>
       </div>
 
       <h2 class="sec-h">창업지원시설운영 (225,000천원)</h2>
@@ -807,6 +817,11 @@ const facUnivItems = [
 const facGuItems = [
   {label:'K-이노베이션 스테이션 센터', amount:59300, exec:0},
 ];
+const counterpartItems = [
+  {label:'기업 지원·협력 활동비', program:'KU 캠퍼스타운 Unicorn Seed 프로그램', amount:280000, exec:0},
+  {label:'교육·연구 환경개선비', program:'K-이노베이션 스테이션 센터', amount:13321.25, exec:13286.75},
+  {label:'교육·연구 환경개선비', program:'스타시티 스타트업 존', amount:6678.75, exec:6678.75},
+];
 
 /* =========================================================
    4-1. 창업경진대회 3차(입주기업 추가모집) 결과보고서 원문 PDF (base64)
@@ -838,7 +853,7 @@ const programs = [
   feedback:'[3차]\n[문제점] 지원 규모(84개 팀) 대비 서류·발표평가 일정이 촉박하게 운영되어 심사 시간 확보가 다소 어려웠음. 바이오·펫 분야 지원 비중이 상대적으로 낮아 목표 분야 간 균형 있는 모집에 한계가 있었음.\n[개선계획] 차기 모집 시 평가 일정을 여유 있게 편성하고 평가위원 풀을 확대하여 심사 내실화. 바이오·펫 분야 특화 홍보채널 및 사전 설명회를 확대하여 분야별 지원 균형 제고.',
   _round:'total',
   rounds:[
-    {key:'r1', label:'1차',
+    {key:'r1', label:'1차', excludeFromTotal:true,
      period:'2025.11.7(금) ~ 2025.12.19(금) [서류접수 11.7~11.28 → 서류심사 12.3~12.5 → 발표심사 12.11 → 사업단평가 12.12~12.18 → 시상식 12.19]',
      content:'2026년 KU 창업 아이디어 경진대회(1차). 서류접수(11.7~11.28) 결과 총 181팀 신청 → 서류심사(12.3~12.5)를 통해 90팀 선발 → 발표심사(12.11, 건국대 창의관 214·215·310호)를 통해 65팀 최종 선발(목표 120팀 참여 대비 151% 달성) → 사업단 평가(입주 적합성·공간배정, 12.12~12.18) → 시상식 및 기업간담회(12.19, 건국대 경영관 301호). 바이오&펫/에코&푸드/AI 3개 분과로 운영. 시상: 대상 비바엘모멘토(정유성), 최우수상 ㈜헬퍼로보틱스(최재원)·밀리사이트테크놀러지스㈜(양종렬), 우수상 ㈜에이비리스터컴퍼니(정현종)·쭉(김효재). 교내 구성원(학생·교원·동문) 및 외국인 창업기업을 포함한 다양한 배경의 참가자를 유치하여 창업 생태계 저변을 확대하고, 대학 특성화 전략과 연계된 창업기업 풀을 체계적으로 확보함.',
      budgetItems:[
@@ -1040,11 +1055,11 @@ if(programs.find(p=>p.id===10)){ const p10 = programs.find(p=>p.id===10); p10.st
 
 function fmt(n){ return Number(n).toLocaleString('ko-KR'); }
 function programBudgetTotal(p){
-  if(p.rounds){ return p.rounds.reduce((s,r)=> s + (r.budgetItems||[]).reduce((s2,bi)=>s2+(Number(bi.amount)||0),0), 0); }
+  if(p.rounds){ return p.rounds.filter(r=>!r.excludeFromTotal).reduce((s,r)=> s + (r.budgetItems||[]).reduce((s2,bi)=>s2+(Number(bi.amount)||0),0), 0); }
   return p.budget;
 }
 function programBudgetExecSum(p){
-  if(p.rounds){ return p.rounds.reduce((s,r)=> s + (r.budgetItems||[]).reduce((s2,bi)=>s2+(Number(bi.exec)||0),0), 0); }
+  if(p.rounds){ return p.rounds.filter(r=>!r.excludeFromTotal).reduce((s,r)=> s + (r.budgetItems||[]).reduce((s2,bi)=>s2+(Number(bi.exec)||0),0), 0); }
   return p.budgetItems.reduce((s,bi)=>s+Number(bi.exec||0),0);
 }
 function itemsExecSum(list){ return list.reduce((s,it)=>s+Number(it.exec||0),0); }
@@ -1079,7 +1094,7 @@ function renderOrgFacRows(){
   orgWrap.innerHTML = orgItems.map((it,idx)=>{
     const p = it.amount ? Math.round((it.exec||0)/it.amount*1000)/10 : 0;
     const rem = it.amount - (it.exec||0);
-    return `<div class="subitem-row"><span>${it.label}</span><span>${fmt(it.amount)}천원</span>
+    return `<div class="subitem-row org-row"><span>${it.label}</span><span>${fmt(it.amount)}천원</span>
       <input type="number" min="0" class="num-in" style="width:88px;" value="${it.exec||0}" onchange="updateOrgExec(${idx}, this.value)">
       <span class="exec-pct" style="color:${p>=100?'#166B3E':'#1B2B22'}">${p}%</span>
       <span style="text-align:right;color:${rem<0?'var(--red)':'var(--ink-soft)'};">${fmt(rem)}</span></div>`;
@@ -1104,7 +1119,37 @@ function renderOrgFacRows(){
       <span class="exec-pct" style="color:${p>=100?'#166B3E':'#1B2B22'}">${p}%</span>
       <span style="text-align:right;color:${rem<0?'var(--red)':'var(--ink-soft)'};">${fmt(rem)}</span></div>`;
   }).join('');
+
+  renderCounterpartRows();
 }
+
+function renderCounterpartRows(){
+  const wrap = document.getElementById('counterpartRows');
+  if(!wrap) return;
+  let totalAmt=0, totalExec=0;
+  wrap.innerHTML = counterpartItems.map((it,idx)=>{
+    const pct = it.amount ? Math.round((it.exec||0)/it.amount*1000)/10 : 0;
+    const rem = it.amount - (it.exec||0);
+    totalAmt += it.amount; totalExec += (it.exec||0);
+    return `<tr>
+      <td>${it.label}</td>
+      <td>${it.program}</td>
+      <td style="text-align:right;">${fmt(it.amount)}</td>
+      <td style="text-align:right;">
+        <input type="number" min="0" class="num-in" style="width:90px;text-align:right;" value="${it.exec||0}" onchange="updateCounterpartExec(${idx}, this.value)">
+      </td>
+      <td class="exec-pct" style="text-align:center;color:${pct>=100?'#166B3E':'#B4432F'}">${pct}%</td>
+      <td style="text-align:right;color:${rem<0?'var(--red)':'inherit'};">${fmt(rem)}</td>
+    </tr>`;
+  }).join('') + `<tr style="font-weight:800;border-top:2px solid var(--line);">
+      <td colspan="2">총계</td>
+      <td style="text-align:right;">${fmt(totalAmt)}</td>
+      <td style="text-align:right;">${fmt(totalExec)}</td>
+      <td style="text-align:center;">${totalAmt?Math.round(totalExec/totalAmt*1000)/10:0}%</td>
+      <td style="text-align:right;">${fmt(totalAmt-totalExec)}</td>
+    </tr>`;
+}
+function updateCounterpartExec(idx, val){ counterpartItems[idx].exec = Number(val)||0; renderCounterpartRows(); renderBudget(); markBudgetDirty(); }
 function updateOrgExec(idx, val){ orgItems[idx].exec = Number(val)||0; renderOrgFacRows(); renderBudget(); markBudgetDirty(); }
 function updateFacExec(which, idx, val){
   if(which==='univ') facUnivItems[idx].exec = Number(val)||0;
@@ -1116,7 +1161,8 @@ function renderBudget(){
   const orgExec = itemsExecSum(orgItems);
   const facExec = itemsExecSum(facUnivItems) + itemsExecSum(facGuItems);
   const progExec = programs.reduce((s,p)=>s+programBudgetExecSum(p),0);
-  const totalExec = orgExec + facExec + progExec;
+  const counterpartExec = counterpartItems.reduce((s,it)=>s+(it.exec||0),0);
+  const totalExec = orgExec + facExec + progExec + counterpartExec;
   const totalBudget = 1500000;
   const totalPct = Math.round(totalExec/totalBudget*1000)/10;
   const totalRemain = totalBudget - totalExec;
@@ -1160,7 +1206,7 @@ function renderBudget(){
     if(pct>90) tr.className='row-highlight';
     tr.innerHTML = `
       <td><span class="catchip ${p.cat}">${CAT_META[p.cat].label}</span></td>
-      <td style="font-weight:600;">${p.name}${p.rounds?' <span style="font-size:10px;color:var(--ink-soft);">(1~3차 통합)</span>':''}</td>
+      <td style="font-weight:600;">${p.name}${p.rounds?' <span style="font-size:10px;color:var(--ink-soft);">(2~3차 기준, 1차 2025예산 제외)</span>':''}</td>
       <td style="text-align:right;">${fmt(budgetTot)}</td>
       <td style="text-align:right;">${fmt(exec)}</td>
       <td class="exec-pct" style="color:${pct>=100?'#166B3E':'#B4432F'}">${pct}%</td>
@@ -1357,7 +1403,7 @@ function roundAggregate(p){
   const withContent = rs.filter(r=>r.content && r.content.trim());
   const content = withContent.length ? withContent.map(r=>`[${r.label}] ${r.content}`).join('\n\n') : '입력된 결과보고서 내용 없음';
   const budgetItems = [];
-  rs.forEach(r=>{ (r.budgetItems||[]).forEach(bi=>{ budgetItems.push({label:`[${r.label}] ${bi.label}`, amount:Number(bi.amount)||0, exec:Number(bi.exec)||0}); }); });
+  rs.forEach(r=>{ (r.budgetItems||[]).forEach(bi=>{ budgetItems.push({label:`[${r.label}]${r.excludeFromTotal?' (2025년 예산·집계제외)':''} ${bi.label}`, amount:Number(bi.amount)||0, exec:Number(bi.exec)||0, excluded:!!r.excludeFromTotal}); }); });
   const kpiMap = {};
   rs.forEach(r=>{ (r.kpis||[]).forEach(k=>{
     const mk = k.label+'|'+k.unit;
@@ -1545,8 +1591,8 @@ function openDetail(id){
   const activeRound = p.rounds ? (isRoundTotal ? null : p.rounds.find(x=>x.key===p._round)) : null;
   const budgetSrc = p.rounds ? (isRoundTotal ? roundAggregate(p).budgetItems : activeRound.budgetItems) : p.budgetItems;
   const kpiSrc = p.rounds ? (isRoundTotal ? roundAggregate(p).kpis : activeRound.kpis) : p.kpis;
-  const budgetTotal = budgetSrc.reduce((s,bi)=>s+(Number(bi.amount)||0),0);
-  const execSum = budgetSrc.reduce((s,bi)=>s+(Number(bi.exec)||0),0);
+  const budgetTotal = budgetSrc.reduce((s,bi)=>s+(bi.excluded?0:(Number(bi.amount)||0)),0);
+  const execSum = budgetSrc.reduce((s,bi)=>s+(bi.excluded?0:(Number(bi.exec)||0)),0);
   const pct = budgetTotal ? Math.round(execSum/budgetTotal*1000)/10 : 0;
   const isDone = p.status==='완료';
   const numsLocked = isRoundTotal || isDone;
@@ -1558,6 +1604,12 @@ function openDetail(id){
     const execCell = numsLocked
       ? `<span style="text-align:right;">${fmt(bi.exec||0)}천원</span>`
       : `<input type="number" min="0" class="num-in" style="width:82px;text-align:right;" value="${bi.exec||0}" onchange="${p.rounds ? `updateRoundBudgetItem(${p.id}, '${p._round}', ${idx}, 'exec', this.value)` : `updateBudgetItem(${p.id}, ${idx}, this.value)`}">`;
+    if(bi.excluded){
+      return `<div class="budgetline-row" style="background:var(--amber-bg);opacity:.85;">
+      <span style="color:var(--amber);">${brLabel(bi.label)}</span><span style="text-align:right;color:var(--amber);">${fmt(bi.amount)}천원</span>
+      <span style="text-align:right;color:var(--amber);">${fmt(bi.exec||0)}천원</span>
+      <span class="exec-pct" style="color:var(--amber);">집계제외<br><span class="kpi-under-tag" style="background:var(--amber);color:#fff;">2025예산</span></span></div>`;
+    }
     return `<div class="budgetline-row">
       <span>${brLabel(bi.label)}</span><span style="text-align:right;">${fmt(bi.amount)}천원</span>
       ${execCell}
@@ -1669,6 +1721,7 @@ function openDetail(id){
           <div class="detail-block-title">소요예산 · 산출근거별 집행 현황${p.rounds ? ` <span style="font-weight:400;color:var(--ink-soft);">(${isRoundTotal ? '1~3차 통합, 읽기전용' : activeRound.label+' 기준'})</span>` : ''}${isDone && !p.rounds ? ' <span style="font-weight:400;color:var(--ink-soft);">(완료, 읽기전용)</span>' : ''}</div>
           <div class="budgetline-head"><span>산출근거 항목</span><span style="text-align:right;">배정</span><span style="text-align:right;">${numsLocked?'집행액':'집행액 입력'}</span><span style="text-align:center;">집행률</span></div>
           ${budgetRows}
+          ${(isRoundTotal && budgetSrc.some(bi=>bi.excluded)) ? `<div class="sec-note" style="margin:6px 0;color:var(--amber);">🟧 표시 항목(1차)은 2025년 사업예산으로 집행되어 2026년 배정액·집행액 집계에서 제외되었습니다.</div>` : ''}
           <div class="budgetline-row total-row" style="font-weight:800;margin-top:4px;">
             <span>합계</span><span style="text-align:right;">${fmt(budgetTotal)}천원</span><span style="text-align:right;">${fmt(execSum)}천원</span>
             <span class="exec-pct" style="color:${pct>=100?'#166B3E':'#B4432F'}">${pct}%${pct<100?'<br><span class="kpi-under-tag">미달성</span>':''}</span>

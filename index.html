@@ -109,7 +109,7 @@
   .filterbar{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;}
   .filterbtn{border:1px solid var(--line);background:#fff;border-radius:20px;padding:7px 14px;font-size:12.3px;font-weight:700;cursor:pointer;color:var(--ink-soft);}
   .filterbtn.active{background:var(--forest-deep);color:#fff;border-color:var(--forest-deep);}
-  .gantt-row{display:grid;grid-template-columns:230px 1fr 90px 90px 90px;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--line);}
+  .gantt-row{display:grid;grid-template-columns:210px 1fr 76px 70px 76px 76px;align-items:center;gap:8px;padding:9px 0;border-bottom:1px solid var(--line);}
   .gantt-row.row-done{background:var(--leaf-light);border-bottom-color:#C7E4D3;}
   tr.row-highlight{background:var(--leaf-light);}
   tr.row-highlight td{font-weight:600;}
@@ -267,7 +267,7 @@
   @media (max-width:860px){
     .shell{flex-direction:column;} .sidebar{width:100%;flex:none;position:relative;height:auto;padding:16px;}
     .main{padding:22px 18px 60px;} .grid-4,.grid-3,.grid-2{grid-template-columns:1fr 1fr;}
-    .gantt-row{grid-template-columns:120px 1fr 55px 55px 55px;font-size:10.5px;}
+    .gantt-row{grid-template-columns:110px 1fr 44px 44px 44px 44px;font-size:10.5px;}
     .cat-row{grid-template-columns:1fr;} .stage-row{grid-template-columns:repeat(2,1fr);}
     .budgetline-row,.budgetline-head,.subitem-row,.subitem-head,.kpirow,.kpirow-head{grid-template-columns:1.4fr .7fr .7fr .6fr;font-size:11px;}
   }
@@ -495,12 +495,14 @@
       </div>
 
       <div class="filterbar" id="filterBar"></div>
+      <div class="filterbar" id="managerFilterBar" style="margin-top:-8px;"></div>
 
       <div class="card">
-        <div style="display:grid;grid-template-columns:230px 1fr 90px 90px 90px;gap:10px;padding:0 0 8px;font-size:11px;font-weight:700;color:var(--ink-soft);">
+        <div style="display:grid;grid-template-columns:210px 1fr 76px 70px 76px 76px;gap:8px;padding:0 0 8px;font-size:11px;font-weight:700;color:var(--ink-soft);">
           <div>프로그램명 (시행시기)</div>
           <div>시행시기 (1월 &nbsp;~&nbsp; 12월)</div>
           <div style="text-align:center;">진행상태</div>
+          <div style="text-align:center;">담당자</div>
           <div style="text-align:center;">예산집행률</div>
           <div style="text-align:center;">KPI달성률</div>
         </div>
@@ -824,7 +826,7 @@ const KU_CONTEST_R3_PDF_URL = 'data:application/pdf;base64,' + KU_CONTEST_R3_PDF
    5. 프로그램 데이터 (전체 KPI 입력형으로 통일)
 ========================================================= */
 const programs = [
- {id:1, cat:'공통', name:'KU 캠퍼스타운 창업경진대회', startMonth:1, endMonth:6,
+ {id:1, cat:'공통', name:'KU 캠퍼스타운 창업경진대회', startMonth:1, endMonth:6, manager:'수빈',
   place:'건국대 캠퍼스타운사업본부 창업지원시설',
   audience:'서울시민·서울 소재 직장 재직자·대학(원)생·예비창업가 및 7년 이하 초기 창업가(대표자 39세 이하). 교내창업(교원·학생·동문)·외국인 유학생 창업은 연령 제한 없음',
   audienceTags:['예비창업자','대학(원)생','서울시민'],
@@ -862,7 +864,7 @@ const programs = [
      reportFile:{name:'2026년_건국대_캠퍼스타운사업본부_입주기업_추가모집_결과보고서_3차.pdf', dataUrl:KU_CONTEST_R3_PDF_URL}}
   ]},
 
- {id:2, cat:'공통', name:'KU 캠퍼스타운 창업스쿨', startMonth:4, endMonth:6,
+ {id:2, cat:'공통', name:'KU 캠퍼스타운 창업스쿨', startMonth:4, endMonth:6, manager:'수빈',
   place:'건국대 X-Space X-Arena, 창의관 215호 외 (온·오프라인 병행)',
   audience:'「학생창업 유망팀 300+ On KONKUK 프로그램」 참여 희망 건국대 대학(원)생 40팀 내외 및 캠퍼스타운사업 입주기업 20팀 내외',
   audienceTags:['재학생','입주기업'],
@@ -886,27 +888,27 @@ const programs = [
   ],
   reportFile:{name:'KU캠퍼스타운사업추진결과보고서_최종_ve3.pdf', dataUrl:KU_SCHOOL_REPORT_PDF_URL}},
 
- {id:3, cat:'공통', name:'KU 캠퍼스타운 B·MOTION 프로그램', startMonth:6, endMonth:8,
+ {id:3, cat:'공통', name:'KU 캠퍼스타운 B·MOTION 프로그램', startMonth:9, endMonth:10, manager:'수빈',
   place:'건국대 산학협동관 214호 및 온라인',
   audience:'캠퍼스타운 입주기업',
   audienceTags:['입주기업'],
   content:'스케일업 트랙(글로벌 시장 타겟팅), AI Growth Studio(생성형 AI 마케팅 자동화), IP Shield(BM 보호전략·예비출원 지원) 3개 트랙으로 구성되며, 참여기업당 2회 이상 멘토링을 제공합니다.',
   kpis:[{label:'BM 개선·리디자인 완료 기업', target:15, unit:'팀'},{label:'IP전략수립·예비출원 지원 기업', target:8, unit:'팀'},{label:'언론보도 건수', target:5, unit:'건'},{label:'만족도', target:4.3, unit:'점'}],
-  note:'ANCHOR과제 18(자율지표②, 지식재산권 출원 8건) KPI와 직접 연동',
+  note:'ANCHOR과제 18(자율지표②, 지식재산권 출원 8건) KPI와 직접 연동 · 확정 일정 9.18(목) ~ 10월',
   budget:31600,
   budgetItems:[{label:'홍보물 제작비',amount:1030},{label:'전문가 강의(스케일업/AI Growth/IP Shield)',amount:2170},{label:'전문가 멘토링(AI Growth+IP Shield)',amount:5400},{label:'프로그램 용역(공간대관·AI툴·홍보)',amount:23000}]},
 
- {id:4, cat:'공통', name:'KU 캠퍼스타운 사업화 지원 프로그램', startMonth:9, endMonth:12,
+ {id:4, cat:'공통', name:'KU 캠퍼스타운 사업화 지원 프로그램', startMonth:11, endMonth:12, manager:'수빈',
   place:'건국대 창의관, 기업별 사무실',
   audience:'입주기업 중 신청기업 40팀',
   audienceTags:['입주기업'],
   content:'기업당 최대 1,000만원의 시제품 제작·시험인증비를 기업 규모·성장단계·사업참여도에 따라 차등 지원합니다(상위 10팀 1,000만원, 중위 20팀 500만원, 하위 10팀 300만원).',
   kpis:[{label:'시제품 제작 건수', target:30, unit:'건'},{label:'만족도', target:4.3, unit:'점'}],
-  note:'ANCHOR과제 18(핵심지표②, 시제품 제작 건수 5건 이상) KPI와 직접 연동',
+  note:'ANCHOR과제 18(핵심지표②, 시제품 제작 건수 5건 이상) KPI와 직접 연동 · 확정 일정 11월~12월',
   budget:232000,
   budgetItems:[{label:'선발심사비',amount:2000},{label:'시제품제작·시험인증 지원금(40팀 차등)',amount:230000}]},
 
- {id:5, cat:'자율', name:'KU 캠퍼스타운 쇼케이스', startMonth:5, endMonth:11,
+ {id:5, cat:'자율', name:'KU 캠퍼스타운 쇼케이스', startMonth:5, endMonth:11, manager:'수빈',
   place:'창업지원시설, 롯데백화점 건대점 만남의 광장 및 광진구 지역축제',
   audience:'입주기업 및 건국대 자회사, 펫 산업 관련 소비재·디지털 서비스 등 B2C 기업 우선',
   audienceTags:['입주기업','서울시민'],
@@ -928,47 +930,47 @@ const programs = [
   ],
   reportFile:{name:'2026년_KU_캠퍼스타운_Showcase_KU플리마켓_결과보고서.pdf', dataUrl:KU_SHOWCASE_FLEA_PDF_URL}},
 
- {id:6, cat:'자율', name:'KU 캠퍼스타운 Global 창업브릿지', startMonth:9, endMonth:11,
+ {id:6, cat:'자율', name:'KU 캠퍼스타운 Global 창업브릿지', startMonth:11, endMonth:11, manager:'호정',
   place:'창업지원시설, 팁스타운(강남구) 등',
   audience:'(예비) 외국인 창업자 및 건국대 유학생, 글로벌 공동창업 희망 입주기업',
   audienceTags:['외국인창업자','입주기업'],
   content:'비자·제도·비즈니스셋업 글로벌 창업 정착교육과, 다국적 창업자·투자자 네트워킹 및 VC 피칭이 이루어지는 GLOBAL 창업 커넥트 데이를 운영합니다.',
   kpis:[{label:'외국인 창업자 교육 참가', target:30, unit:'팀'},{label:'글로벌 네트워킹 참가자', target:50, unit:'명'},{label:'만족도', target:4.3, unit:'점'}],
-  note:'',
+  note:'확정 일정 11.23(월) ~ 11.30(월)',
   budget:31000,
   budgetItems:[{label:'홍보물 제작비',amount:1000},{label:'글로벌 창업 정착교육',amount:10000},{label:'GLOBAL 창업 커넥트 데이 용역비',amount:20000}]},
 
- {id:7, cat:'자율', name:'KU 캠퍼스타운 Unicorn Seed 프로그램', startMonth:6, endMonth:12,
+ {id:7, cat:'자율', name:'KU 캠퍼스타운 Unicorn Seed 프로그램', startMonth:12, endMonth:12, manager:'호정',
   place:'창업지원시설 및 건국대 기술지주회사 회의실',
   audience:'기술기반 또는 혁신 아이템을 보유한 입주기업',
   audienceTags:['입주기업','투자자'],
   content:'1:1 IR 전문가 컨설팅→KU Investment 데모데이(투자자 10개 기관 이상 초청)→건국대 기술지주회사 연계 후속 투자까지 3단계 투자 연계 프로그램을 운영합니다.',
   kpis:[{label:'데모데이 참가 기업', target:8, unit:'개사'},{label:'투자유치 총액', target:2, unit:'억원'}],
-  note:'시비 1천만원 + 대응자금 2.8억원(직접투자비)',
+  note:'시비 1천만원 + 대응자금 2.8억원(직접투자비) · 데모데이 12.15(월)~12.20(토) 개최(1:1 IR 컨설팅은 6월부터 상시 진행)',
   budget:290000,
   budgetItems:[{label:'프로그램 운영비(자문·대관·심사·사후관리)',amount:10000},{label:'직접투자비(대응자금)',amount:280000}]},
 
- {id:8, cat:'자율', name:'캠퍼스타운 대학 연합 창업포럼', startMonth:8, endMonth:10,
+ {id:8, cat:'자율', name:'캠퍼스타운 대학 연합 창업포럼', startMonth:9, endMonth:9, manager:'윤선',
   place:'신용보증기금 광진지점 (NEST COURT)',
   audience:'건국대·한양대·경희대·연세대 캠퍼스타운 창업기업 및 재학생, 관내 창업기업',
   audienceTags:['대학연합','재학생'],
   content:'토크콘서트, 창업기업 데모데이(IR 피칭), 글로벌 창업 Jump-up(해외진출 상담), 기술사업화 전시·상담, 네트워킹 서밋 5개 세션으로 구성된 4개 대학 연합 창업포럼입니다.',
   kpis:[{label:'총 참여자 수', target:100, unit:'명'},{label:'참여자 만족도조사', target:90, unit:'점'}],
-  note:'위탁(용역) 운영 · 관내 창업기업 대상 확대 진행',
+  note:'위탁(용역) 운영 · 관내 창업기업 대상 확대 진행 · 확정 일정 9.17(수) 진행',
   budget:8000,
   budgetItems:[{label:'대학연합행사 운영 용역비',amount:8000}]},
 
- {id:9, cat:'자율', name:'KU 캠퍼스타운 IP 서포트 프로그램', startMonth:9, endMonth:12,
+ {id:9, cat:'자율', name:'KU 캠퍼스타운 IP 서포트 프로그램', startMonth:11, endMonth:12, manager:'윤선',
   place:'입주기업 사무실 및 용역업체 미팅룸',
   audience:'입주기업 중 신청기업 15팀',
   audienceTags:['입주기업'],
   content:'브랜드 지식재산권 강의(상표권·부정경쟁방지법·디자인권), 전문변리사 1:1 컨설팅, 상표 출원 지원을 15팀 대상으로 제공합니다.',
   kpis:[{label:'참여 기업', target:15, unit:'개사'},{label:'만족도', target:4.3, unit:'점'}],
-  note:'2026년 신설 프로그램',
+  note:'2026년 신설 프로그램 · 확정 일정 11.16(월) ~ 12.15(화)',
   budget:5050,
   budgetItems:[{label:'IP 서포트 프로그램 용역(강의+1:1컨설팅+출원지원)',amount:5050}]},
 
- {id:10, cat:'AI', name:'KU 캠퍼스타운 AI Nest 프로그램', startMonth:8, endMonth:9,
+ {id:10, cat:'AI', name:'KU 캠퍼스타운 AI Nest 프로그램', startMonth:8, endMonth:9, manager:'윤선',
   place:'건국대 ANCHOR사업단 전산실습실 및 온라인 병행',
   audience:'입주기업, 건국대 재학생·대학(원)생, 서울시민',
   audienceTags:['입주기업','재학생','서울시민'],
@@ -978,37 +980,37 @@ const programs = [
   budget:28650,
   budgetItems:[{label:'강사비',amount:3420},{label:'원고비',amount:2000},{label:'AI플랫폼 실습지원비',amount:9000},{label:'줌송출·영상편집비',amount:4730},{label:'실습데이터셋·교재인쇄비',amount:1000},{label:'기타운영비',amount:2000},{label:'오프라인 행사비',amount:3300},{label:'운영 인건비',amount:2500},{label:'홍보비',amount:700}]},
 
- {id:11, cat:'AI', name:'KU 캠퍼스타운 AI 글로벌 해커톤', startMonth:9, endMonth:12,
+ {id:11, cat:'AI', name:'KU 캠퍼스타운 AI 글로벌 해커톤', startMonth:11, endMonth:11, manager:'호정',
   place:'창업지원시설 및 교외 공간',
   audience:'입주기업, 서울시 거주 청년, 국내외 대학(원)생(내·외국인)',
   audienceTags:['입주기업','재학생','서울시민'],
   content:'팀빌딩(온라인)→AI 프로그램 활용 창업교육(온라인)→팀별 멘토링(온라인)→IR 대회(오프라인) 4단계로 진행되며, 디지털 서비스 등 트랙별 글로벌 시장진출 아이디어를 발굴합니다.',
   kpis:[{label:'입주기업 참여', target:10, unit:'팀'},{label:'학생 참여', target:30, unit:'명'},{label:'아이디어 제출', target:10, unit:'건'},{label:'만족도', target:4.3, unit:'점'}],
-  note:'AI 인재육성 중급단계',
+  note:'AI 인재육성 중급단계 · 확정 일정 11.2(월) ~ 11.13(금)',
   budget:41000,
   budgetItems:[{label:'해커톤 장소 대관비',amount:3000},{label:'팀별 컨설턴트비',amount:20000},{label:'AI SW실습실 대관비',amount:10000},{label:'플랫폼/AI툴 사용료',amount:2500},{label:'서면심사비',amount:840},{label:'발표심사비',amount:1500},{label:'기타운영비',amount:660},{label:'홍보물 제작비',amount:1000},{label:'우수팀 시상금',amount:1500}]},
 
- {id:12, cat:'AI', name:'KU 캠퍼스타운 AI-X ScaleUp Lab', startMonth:8, endMonth:11,
+ {id:12, cat:'AI', name:'KU 캠퍼스타운 AI-X ScaleUp Lab', startMonth:10, endMonth:12, manager:'호정',
   place:'건국대 공용공간 및 온라인, 외부공간(더클래식500 등)',
   audience:'AI 기반 창업기업',
   audienceTags:['입주기업','투자자'],
   content:'Pre-Lab(사전 진단)→Lab 운영(AI 스케일업 실무교육·해커톤)→오픈이노베이션(대기업·공공기관·VC 매칭)→Post-Lab(창업지원금 차등 지급, 후속 연계) 4단계로 AI 기업 기술·제품을 고도화합니다.',
   kpis:[{label:'참여 기업', target:30, unit:'개사'},{label:'협업모델 도출', target:5, unit:'건'},{label:'투자유치', target:2, unit:'건'},{label:'만족도', target:4.3, unit:'점'}],
-  note:'AI 인재육성 중·고급 단계',
+  note:'AI 인재육성 중·고급 단계 · 확정 일정 : (중급) 10.12(월)~10.23(금) · IR FESTA 10월말~11월초 · (고급) 12월중',
   budget:40000,
   budgetItems:[{label:'홍보물 제작비',amount:1000},{label:'데모데이 발표심사비',amount:3000},{label:'오픈이노베이션 용역비',amount:5000},{label:'스케일업 교육 용역비',amount:10000},{label:'데모데이 우수팀 시상금',amount:1000},{label:'창업지원금 지급(7팀)',amount:20000}]},
 
- {id:13, cat:'ANCHOR', name:'KU 캠퍼스타운 HEMA-KORO 마라톤 컨설팅', startMonth:5, endMonth:12,
+ {id:13, cat:'ANCHOR', name:'KU 캠퍼스타운 HEMA-KORO 마라톤 컨설팅', startMonth:5, endMonth:12, manager:'수빈',
   place:'창업지원시설 및 건국대 수의대병원',
   audience:'HEMA(바이오헬스·에코스마트시티·모빌리티ICT·동물바이오) 창업희망팀 30팀, 서울시 펫 관련 산업 기업 10개',
   audienceTags:['입주기업','지역기업'],
   content:'HEMA 세션(ICC 교수진 3단계 기술진단·1:1 멘토링)과 KORO 세션(수의대·동물병원 연계 기술진단→고객검증→실증테스트→투자연계 4단계 성장지원)으로 구성됩니다.',
   kpis:[{label:'HEMA-KORO 참여 기업', target:30, unit:'개팀'},{label:'지역구 펫 관련 참여기업', target:10, unit:'개팀'},{label:'만족도', target:4.3, unit:'점'}],
-  note:'ANCHOR 4과제(산학협력 생태계 활성화) 연계 프로그램',
+  note:'ANCHOR 4과제(산학협력 생태계 활성화) 연계 프로그램 · 8.7 홍보비 지급(300천원) · 8.12 멘토링비 1차 지급(9,300천원) · 8.26 멘토링비 2차 지급(1,800천원) · 총 집행액 11,400천원',
   budget:19200,
-  budgetItems:[{label:'홍보물 제작비',amount:1000},{label:'성과발표회 평가비',amount:1500},{label:'멘토링(건국대 교수진+외부전문가)',amount:16000},{label:'데모데이 우수팀 시상금',amount:700}]},
+  budgetItems:[{label:'홍보물 제작비(홍보비 8.7 지급)',amount:1000, exec:300},{label:'성과발표회 평가비',amount:1500, exec:0},{label:'멘토링(건국대 교수진+외부전문가, 1차 8.12+2차 8.26 지급)',amount:16000, exec:11100},{label:'데모데이 우수팀 시상금',amount:700, exec:0}]},
 
- {id:14, cat:'ANCHOR', name:'KU 캠퍼스타운 공유주방 푸드랩', startMonth:9, endMonth:11,
+ {id:14, cat:'ANCHOR', name:'KU 캠퍼스타운 공유주방 푸드랩', startMonth:9, endMonth:11, manager:'수빈',
   place:'건국대 스타시티 공유주방, 배화여대 쿠킹랩',
   audience:'입주기업, 배화여대(ANCHOR 4과제 참여대학) 식품·외식 창업 희망자',
   audienceTags:['입주기업','대학연합'],
@@ -1031,6 +1033,10 @@ programs.forEach(p=>{ if(p.rounds){ syncTopFeedbackFromRounds(p); } });
 if(programs.find(p=>p.id===1)){ const p1 = programs.find(p=>p.id===1); p1.status='완료'; p1.statusLocked=true; p1.manualProgress=100; }
 if(programs.find(p=>p.id===2)){ const p2 = programs.find(p=>p.id===2); p2.status='완료'; p2.statusLocked=true; p2.manualProgress=100; }
 if(programs.find(p=>p.id===5)){ const p5 = programs.find(p=>p.id===5); p5.status='진행'; p5.manualProgress=40; }
+if(programs.find(p=>p.id===3)){ const p3 = programs.find(p=>p.id===3); p3.status='진행'; p3.manualProgress=20; }
+if(programs.find(p=>p.id===8)){ const p8 = programs.find(p=>p.id===8); p8.status='진행'; p8.manualProgress=50; }
+if(programs.find(p=>p.id===13)){ const p13 = programs.find(p=>p.id===13); p13.status='진행'; p13.manualProgress=59; }
+if(programs.find(p=>p.id===10)){ const p10 = programs.find(p=>p.id===10); p10.status='진행'; p10.manualProgress=50; }
 
 function fmt(n){ return Number(n).toLocaleString('ko-KR'); }
 function programBudgetTotal(p){
@@ -1426,6 +1432,7 @@ function renderBudget(){
    5. 프로그램 총괄표 (지원대상 그룹화 + 필터 + 로드맵 간트 + 상세패널 + 환류 새창)
 ========================================================= */
 let activeFilter = '전체';
+let activeManager = '전체';
 
 let activeAudTag = null;
 function renderAudienceGroups(){
@@ -1473,6 +1480,19 @@ function renderFilterBar(){
   });
 }
 
+function renderManagerFilterBar(){
+  const bar = document.getElementById('managerFilterBar');
+  bar.innerHTML='';
+  const mgrs = ['전체', ...Array.from(new Set(programs.map(p=>p.manager).filter(Boolean)))];
+  mgrs.forEach(m=>{
+    const btn = document.createElement('button');
+    btn.className = 'filterbtn'+(m===activeManager?' active':'');
+    btn.textContent = m==='전체' ? '담당자 전체' : `👤 ${m} (${programs.filter(p=>p.manager===m).length})`;
+    btn.addEventListener('click', ()=>{ activeManager=m; renderManagerFilterBar(); renderGantt(); });
+    bar.appendChild(btn);
+  });
+}
+
 function renderStatusCounts(){
   ['계획','진행','완료'].forEach(s=>{
     document.getElementById('cnt-'+s).textContent = programs.filter(p=>p.status===s).length;
@@ -1495,7 +1515,8 @@ function programKpiAvgPct(p){
 function renderGantt(){
   const wrap = document.getElementById('ganttWrap');
   wrap.innerHTML='';
-  const list = activeFilter==='전체' ? programs : programs.filter(p=>p.cat===activeFilter);
+  let list = activeFilter==='전체' ? programs : programs.filter(p=>p.cat===activeFilter);
+  if(activeManager!=='전체'){ list = list.filter(p=>p.manager===activeManager); }
   list.forEach(p=>{
     const row = document.createElement('div');
     row.className='gantt-row' + (p.status==='완료' ? ' row-done' : (p.status==='진행' ? ' row-active' : ''));
@@ -1510,6 +1531,7 @@ function renderGantt(){
         <div class="gantt-bar" style="left:${(p.startMonth-1)/12*100}%; width:${(p.endMonth-p.startMonth+1)/12*100}%; background:${CAT_META[p.cat].color};"></div>
       </div>
       <div class="gantt-status" style="color:${statusColor}">${statusTxt}</div>
+      <div class="exec-pct" style="text-align:center;color:var(--ink-soft);font-weight:700;">${p.manager||'—'}</div>
       <div class="exec-pct" style="text-align:center;color:${budgetPct>=100?'#166B3E':'#B4432F'}">${budgetPct}%</div>
       <div class="exec-pct" style="text-align:center;color:${kpiPct>=100?'#146C3A':'#1B2B22'}">${kpiPct}%</div>
     `;
@@ -1923,6 +1945,7 @@ renderOrgFacRows();
 renderBudget();
 renderAudienceGroups();
 renderFilterBar();
+renderManagerFilterBar();
 renderStatusCounts();
 renderGantt();
 renderFeedbackSummary();

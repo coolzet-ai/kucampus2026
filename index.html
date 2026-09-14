@@ -100,15 +100,23 @@
   .ring{width:100px;height:100px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:conic-gradient(#fff var(--p,0%), rgba(255,255,255,.22) 0);position:relative;flex:0 0 auto;}
   .ring::before{content:"";position:absolute;inset:9px;border-radius:50%;background:var(--forest-deep);}
   .ring span{position:relative;font-size:18px;font-weight:800;}
-  .cat-row{display:grid;grid-template-columns:1.5fr .8fr .8fr .6fr;gap:10px;align-items:center;padding:12px 14px;border-radius:10px;background:#FAFBF9;margin-bottom:8px;}
+  .cat-row{display:grid;grid-template-columns:1.4fr .7fr .7fr .55fr .55fr;gap:10px;align-items:center;padding:12px 14px;border-radius:10px;background:#FAFBF9;margin-bottom:8px;}
   .cat-row .cat-dot{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:8px;}
   .cat-row .cat-name{font-size:13.3px;font-weight:700;} .cat-row .cat-figs{font-size:12.3px;color:var(--ink-soft);} .cat-row .cat-pct{font-size:13px;font-weight:800;text-align:right;}
-  .subitem-row{display:grid;grid-template-columns:1.6fr .8fr .8fr .6fr;gap:8px;align-items:center;font-size:12.3px;color:var(--ink-soft);padding:7px 0;border-bottom:1px dashed var(--line);}
+  .subitem-row{display:grid;grid-template-columns:1.4fr .7fr .7fr .55fr .55fr;gap:8px;align-items:center;font-size:12.3px;color:var(--ink-soft);padding:7px 0;border-bottom:1px dashed var(--line);}
   .subitem-row:last-child{border-bottom:none;}
-  .subitem-head{display:grid;grid-template-columns:1.6fr .8fr .8fr .6fr;gap:8px;font-size:10.8px;color:var(--ink-soft);font-weight:700;padding-bottom:6px;border-bottom:1px solid var(--line);margin-bottom:2px;}
+  .subitem-head{display:grid;grid-template-columns:1.4fr .7fr .7fr .55fr .55fr;gap:8px;font-size:10.8px;color:var(--ink-soft);font-weight:700;padding-bottom:6px;border-bottom:1px solid var(--line);margin-bottom:2px;}
   .filterbar{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;}
   .filterbtn{border:1px solid var(--line);background:#fff;border-radius:20px;padding:7px 14px;font-size:12.3px;font-weight:700;cursor:pointer;color:var(--ink-soft);}
   .filterbtn.active{background:var(--forest-deep);color:#fff;border-color:var(--forest-deep);}
+  .status-count-card{transition:.15s;border-width:1px;}
+  .hero-stat-line{display:inline-flex;align-items:baseline;gap:6px;font-size:12.5px;font-weight:700;padding:4px 12px;border-radius:20px;width:fit-content;}
+  .hero-stat-line .v{font-size:15px;font-weight:800;}
+  .hero-stat-line.exec{background:rgba(255,255,255,.22);color:#fff;}
+  .hero-stat-line.remain{background:#fff;color:var(--forest-deep);}
+  .hero-stat-line.remain.neg{background:var(--red);color:#fff;}
+  .status-count-card:hover{border-color:var(--leaf);box-shadow:0 2px 8px rgba(46,139,87,.15);}
+  .status-count-card.active-stat{border-width:2px;border-color:var(--forest-deep);box-shadow:0 2px 10px rgba(10,54,36,.18);}
   .gantt-row{display:grid;grid-template-columns:210px 1fr 76px 70px 76px 76px;align-items:center;gap:8px;padding:9px 0;border-bottom:1px solid var(--line);}
   .gantt-row.row-done{background:var(--leaf-light);border-bottom-color:#C7E4D3;}
   tr.row-highlight{background:var(--leaf-light);}
@@ -269,7 +277,8 @@
     .main{padding:22px 18px 60px;} .grid-4,.grid-3,.grid-2{grid-template-columns:1fr 1fr;}
     .gantt-row{grid-template-columns:110px 1fr 44px 44px 44px 44px;font-size:10.5px;}
     .cat-row{grid-template-columns:1fr;} .stage-row{grid-template-columns:repeat(2,1fr);}
-    .budgetline-row,.budgetline-head,.subitem-row,.subitem-head,.kpirow,.kpirow-head{grid-template-columns:1.4fr .7fr .7fr .6fr;font-size:11px;}
+    .budgetline-row,.budgetline-head,.kpirow,.kpirow-head{grid-template-columns:1.4fr .7fr .7fr .6fr;font-size:11px;}
+    .subitem-row,.subitem-head{grid-template-columns:1.2fr .6fr .6fr .5fr .5fr;font-size:10px;}
   }
 </style>
 </head>
@@ -292,7 +301,7 @@
       <li><button data-view="v7"><span class="num">7</span>입주기업 현황</button></li>
       <li><button data-view="v8"><span class="num">8</span>유관기관 캘린더</button></li>
       <li><button data-view="v9"><span class="num">9</span>사업단 홈페이지</button></li>
-      <li><button data-view="v10"><span class="num">10</span>Google Sheets 연동</button></li>
+      <li><button data-view="v10"><span class="num">10</span>서울캠퍼스타운 홈페이지</button></li>
     </ul>
     <div class="sidebar-foot">
       자료 근거 : 2026년 9월 지표점검회의(2026.8.31 기준) 및 건국대학교 캠퍼스타운사업 세부실행계획서(변경후)<br><br>
@@ -303,7 +312,6 @@
   <main class="main">
 
     <div class="topbar">
-      <div class="updated" id="globalUpdatedTxt">저장된 변경사항 없음</div>
       <div class="author">
         <div class="nm">캠타김군</div>
         <a class="mail" href="mailto:coolzet@konkuk.ac.kr">coolzet@konkuk.ac.kr</a>
@@ -411,16 +419,14 @@
         <div class="view-desc">사업계획 총괄표(세부실행계획서 28p) 기준 6개 예산 카테고리입니다. 조직운영(간접비 포함)·창업지원시설운영도 항목별로 집행액을 입력할 수 있습니다. 프로그램 집행액은 「5. 프로그램 총괄표」와 값이 연동됩니다.</div>
       </div>
 
-      <div class="savebar">
-        <button class="savebtn" onclick="saveBudget()">예산 입력값 저장하기</button>
-        <span class="save-stamp dirty" id="budgetSaveStamp">아직 저장하지 않음 · 입력값은 저장 전까지 임시 상태입니다</span>
-      </div>
-
       <div class="budget-hero">
         <div class="num-block"><div class="big">1,500,000</div><div class="lbl">2026년 총 사업비(천원) · 조직운영~ANCHOR연계 6개 카테고리 합계</div></div>
+        <div style="text-align:center;background:rgba(255,255,255,.14);border-radius:14px;padding:10px 18px;" id="yearEndCountdown"></div>
         <div class="ring-wrap">
           <div class="ring" id="totalRing"><span id="totalRingTxt">0%</span></div>
-          <div><div style="font-size:13px;font-weight:700;">전체 예산 집행률</div><div style="font-size:12px;color:#BFE0CD;margin-top:2px;" id="totalExecTxt">집행액 0천원 / 배정 1,500,000천원</div></div>
+          <div><div style="font-size:13px;font-weight:700;margin-bottom:6px;">전체 예산 집행률</div>
+            <div id="totalExecTxt" style="display:flex;flex-direction:column;gap:5px;"></div>
+          </div>
         </div>
       </div>
 
@@ -431,7 +437,7 @@
 
       <h2 class="sec-h">조직운영 (357,000천원 · 간접비 포함)</h2>
       <div class="card">
-        <div class="subitem-head"><span>항목</span><span>배정</span><span>집행액 입력</span><span style="text-align:center;">집행률</span></div>
+        <div class="subitem-head"><span>항목</span><span>배정</span><span>집행액 입력</span><span style="text-align:center;">집행률</span><span style="text-align:right;">잔여</span></div>
         <div id="orgRows"></div>
       </div>
 
@@ -439,12 +445,12 @@
       <div class="grid grid-2">
         <div class="card">
           <h3 class="sub-h">① 대학소유 (165,700천원)</h3>
-          <div class="subitem-head"><span>공간</span><span>배정</span><span>집행액 입력</span><span style="text-align:center;">집행률</span></div>
+          <div class="subitem-head"><span>공간</span><span>배정</span><span>집행액 입력</span><span style="text-align:center;">집행률</span><span style="text-align:right;">잔여</span></div>
           <div id="facUnivRows"></div>
         </div>
         <div class="card">
           <h3 class="sub-h">② 자치구(기타)소유 (59,300천원)</h3>
-          <div class="subitem-head"><span>공간</span><span>배정</span><span>집행액 입력</span><span style="text-align:center;">집행률</span></div>
+          <div class="subitem-head"><span>공간</span><span>배정</span><span>집행액 입력</span><span style="text-align:center;">집행률</span><span style="text-align:right;">잔여</span></div>
           <div id="facGuRows"></div>
         </div>
       </div>
@@ -452,7 +458,7 @@
       <h2 class="sec-h">프로그램별 예산 상세 (4개 유형 · 14개 프로그램)</h2>
       <div class="card" style="overflow-x:auto;">
         <table>
-          <thead><tr><th>분류</th><th>프로그램명</th><th style="text-align:right;">배정예산(천원)</th><th style="text-align:right;">집행액(천원)</th><th style="text-align:center;">집행률</th></tr></thead>
+          <thead><tr><th>분류</th><th>프로그램명</th><th style="text-align:right;">배정예산(천원)</th><th style="text-align:right;">집행액(천원)</th><th style="text-align:center;">집행률</th><th style="text-align:right;">잔여(천원)</th></tr></thead>
           <tbody id="budgetTableBody"></tbody>
         </table>
         <div class="sec-note" style="margin-top:10px;">※ 창업기업육성(자율) 카테고리는 세부실행계획서 총괄표 소계(352,600천원)와 개별 프로그램 산출근거 합계(362,650천원) 사이에 원문 자체의 약 1,000만원 반영 시점 차이가 있습니다. 카테고리 집행률은 총괄표 소계 값을 기준으로 계산합니다.</div>
@@ -467,16 +473,11 @@
         <div class="view-desc">육성(공통)·육성(자율)·AI 기반기업 및 인력육성·ANCHOR 연계 4유형으로 구분했습니다. 막대를 클릭하면 지원대상·산출근거별 예산·정량 KPI 전체·환류사항을 아래에서 확인·입력할 수 있습니다.</div>
       </div>
 
-      <div class="savebar">
-        <button class="savebtn" onclick="saveProgram()">프로그램 입력값 저장하기</button>
-        <span class="save-stamp dirty" id="programSaveStamp">아직 저장하지 않음 · 입력값은 저장 전까지 임시 상태입니다</span>
-      </div>
-
       <div class="grid grid-4" style="margin-bottom:18px;">
-        <div class="card" style="text-align:center;"><div style="font-size:12px;color:var(--ink-soft);font-weight:700;">계획</div><div style="font-size:26px;font-weight:800;color:var(--ink-soft);margin-top:4px;" id="cnt-계획">14</div></div>
-        <div class="card" style="text-align:center;"><div style="font-size:12px;color:var(--blue);font-weight:700;">진행</div><div style="font-size:26px;font-weight:800;color:var(--blue);margin-top:4px;" id="cnt-진행">0</div></div>
-        <div class="card" style="text-align:center;"><div style="font-size:12px;color:var(--leaf);font-weight:700;">완료</div><div style="font-size:26px;font-weight:800;color:var(--leaf);margin-top:4px;" id="cnt-완료">0</div></div>
-        <div class="card" style="text-align:center;"><div style="font-size:12px;color:var(--ink-soft);font-weight:700;">전체 프로그램</div><div style="font-size:26px;font-weight:800;color:var(--forest-deep);margin-top:4px;">14</div></div>
+        <div class="card status-count-card" id="statcard-계획" onclick="setStatusFilter('계획')" style="text-align:center;cursor:pointer;"><div style="font-size:12px;color:var(--ink-soft);font-weight:700;">계획</div><div style="font-size:26px;font-weight:800;color:var(--ink-soft);margin-top:4px;" id="cnt-계획">14</div></div>
+        <div class="card status-count-card" id="statcard-진행" onclick="setStatusFilter('진행')" style="text-align:center;cursor:pointer;"><div style="font-size:12px;color:var(--blue);font-weight:700;">진행</div><div style="font-size:26px;font-weight:800;color:var(--blue);margin-top:4px;" id="cnt-진행">0</div></div>
+        <div class="card status-count-card" id="statcard-완료" onclick="setStatusFilter('완료')" style="text-align:center;cursor:pointer;"><div style="font-size:12px;color:var(--leaf);font-weight:700;">완료</div><div style="font-size:26px;font-weight:800;color:var(--leaf);margin-top:4px;" id="cnt-완료">0</div></div>
+        <div class="card status-count-card" id="statcard-전체" onclick="setStatusFilter('전체')" style="text-align:center;cursor:pointer;"><div style="font-size:12px;color:var(--ink-soft);font-weight:700;">전체 프로그램</div><div style="font-size:26px;font-weight:800;color:var(--forest-deep);margin-top:4px;">14</div></div>
       </div>
 
       <div class="fb-summary-bar" id="fbSummaryBar" onclick="toggleFbList()">
@@ -625,50 +626,49 @@
       <div class="notice-inline">참고 : 위 3개(입주기업 현황·유관기관 캘린더·사업단 홈페이지) 화면은 보안 정책상 이 대시보드 안에서 실시간으로 불러와 보여줄 수 없어, 새 탭 링크로 안내하는 방식으로 대체했습니다.</div>
     </section>
 
-    <!-- ============ 10. Google Sheets 연동 ============ -->
+    <!-- ============ 10. 서울캠퍼스타운 홈페이지 ============ -->
     <section class="view" id="v10">
       <div class="view-head">
-        <div class="view-kicker">BACKEND · GOOGLE SHEETS</div>
-        <div class="view-title">Google Sheets 연동</div>
-        <div class="view-desc">이 대시보드의 입력값(예산 집행액·프로그램 KPI·진행상태·환류사항)은 기본적으로 브라우저 세션에만 저장됩니다. Google Sheets를 백엔드로 연결하면 값이 실제로 저장되어 다른 기기·다음 방문에서도 이어서 볼 수 있습니다.</div>
+        <div class="view-kicker">SEOUL CAMPUSTOWN · OFFICIAL SITE</div>
+        <div class="view-title">서울캠퍼스타운 홈페이지</div>
+        <div class="view-desc">서울시 캠퍼스타운 사업 공식 포털(campustown.seoul.go.kr)의 새소식·모집일정과, 참여대학별 캠퍼스타운 바로가기를 모았습니다.</div>
       </div>
 
+      <h2 class="sec-h" style="margin-top:0;">① 새소식</h2>
       <div class="card" style="margin-bottom:20px;">
-        <h3 class="sub-h">연결 상태</h3>
-        <div class="connectrow">
-          <input type="text" class="url-in" id="sheetsUrlInput" placeholder="Apps Script 배포 후 발급된 Web App URL을 붙여넣으세요 (…/exec)">
-          <button class="savebtn" onclick="connectSheets()">연결 및 불러오기</button>
-        </div>
-        <div style="margin-top:12px;">
-          <span class="sheets-status" id="sheetsStatus">연동되지 않음</span>
-          <span class="sync-badge" id="syncBadge">저장 시 자동 동기화 꺼짐</span>
-        </div>
-        <div class="connectrow">
-          <button class="savebtn" style="background:var(--leaf);" onclick="loadFromSheets()">지금 시트에서 불러오기</button>
-          <button class="savebtn" style="background:var(--blue);" onclick="pushToSheets()">지금 시트로 저장하기</button>
-        </div>
-        <div class="sec-note" style="margin-top:12px;">연결에 성공하면 「4. 예산 총괄표」·「5. 프로그램 총괄표」의 저장하기 버튼을 누를 때마다 이 시트로도 자동 저장됩니다. URL은 이 브라우저 세션에만 유지되므로, 다음에 열 때도 자동 연결하려면 아래 안내에 따라 이 HTML 파일 안에 URL을 직접 붙여넣어 두는 것을 권장합니다.</div>
+        <p style="font-size:13px;margin-top:0;">서울캠퍼스타운 전체 참여대학의 프로그램 소식·공지사항이 실시간으로 올라오는 공식 게시판입니다. 국민대·한양대 등 각 대학의 경진대회·입주기업 모집 공고도 이 게시판을 통해 함께 확인할 수 있습니다.</p>
+        <a class="openbtn" href="https://campustown.seoul.go.kr/site/main/board/university_news/list" target="_blank" rel="noopener">새소식 게시판 바로가기 ↗</a>
       </div>
 
-      <h2 class="sec-h" style="margin-top:0;">설정 방법 (최초 1회, 약 5분)</h2>
+      <h2 class="sec-h">② 프로그램 모집일정</h2>
       <div class="card" style="margin-bottom:20px;">
-        <ol class="setup-steps">
-          <li><b>Google Sheets에서 새 스프레드시트</b>를 하나 만듭니다. (제목은 원하는 대로, 예: "캠퍼스타운 대시보드 DB")</li>
-          <li>상단 메뉴에서 <b>확장 프로그램 → Apps Script</b>를 클릭합니다.</li>
-          <li>기본으로 열려있는 <code>Code.gs</code> 내용을 모두 지우고, 아래 코드를 그대로 붙여넣습니다.</li>
-          <li>상단의 <b>저장</b>(💾) 후, <b>배포 → 새 배포</b>를 클릭합니다.</li>
-          <li>유형 선택에서 <b>웹 앱</b>을 고르고, "실행 계정: 나", "액세스 권한: 전체 허용(익명 포함)" 으로 설정한 뒤 <b>배포</b>를 누릅니다.</li>
-          <li>권한 승인 화면이 나오면 본인 계정으로 승인합니다.</li>
-          <li>배포가 끝나면 나오는 <b>웹 앱 URL</b>(…/exec 로 끝나는 주소)을 복사해, 위 입력창에 붙여넣고 "연결 및 불러오기"를 누릅니다.</li>
-        </ol>
+        <p style="font-size:13px;margin-top:0;">참여대학별 창업경진대회·입주기업 모집·인턴십 등 신청 기간이 있는 프로그램 공고는 위 새소식 게시판에 게시글 형태로 함께 안내됩니다(별도의 통합 캘린더 페이지는 운영되지 않아, 게시판에서 "모집" 키워드로 확인하는 것을 권장합니다).</p>
+        <a class="openbtn" href="https://campustown.seoul.go.kr/site/main/board/university_news/list" target="_blank" rel="noopener">모집공고 확인하기 ↗</a>
       </div>
 
-      <h2 class="sec-h">Apps Script 코드 (Code.gs)</h2>
-      <div class="codebox">
-        <button class="copybtn" onclick="copyGsCode()">코드 복사</button>
-        <pre id="gsCode"></pre>
+      <h2 class="sec-h">③ 각 대학 캠퍼스타운 바로가기</h2>
+      <div class="grid grid-2" style="margin-bottom:14px;">
+        <div class="gov-card">
+          <div class="gov-name" style="margin-bottom:8px;">서울대학교</div>
+          <a class="gov-link" href="https://campustown.snu.ac.kr/" target="_blank" rel="noopener">campustown.snu.ac.kr ↗</a>
+        </div>
+        <div class="gov-card">
+          <div class="gov-name" style="margin-bottom:8px;">국민대학교</div>
+          <a class="gov-link" href="https://startup.kookmin.ac.kr/" target="_blank" rel="noopener">startup.kookmin.ac.kr ↗</a>
+        </div>
+        <div class="gov-card">
+          <div class="gov-name" style="margin-bottom:8px;">한양대학교</div>
+          <a class="gov-link" href="https://startup.hanyang.ac.kr/" target="_blank" rel="noopener">startup.hanyang.ac.kr ↗</a>
+        </div>
+        <div class="gov-card">
+          <div class="gov-name" style="margin-bottom:8px;">연세대학교</div>
+          <a class="gov-link" href="https://venture.yonsei.ac.kr/" target="_blank" rel="noopener">venture.yonsei.ac.kr ↗</a>
+        </div>
       </div>
-      <div class="sec-note">이 코드는 시트에 <b>OrgFac / Programs / ProgramBudgetItems / ProgramKpis / Meta</b> 5개 탭을 자동으로 만들어 데이터를 저장합니다. 기존 탭 이름과 겹치지 않는 새 스프레드시트에서 사용하는 것을 권장합니다.</div>
+      <div class="card">
+        <p style="font-size:13px;margin-top:0;">서울대는 전용 캠퍼스타운 사이트를, 국민대·한양대·연세대는 대학 창업지원단(스타트업 라운지) 홈페이지를 통해 캠퍼스타운을 운영하고 있습니다. <b>2026년 선정 13개 대학 전체 목록</b>은 서울캠퍼스타운 공식 사이트에서 확인할 수 있습니다.</p>
+        <a class="openbtn" href="https://campustown.seoul.go.kr/site/main/university/list" target="_blank" rel="noopener">전체 참여대학 목록 보기 ↗</a>
+      </div>
     </section>
 
     <div class="footer-note">
@@ -1058,11 +1058,6 @@ function fmtDate(d){
   const p2 = n=>String(n).padStart(2,'0');
   return `${d.getFullYear()}.${p2(d.getMonth()+1)}.${p2(d.getDate())} ${p2(d.getHours())}:${p2(d.getMinutes())}`;
 }
-function updateGlobalStamp(){
-  const el = document.getElementById('globalUpdatedTxt');
-  const latest = [budgetSavedAt, programSavedAt].filter(Boolean).sort((a,b)=>b-a)[0];
-  el.textContent = latest ? `업데이트 기준 : ${fmtDate(latest)}` : '저장된 변경사항 없음';
-}
 function markBudgetDirty(){
   const el = document.getElementById('budgetSaveStamp');
   if(!el) return;
@@ -1075,273 +1070,6 @@ function markProgramDirty(){
   el.textContent = '변경사항 있음 · 아직 저장하지 않음';
   el.classList.add('dirty');
 }
-function saveBudget(){
-  budgetSavedAt = new Date();
-  const el = document.getElementById('budgetSaveStamp');
-  el.textContent = `마지막 저장 : ${fmtDate(budgetSavedAt)}`;
-  el.classList.remove('dirty');
-  updateGlobalStamp();
-}
-function saveProgram(){
-  programSavedAt = new Date();
-  const el = document.getElementById('programSaveStamp');
-  el.textContent = `마지막 저장 : ${fmtDate(programSavedAt)}`;
-  el.classList.remove('dirty');
-  updateGlobalStamp();
-}
-
-/* =========================================================
-   Google Sheets 연동 (Apps Script Web App 백엔드)
-========================================================= */
-let SHEETS_URL = '';
-let sheetsConnected = false;
-
-function setSheetsStatus(msg, kind){
-  const el = document.getElementById('sheetsStatus');
-  el.textContent = msg;
-  el.className = 'sheets-status ' + (kind||'');
-}
-function setSyncBadge(on){
-  const el = document.getElementById('syncBadge');
-  el.textContent = on ? '저장 시 자동 동기화 켜짐' : '저장 시 자동 동기화 꺼짐';
-  el.className = 'sync-badge' + (on ? ' on' : '');
-}
-
-function buildPayload(){
-  return {
-    orgFac: {
-      org: orgItems.map(it=>({label:it.label, amount:it.amount, exec:it.exec})),
-      facUniv: facUnivItems.map(it=>({label:it.label, amount:it.amount, exec:it.exec})),
-      facGu: facGuItems.map(it=>({label:it.label, amount:it.amount, exec:it.exec})),
-    },
-    programs: programs.map(p=>({
-      id:p.id, status:p.status, manualProgress:p.manualProgress,
-      startMonth:p.startMonth, endMonth:p.endMonth, feedback:p.feedback,
-      budgetItems: p.budgetItems.map(bi=>({label:bi.label, amount:bi.amount, exec:bi.exec})),
-      kpis: p.kpis.map(k=>({label:k.label, target:k.target, unit:k.unit, achieved:k.achieved}))
-    }))
-  };
-}
-
-function applyPayload(data){
-  if(!data) return;
-  if(data.orgFac){
-    (data.orgFac.org||[]).forEach((it,idx)=>{ if(orgItems[idx]) orgItems[idx].exec = Number(it.exec)||0; });
-    (data.orgFac.facUniv||[]).forEach((it,idx)=>{ if(facUnivItems[idx]) facUnivItems[idx].exec = Number(it.exec)||0; });
-    (data.orgFac.facGu||[]).forEach((it,idx)=>{ if(facGuItems[idx]) facGuItems[idx].exec = Number(it.exec)||0; });
-  }
-  if(data.programs){
-    data.programs.forEach(dp=>{
-      const p = programs.find(x=>x.id===Number(dp.id));
-      if(!p) return;
-      p.status = dp.status || p.status;
-      p.manualProgress = Number(dp.manualProgress)||0;
-      p.startMonth = Number(dp.startMonth)||p.startMonth;
-      p.endMonth = Number(dp.endMonth)||p.endMonth;
-      p.feedback = dp.feedback || '';
-      (dp.budgetItems||[]).forEach((bi,idx)=>{ if(p.budgetItems[idx]) p.budgetItems[idx].exec = Number(bi.exec)||0; });
-      (dp.kpis||[]).forEach((k,idx)=>{ if(p.kpis[idx]) p.kpis[idx].achieved = Number(k.achieved)||0; });
-    });
-  }
-  renderOrgFacRows(); renderBudget(); renderStatusCounts(); renderGantt(); renderFeedbackSummary();
-}
-
-function connectSheets(){
-  const val = document.getElementById('sheetsUrlInput').value.trim();
-  if(!val){ setSheetsStatus('URL을 입력해주세요', 'warn'); return; }
-  SHEETS_URL = val;
-  sheetsConnected = true;
-  setSyncBadge(true);
-  loadFromSheets();
-}
-
-async function loadFromSheets(){
-  if(!SHEETS_URL){ setSheetsStatus('먼저 Web App URL을 입력하고 연결해주세요', 'warn'); return; }
-  try{
-    setSheetsStatus('불러오는 중…', '');
-    const res = await fetch(SHEETS_URL);
-    const json = await res.json();
-    if(json.status !== 'ok') throw new Error(json.message || '불러오기 실패');
-    applyPayload(json.data);
-    if(json.updatedAt){
-      budgetSavedAt = new Date(json.updatedAt);
-      programSavedAt = new Date(json.updatedAt);
-      updateGlobalStamp();
-      const bEl = document.getElementById('budgetSaveStamp');
-      if(bEl){ bEl.textContent = `마지막 저장 : ${fmtDate(budgetSavedAt)} (Sheets)`; bEl.classList.remove('dirty'); }
-      const pEl = document.getElementById('programSaveStamp');
-      if(pEl){ pEl.textContent = `마지막 저장 : ${fmtDate(programSavedAt)} (Sheets)`; pEl.classList.remove('dirty'); }
-    }
-    setSheetsStatus('연동됨 · 불러오기 완료 ('+fmtDate(new Date())+')', 'ok');
-  }catch(err){
-    setSheetsStatus('불러오기 실패 : '+err.message, 'bad');
-  }
-}
-
-async function pushToSheets(){
-  if(!SHEETS_URL){ setSheetsStatus('먼저 Web App URL을 입력하고 연결해주세요', 'warn'); return {ok:false}; }
-  try{
-    setSheetsStatus('저장 중…', '');
-    const res = await fetch(SHEETS_URL, {
-      method:'POST',
-      headers:{'Content-Type':'text/plain;charset=utf-8'},
-      body: JSON.stringify({action:'save', data: buildPayload()})
-    });
-    const json = await res.json();
-    if(json.status !== 'ok') throw new Error(json.message || '저장 실패');
-    const savedDate = new Date(json.updatedAt || Date.now());
-    setSheetsStatus('연동됨 · 저장 완료 ('+fmtDate(savedDate)+')', 'ok');
-    return {ok:true, updatedAt: json.updatedAt};
-  }catch(err){
-    setSheetsStatus('저장 실패 : '+err.message, 'bad');
-    return {ok:false};
-  }
-}
-
-const GS_CODE = [
-"const SHEET_NAMES = {",
-"  orgFac: 'OrgFac',",
-"  programs: 'Programs',",
-"  budgetItems: 'ProgramBudgetItems',",
-"  kpis: 'ProgramKpis',",
-"  meta: 'Meta'",
-"};",
-"",
-"function doGet(e) {",
-"  return respond_(handleLoad_());",
-"}",
-"",
-"function doPost(e) {",
-"  const body = JSON.parse(e.postData.contents);",
-"  if (body.action === 'save') {",
-"    return respond_(handleSave_(body.data));",
-"  }",
-"  return respond_({status:'error', message:'unknown action'});",
-"}",
-"",
-"function respond_(obj) {",
-"  return ContentService.createTextOutput(JSON.stringify(obj))",
-"    .setMimeType(ContentService.MimeType.JSON);",
-"}",
-"",
-"function getSheet_(name, headers) {",
-"  const ss = SpreadsheetApp.getActiveSpreadsheet();",
-"  let sh = ss.getSheetByName(name);",
-"  if (!sh) {",
-"    sh = ss.insertSheet(name);",
-"    sh.appendRow(headers);",
-"  }",
-"  return sh;",
-"}",
-"",
-"function sheetToObjects_(sheet) {",
-"  const rows = sheet.getDataRange().getValues();",
-"  if (rows.length < 2) return [];",
-"  const headers = rows[0];",
-"  return rows.slice(1)",
-"    .filter(row => row.join('') !== '')",
-"    .map(row => {",
-"      const obj = {};",
-"      headers.forEach((h, i) => obj[h] = row[i]);",
-"      return obj;",
-"    });",
-"}",
-"",
-"function clearDataRows_(sheet) {",
-"  const lastRow = sheet.getLastRow();",
-"  if (lastRow > 1) {",
-"    sheet.getRange(2, 1, lastRow - 1, sheet.getLastColumn()).clearContent();",
-"  }",
-"}",
-"",
-"function setMeta_(sheet, key, value) {",
-"  const rows = sheet.getDataRange().getValues();",
-"  for (let i = 1; i < rows.length; i++) {",
-"    if (rows[i][0] === key) { sheet.getRange(i + 1, 2).setValue(value); return; }",
-"  }",
-"  sheet.appendRow([key, value]);",
-"}",
-"",
-"function handleLoad_() {",
-"  const orgFacSheet = getSheet_(SHEET_NAMES.orgFac, ['type','idx','label','amount','exec']);",
-"  const progSheet   = getSheet_(SHEET_NAMES.programs, ['id','status','manualProgress','startMonth','endMonth','feedback']);",
-"  const biSheet      = getSheet_(SHEET_NAMES.budgetItems, ['programId','idx','label','amount','exec']);",
-"  const kpiSheet      = getSheet_(SHEET_NAMES.kpis, ['programId','idx','label','target','unit','achieved']);",
-"  const metaSheet    = getSheet_(SHEET_NAMES.meta, ['key','value']);",
-"",
-"  const orgFacRows = sheetToObjects_(orgFacSheet);",
-"  const progRows   = sheetToObjects_(progSheet);",
-"  const biRows      = sheetToObjects_(biSheet);",
-"  const kpiRows      = sheetToObjects_(kpiSheet);",
-"  const metaRows    = sheetToObjects_(metaSheet);",
-"",
-"  const data = {",
-"    orgFac: {",
-"      org:     orgFacRows.filter(r => r.type === 'org').map(r => ({label:r.label, amount:Number(r.amount), exec:Number(r.exec)})),",
-"      facUniv: orgFacRows.filter(r => r.type === 'facUniv').map(r => ({label:r.label, amount:Number(r.amount), exec:Number(r.exec)})),",
-"      facGu:   orgFacRows.filter(r => r.type === 'facGu').map(r => ({label:r.label, amount:Number(r.amount), exec:Number(r.exec)}))",
-"    },",
-"    programs: progRows.map(pr => {",
-"      const pid = Number(pr.id);",
-"      return {",
-"        id: pid,",
-"        status: pr.status,",
-"        manualProgress: Number(pr.manualProgress),",
-"        startMonth: Number(pr.startMonth),",
-"        endMonth: Number(pr.endMonth),",
-"        feedback: pr.feedback,",
-"        budgetItems: biRows.filter(b => Number(b.programId) === pid)",
-"          .map(b => ({label:b.label, amount:Number(b.amount), exec:Number(b.exec)})),",
-"        kpis: kpiRows.filter(k => Number(k.programId) === pid)",
-"          .map(k => ({label:k.label, target:Number(k.target), unit:k.unit, achieved:Number(k.achieved)}))",
-"      };",
-"    })",
-"  };",
-"",
-"  const metaMap = {};",
-"  metaRows.forEach(m => { metaMap[m.key] = m.value; });",
-"",
-"  return {status:'ok', data:data, updatedAt: metaMap.updatedAt || null};",
-"}",
-"",
-"function handleSave_(data) {",
-"  const orgFacSheet = getSheet_(SHEET_NAMES.orgFac, ['type','idx','label','amount','exec']);",
-"  const progSheet   = getSheet_(SHEET_NAMES.programs, ['id','status','manualProgress','startMonth','endMonth','feedback']);",
-"  const biSheet      = getSheet_(SHEET_NAMES.budgetItems, ['programId','idx','label','amount','exec']);",
-"  const kpiSheet      = getSheet_(SHEET_NAMES.kpis, ['programId','idx','label','target','unit','achieved']);",
-"  const metaSheet    = getSheet_(SHEET_NAMES.meta, ['key','value']);",
-"",
-"  clearDataRows_(orgFacSheet);",
-"  clearDataRows_(progSheet);",
-"  clearDataRows_(biSheet);",
-"  clearDataRows_(kpiSheet);",
-"",
-"  const orgFac = data.orgFac || {};",
-"  (orgFac.org || []).forEach((it, idx) => orgFacSheet.appendRow(['org', idx, it.label, it.amount, it.exec]));",
-"  (orgFac.facUniv || []).forEach((it, idx) => orgFacSheet.appendRow(['facUniv', idx, it.label, it.amount, it.exec]));",
-"  (orgFac.facGu || []).forEach((it, idx) => orgFacSheet.appendRow(['facGu', idx, it.label, it.amount, it.exec]));",
-"",
-"  (data.programs || []).forEach(p => {",
-"    progSheet.appendRow([p.id, p.status, p.manualProgress, p.startMonth, p.endMonth, p.feedback]);",
-"    (p.budgetItems || []).forEach((bi, idx) => biSheet.appendRow([p.id, idx, bi.label, bi.amount, bi.exec]));",
-"    (p.kpis || []).forEach((k, idx) => kpiSheet.appendRow([p.id, idx, k.label, k.target, k.unit, k.achieved]));",
-"  });",
-"",
-"  const now = new Date().toISOString();",
-"  setMeta_(metaSheet, 'updatedAt', now);",
-"",
-"  return {status:'ok', updatedAt: now};",
-"}"
-].join('\n');
-
-function copyGsCode(){
-  navigator.clipboard.writeText(GS_CODE).then(()=>{
-    const btn = document.querySelector('.copybtn');
-    const old = btn.textContent;
-    btn.textContent = '복사됨!';
-    setTimeout(()=>{ btn.textContent = old; }, 1600);
-  });
-}
 
 /* =========================================================
    4. 예산 총괄 렌더링 (조직운영·시설운영비 편집 가능)
@@ -1350,25 +1078,31 @@ function renderOrgFacRows(){
   const orgWrap = document.getElementById('orgRows');
   orgWrap.innerHTML = orgItems.map((it,idx)=>{
     const p = it.amount ? Math.round((it.exec||0)/it.amount*1000)/10 : 0;
+    const rem = it.amount - (it.exec||0);
     return `<div class="subitem-row"><span>${it.label}</span><span>${fmt(it.amount)}천원</span>
       <input type="number" min="0" class="num-in" style="width:88px;" value="${it.exec||0}" onchange="updateOrgExec(${idx}, this.value)">
-      <span class="exec-pct" style="color:${p>=100?'#166B3E':'#1B2B22'}">${p}%</span></div>`;
+      <span class="exec-pct" style="color:${p>=100?'#166B3E':'#1B2B22'}">${p}%</span>
+      <span style="text-align:right;color:${rem<0?'var(--red)':'var(--ink-soft)'};">${fmt(rem)}</span></div>`;
   }).join('');
 
   const univWrap = document.getElementById('facUnivRows');
   univWrap.innerHTML = facUnivItems.map((it,idx)=>{
     const p = it.amount ? Math.round((it.exec||0)/it.amount*1000)/10 : 0;
+    const rem = it.amount - (it.exec||0);
     return `<div class="subitem-row"><span>${it.label}</span><span>${fmt(it.amount)}천원</span>
       <input type="number" min="0" class="num-in" style="width:88px;" value="${it.exec||0}" onchange="updateFacExec('univ', ${idx}, this.value)">
-      <span class="exec-pct" style="color:${p>=100?'#166B3E':'#1B2B22'}">${p}%</span></div>`;
+      <span class="exec-pct" style="color:${p>=100?'#166B3E':'#1B2B22'}">${p}%</span>
+      <span style="text-align:right;color:${rem<0?'var(--red)':'var(--ink-soft)'};">${fmt(rem)}</span></div>`;
   }).join('');
 
   const guWrap = document.getElementById('facGuRows');
   guWrap.innerHTML = facGuItems.map((it,idx)=>{
     const p = it.amount ? Math.round((it.exec||0)/it.amount*1000)/10 : 0;
+    const rem = it.amount - (it.exec||0);
     return `<div class="subitem-row"><span>${it.label}</span><span>${fmt(it.amount)}천원</span>
       <input type="number" min="0" class="num-in" style="width:88px;" value="${it.exec||0}" onchange="updateFacExec('gu', ${idx}, this.value)">
-      <span class="exec-pct" style="color:${p>=100?'#166B3E':'#1B2B22'}">${p}%</span></div>`;
+      <span class="exec-pct" style="color:${p>=100?'#166B3E':'#1B2B22'}">${p}%</span>
+      <span style="text-align:right;color:${rem<0?'var(--red)':'var(--ink-soft)'};">${fmt(rem)}</span></div>`;
   }).join('');
 }
 function updateOrgExec(idx, val){ orgItems[idx].exec = Number(val)||0; renderOrgFacRows(); renderBudget(); markBudgetDirty(); }
@@ -1385,8 +1119,12 @@ function renderBudget(){
   const totalExec = orgExec + facExec + progExec;
   const totalBudget = 1500000;
   const totalPct = Math.round(totalExec/totalBudget*1000)/10;
+  const totalRemain = totalBudget - totalExec;
 
-  document.getElementById('totalExecTxt').textContent = `집행액 ${fmt(totalExec)}천원 / 배정 ${fmt(totalBudget)}천원`;
+  document.getElementById('totalExecTxt').innerHTML = `
+    <span class="hero-stat-line exec">집행액 <span class="v">${fmt(totalExec)}</span>천원</span>
+    <span class="hero-stat-line remain${totalRemain<0?' neg':''}">잔여액 <span class="v">${fmt(totalRemain)}</span>천원</span>
+  `;
   document.getElementById('totalRingTxt').textContent = totalPct+'%';
   document.getElementById('totalRing').style.setProperty('--p', Math.min(totalPct,100)+'%');
 
@@ -1398,6 +1136,7 @@ function renderBudget(){
     else if(c.key==='facops') exec = facExec;
     else exec = programs.filter(p=>p.cat===c.key).reduce((s,p)=>s+programBudgetExecSum(p),0);
     const pct = c.amount ? Math.round(exec/c.amount*1000)/10 : 0;
+    const remain = c.amount - exec;
     const row = document.createElement('div');
     row.className='cat-row';
     row.innerHTML = `
@@ -1405,6 +1144,7 @@ function renderBudget(){
       <div class="cat-figs">배정 ${fmt(c.amount)}천원</div>
       <div class="cat-figs">집행 ${fmt(exec)}천원</div>
       <div class="cat-pct" style="color:${pct>=100?'#166B3E':(pct>0?'#2E5FA3':'#5B6B62')}">${pct}%</div>
+      <div class="cat-figs" style="text-align:right;color:${remain<0?'var(--red)':'var(--ink-soft)'};">잔여 ${fmt(remain)}천원</div>
     `;
     catWrap.appendChild(row);
   });
@@ -1415,6 +1155,7 @@ function renderBudget(){
     const exec = programBudgetExecSum(p);
     const budgetTot = programBudgetTotal(p);
     const pct = budgetTot? Math.round(exec/budgetTot*1000)/10 : 0;
+    const remain = budgetTot - exec;
     const tr = document.createElement('tr');
     if(pct>90) tr.className='row-highlight';
     tr.innerHTML = `
@@ -1423,9 +1164,21 @@ function renderBudget(){
       <td style="text-align:right;">${fmt(budgetTot)}</td>
       <td style="text-align:right;">${fmt(exec)}</td>
       <td class="exec-pct" style="color:${pct>=100?'#166B3E':'#B4432F'}">${pct}%</td>
+      <td style="text-align:right;color:${remain<0?'var(--red)':'inherit'};">${fmt(remain)}</td>
     `;
     tbody.appendChild(tr);
   });
+}
+
+/* ---------- 12월말까지 남은 D-Day ---------- */
+function renderYearEndCountdown(){
+  const el = document.getElementById('yearEndCountdown');
+  if(!el) return;
+  const now = new Date();
+  const yearEnd = new Date(now.getFullYear(), 11, 31, 23, 59, 59);
+  let days = Math.ceil((yearEnd - now) / (1000*60*60*24));
+  if(days < 0) days = 0;
+  el.innerHTML = `<span style="font-size:22px;font-weight:800;">D-${days}</span><span style="font-size:11px;margin-left:6px;color:#BFE0CD;">12.31까지</span>`;
 }
 
 /* =========================================================
@@ -1433,6 +1186,12 @@ function renderBudget(){
 ========================================================= */
 let activeFilter = '전체';
 let activeManager = '전체';
+let activeStatusFilter = '전체';
+function setStatusFilter(s){
+  activeStatusFilter = (activeStatusFilter===s) ? '전체' : s;
+  renderStatusCounts();
+  renderGantt();
+}
 
 let activeAudTag = null;
 function renderAudienceGroups(){
@@ -1483,7 +1242,9 @@ function renderFilterBar(){
 function renderManagerFilterBar(){
   const bar = document.getElementById('managerFilterBar');
   bar.innerHTML='';
-  const mgrs = ['전체', ...Array.from(new Set(programs.map(p=>p.manager).filter(Boolean)))];
+  const order = ['수빈','호정','지연','윤선'];
+  const present = order.filter(m=>programs.some(p=>p.manager===m));
+  const mgrs = ['전체', ...present];
   mgrs.forEach(m=>{
     const btn = document.createElement('button');
     btn.className = 'filterbtn'+(m===activeManager?' active':'');
@@ -1496,6 +1257,10 @@ function renderManagerFilterBar(){
 function renderStatusCounts(){
   ['계획','진행','완료'].forEach(s=>{
     document.getElementById('cnt-'+s).textContent = programs.filter(p=>p.status===s).length;
+  });
+  ['계획','진행','완료','전체'].forEach(s=>{
+    const card = document.getElementById('statcard-'+s);
+    if(card) card.classList.toggle('active-stat', activeStatusFilter===s);
   });
 }
 
@@ -1517,6 +1282,7 @@ function renderGantt(){
   wrap.innerHTML='';
   let list = activeFilter==='전체' ? programs : programs.filter(p=>p.cat===activeFilter);
   if(activeManager!=='전체'){ list = list.filter(p=>p.manager===activeManager); }
+  if(activeStatusFilter!=='전체'){ list = list.filter(p=>p.status===activeStatusFilter); }
   list.forEach(p=>{
     const row = document.createElement('div');
     row.className='gantt-row' + (p.status==='완료' ? ' row-done' : (p.status==='진행' ? ' row-active' : ''));
@@ -1943,13 +1709,13 @@ function updateFeedback(id, val){ programs.find(p=>p.id===id).feedback = val; re
 ========================================================= */
 renderOrgFacRows();
 renderBudget();
+renderYearEndCountdown();
 renderAudienceGroups();
 renderFilterBar();
 renderManagerFilterBar();
 renderStatusCounts();
 renderGantt();
 renderFeedbackSummary();
-updateGlobalStamp();
 </script>
 </body>
 </html>

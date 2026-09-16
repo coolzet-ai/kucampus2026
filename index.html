@@ -100,18 +100,19 @@
   .ring{width:100px;height:100px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:conic-gradient(#fff var(--p,0%), rgba(255,255,255,.22) 0);position:relative;flex:0 0 auto;}
   .ring::before{content:"";position:absolute;inset:9px;border-radius:50%;background:var(--forest-deep);}
   .ring span{position:relative;font-size:18px;font-weight:800;}
-  .cat-row{display:grid;grid-template-columns:1.4fr .7fr .7fr .55fr .55fr;gap:10px;align-items:center;padding:12px 14px;border-radius:10px;background:#FAFBF9;margin-bottom:8px;}
+  .cat-row{display:grid;grid-template-columns:1.4fr .7fr .7fr .55fr .55fr;gap:10px;align-items:center;padding:12px 14px;border-radius:10px;background:#FAFBF9;margin-bottom:8px;min-height:64px;}
   .cat-row .cat-dot{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:8px;}
   .cat-row .cat-name{font-size:13.3px;font-weight:700;} .cat-row .cat-figs{font-size:12.3px;color:var(--ink-soft);} .cat-row .cat-pct{font-size:13px;font-weight:800;text-align:right;}
-  .subitem-row{display:grid;grid-template-columns:1.4fr .7fr .7fr .55fr .55fr;gap:8px;align-items:center;font-size:12.3px;color:var(--ink-soft);padding:7px 0;border-bottom:1px dashed var(--line);}
+  .subitem-row{display:grid;grid-template-columns:1.4fr .7fr .7fr .55fr .55fr;gap:8px;align-items:center;font-size:12.3px;color:var(--ink-soft);padding:7px 0;border-bottom:1px dashed var(--line);min-height:52px;}
   .subitem-row.org-row{padding:15px 0;line-height:1.6;}
+  .subitem-row.gu-row{padding:22px 0;line-height:1.7;font-size:13.5px;}
   .subitem-row:last-child{border-bottom:none;}
   .subitem-head{display:grid;grid-template-columns:1.4fr .7fr .7fr .55fr .55fr;gap:8px;font-size:10.8px;color:var(--ink-soft);font-weight:700;padding-bottom:6px;border-bottom:1px solid var(--line);margin-bottom:2px;}
   .filterbar{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;}
   .filterbtn{border:1px solid var(--line);background:#fff;border-radius:20px;padding:7px 14px;font-size:12.3px;font-weight:700;cursor:pointer;color:var(--ink-soft);}
   .filterbtn.active{background:var(--forest-deep);color:#fff;border-color:var(--forest-deep);}
   .status-count-card{transition:.15s;border-width:1px;}
-  .hero-stat-line{display:inline-flex;align-items:baseline;gap:6px;font-size:12.5px;font-weight:700;padding:4px 12px;border-radius:20px;width:fit-content;}
+  .hero-stat-line{display:flex;align-items:baseline;justify-content:space-between;gap:10px;font-size:12.5px;font-weight:700;padding:6px 14px;border-radius:20px;width:220px;box-sizing:border-box;}
   .hero-stat-line .v{font-size:15px;font-weight:800;}
   .hero-stat-line.exec{background:rgba(255,255,255,.22);color:#fff;}
   .hero-stat-line.remain{background:#fff;color:var(--forest-deep);}
@@ -316,7 +317,7 @@
       <div class="author">
         <div class="nm">캠타김군</div>
         <a class="mail" href="mailto:coolzet@konkuk.ac.kr">coolzet@konkuk.ac.kr</a>
-        <div class="upd-date">업데이트일자 · 2026.9.14</div>
+        <div class="upd-date" id="updDateTxt">업데이트일자 · 2026.09.16 (편집 반영 기준)</div>
       </div>
     </div>
 
@@ -421,7 +422,9 @@
       </div>
 
       <div class="budget-hero">
-        <div class="num-block"><div class="big">1,500,000</div><div class="lbl">2026년 총 사업비(천원) · 조직운영~ANCHOR연계 6개 카테고리 합계</div></div>
+        <div class="num-block"><div class="big" id="totalBudgetBig">1,500,000,000</div><div class="lbl">2026년 총 사업비(원) · 조직운영~ANCHOR연계 6개 카테고리 합계</div>
+          <div id="budgetDiffNote" style="font-size:11px;color:#FDE9C8;margin-top:6px;"></div>
+        </div>
         <div style="text-align:center;background:rgba(255,255,255,.14);border-radius:14px;padding:10px 18px;" id="yearEndCountdown"></div>
         <div class="ring-wrap">
           <div class="ring" id="totalRing"><span id="totalRingTxt">0%</span></div>
@@ -433,42 +436,49 @@
 
       <div class="card">
         <h3 class="sub-h">6개 카테고리 예산 현황</h3>
+        <div class="cat-row" style="background:none;font-size:10.8px;font-weight:700;color:var(--ink-soft);padding:0 14px 8px;border-bottom:1px solid var(--line);margin-bottom:6px;min-height:auto;">
+          <div>항목</div>
+          <div style="text-align:right;">배정</div>
+          <div style="text-align:right;">집행액</div>
+          <div style="text-align:right;">집행률</div>
+          <div style="text-align:right;">잔여</div>
+        </div>
         <div id="catRows"></div>
       </div>
 
-      <h2 class="sec-h">조직운영 (357,000천원 · 간접비 포함)</h2>
+      <div style="height:1px;background:var(--line);margin:28px 0;"></div>
+
+      <h2 class="sec-h" style="border-top:none;margin-top:0;padding-top:0;">조직운영 (<span id="orgHeadingAmt">357,000,000</span>원 · 간접비 포함)</h2>
       <div class="card">
-        <div class="subitem-head"><span>항목</span><span>배정</span><span>집행액 입력</span><span style="text-align:center;">집행률</span><span style="text-align:right;">잔여</span></div>
+        <div class="subitem-head"><span>항목</span><span style="text-align:right;">배정</span><span style="text-align:right;">집행액</span><span style="text-align:right;">집행률</span><span style="text-align:right;">잔여</span></div>
         <div id="orgRows"></div>
       </div>
 
-      <h2 class="sec-h">대학 대응자금 투입 및 자치구 사업비 지원 (300,000천원)</h2>
+      <h2 class="sec-h">대학 대응자금 투입 및 자치구 사업비 지원 (<span id="counterpartHeadingAmt">300,000,000</span>원)</h2>
       <div class="card" style="margin-bottom:20px;">
-        <div class="sec-note" style="margin-top:0;">대학 대응자금 투입 시기('26.4월 완료) 기준 집행 현황입니다. 배정 금액은 「Unicorn Seed 프로그램」 및 창업지원시설운영(스타시티 스타트업 존·K-이노베이션 스테이션 센터) 예산 중 대응자금으로 배정된 부분입니다.</div>
+        <div class="sec-note" style="margin-top:0;">대학 대응자금 투입 시기('26.4월 완료) 기준 집행 현황입니다. 배정 금액은 「Unicorn Seed 프로그램」 및 창업지원시설운영(스타시티 스타트업 존·K-이노베이션 스테이션 센터) 예산 중 대응자금으로 배정된 부분입니다. <b>이 금액은 창업지원시설운영·Unicorn Seed 프로그램 예산에 이미 포함되어 있으므로, 상단 "전체 예산 집행률" 및 6개 카테고리 집계에서는 별도로 합산하지 않습니다(중복 계산 방지).</b></div>
         <table>
-          <thead><tr><th>항목</th><th>프로그램명</th><th style="text-align:right;">배정(천원)</th><th style="text-align:right;">집행(천원)</th><th style="text-align:center;">집행률</th><th style="text-align:right;">잔여(천원)</th></tr></thead>
+          <thead><tr><th>항목</th><th>프로그램명</th><th style="text-align:right;">배정(원)</th><th style="text-align:right;">집행(원)</th><th style="text-align:right;">집행률</th><th style="text-align:right;">잔여(원)</th></tr></thead>
           <tbody id="counterpartRows"></tbody>
         </table>
       </div>
 
-      <h2 class="sec-h">창업지원시설운영 (225,000천원)</h2>
-      <div class="grid grid-2">
-        <div class="card">
-          <h3 class="sub-h">① 대학소유 (165,700천원)</h3>
-          <div class="subitem-head"><span>공간</span><span>배정</span><span>집행액 입력</span><span style="text-align:center;">집행률</span><span style="text-align:right;">잔여</span></div>
-          <div id="facUnivRows"></div>
-        </div>
-        <div class="card">
-          <h3 class="sub-h">② 자치구(기타)소유 (59,300천원)</h3>
-          <div class="subitem-head"><span>공간</span><span>배정</span><span>집행액 입력</span><span style="text-align:center;">집행률</span><span style="text-align:right;">잔여</span></div>
-          <div id="facGuRows"></div>
-        </div>
+      <h2 class="sec-h">창업지원시설운영 (<span id="facHeadingAmt">225,000,000</span>원)</h2>
+      <div class="card" style="margin-bottom:20px;">
+        <h3 class="sub-h">① 대학소유 (<span id="facUnivHeadingAmt">165,678,750</span>원)</h3>
+        <div class="subitem-head"><span>공간</span><span style="text-align:right;">배정</span><span style="text-align:right;">집행액</span><span style="text-align:right;">집행률</span><span style="text-align:right;">잔여</span></div>
+        <div id="facUnivRows"></div>
+      </div>
+      <div class="card" style="margin-bottom:20px;padding-bottom:26px;">
+        <h3 class="sub-h">② 자치구(기타)소유 (<span id="facGuHeadingAmt">59,321,250</span>원)</h3>
+        <div class="subitem-head"><span>공간</span><span style="text-align:right;">배정</span><span style="text-align:right;">집행액</span><span style="text-align:right;">집행률</span><span style="text-align:right;">잔여</span></div>
+        <div id="facGuRows"></div>
       </div>
 
       <h2 class="sec-h">프로그램별 예산 상세 (4개 유형 · 14개 프로그램)</h2>
       <div class="card" style="overflow-x:auto;">
         <table>
-          <thead><tr><th>분류</th><th>프로그램명</th><th style="text-align:right;">배정예산(천원)</th><th style="text-align:right;">집행액(천원)</th><th style="text-align:center;">집행률</th><th style="text-align:right;">잔여(천원)</th></tr></thead>
+          <thead><tr><th>분류</th><th>프로그램명</th><th style="text-align:right;">배정예산(원)</th><th style="text-align:right;">집행액(원)</th><th style="text-align:right;">집행률</th><th style="text-align:right;">잔여(원)</th></tr></thead>
           <tbody id="budgetTableBody"></tbody>
         </table>
         <div class="sec-note" style="margin-top:10px;">※ 창업기업육성(자율) 카테고리는 세부실행계획서 총괄표 소계(352,600천원)와 개별 프로그램 산출근거 합계(362,650천원) 사이에 원문 자체의 약 1,000만원 반영 시점 차이가 있습니다. 카테고리 집행률은 총괄표 소계 값을 기준으로 계산합니다.</div>
@@ -793,29 +803,38 @@ const CAT_META = {
   'ANCHOR':{label:'ANCHOR 연계프로그램', color:'#B8792B'},
 };
 const BUDGET_CATS_META = [
-  {key:'orgops', label:'조직운영', amount:357000, color:'#8A8F89'},
-  {key:'facops', label:'창업지원시설운영', amount:225000, color:'#B9BFB6'},
-  {key:'공통', label:'창업기업육성(공통)', amount:406500, color:CAT_META['공통'].color},
-  {key:'자율', label:'창업기업육성(자율)', amount:352600, color:CAT_META['자율'].color},
-  {key:'AI', label:'AI 기반기업 및 인력육성', amount:109600, color:CAT_META['AI'].color},
-  {key:'ANCHOR', label:'ANCHOR 연계프로그램', amount:39200, color:CAT_META['ANCHOR'].color},
+  {key:'orgops', label:'조직운영', origAmount:357000, color:'#8A8F89'},
+  {key:'facops', label:'창업지원시설운영', origAmount:225000, color:'#B9BFB6'},
+  {key:'공통', label:'창업기업육성(공통)', origAmount:406500, color:CAT_META['공통'].color},
+  {key:'자율', label:'창업기업육성(자율)', origAmount:352600, color:CAT_META['자율'].color},
+  {key:'AI', label:'AI 기반기업 및 인력육성', origAmount:109600, color:CAT_META['AI'].color},
+  {key:'ANCHOR', label:'ANCHOR 연계프로그램', origAmount:39200, color:CAT_META['ANCHOR'].color},
 ];
+const ORIG_TOTAL_BUDGET = 1500000; // 세부실행계획서 최초 승인 예산(참고용 고정값)
 
 const orgItems = [
-  {label:'인건비·법인부담금·퇴직충당금 등', amount:301000, exec:0},
+  {label:'인건비', amount:245000, exec:133431.688},
   {label:'인센티브', amount:20000, exec:0},
+  {label:'시설수선비', amount:20000, exec:6000},
+  {label:'회의비 및 자문비', amount:8760, exec:4560},
+  {label:'홍보비', amount:8740, exec:1307},
+  {label:'식비 및 다과비', amount:6125, exec:1729.89},
+  {label:'회계감사비', amount:5000, exec:0},
+  {label:'소모성 물품구입', amount:3975, exec:1669.74},
+  {label:'교육훈련비', amount:2500, exec:0},
+  {label:'여비', amount:900, exec:150},
   {label:'간접비 (기타 사업 운영을 위한 비용)', amount:36000, exec:0},
 ];
 const facUnivItems = [
-  {label:'스타시티 스타트업 존', amount:88700, exec:0},
-  {label:'K-바이오 이노베이션 허브', amount:23000, exec:0},
-  {label:'KU 스타트업 존', amount:1000, exec:0},
-  {label:'KU청년창업스튜디오', amount:6000, exec:0},
-  {label:'사업본부', amount:32000, exec:0},
-  {label:'창의관 창업지원시설', amount:15000, exec:0},
+  {label:'스타시티 스타트업 존', amount:88678.75, exec:43464.2, counterpart:true},
+  {label:'K-바이오 이노베이션 허브', amount:23000, exec:10514.72},
+  {label:'KU 스타트업 존', amount:1000, exec:264},
+  {label:'KU청년창업스튜디오', amount:6000, exec:2699.68},
+  {label:'사업단 사업센터(창업지원공간 통합 관리)', amount:32000, exec:12918.64},
+  {label:'창의관 창업지원시설', amount:15000, exec:673.71},
 ];
 const facGuItems = [
-  {label:'K-이노베이션 스테이션 센터', amount:59300, exec:0},
+  {label:'K-이노베이션 스테이션 센터', amount:59321.25, exec:26251.67, counterpart:true},
 ];
 const counterpartItems = [
   {label:'기업 지원·협력 활동비', program:'KU 캠퍼스타운 Unicorn Seed 프로그램', amount:280000, exec:0},
@@ -853,7 +872,7 @@ const programs = [
   feedback:'[3차]\n[문제점] 지원 규모(84개 팀) 대비 서류·발표평가 일정이 촉박하게 운영되어 심사 시간 확보가 다소 어려웠음. 바이오·펫 분야 지원 비중이 상대적으로 낮아 목표 분야 간 균형 있는 모집에 한계가 있었음.\n[개선계획] 차기 모집 시 평가 일정을 여유 있게 편성하고 평가위원 풀을 확대하여 심사 내실화. 바이오·펫 분야 특화 홍보채널 및 사전 설명회를 확대하여 분야별 지원 균형 제고.',
   _round:'total',
   rounds:[
-    {key:'r1', label:'1차', excludeFromTotal:true,
+    {key:'r1', label:'1차', excludeFromTotal:true, excludeReason:'2025년 예산',
      period:'2025.11.7(금) ~ 2025.12.19(금) [서류접수 11.7~11.28 → 서류심사 12.3~12.5 → 발표심사 12.11 → 사업단평가 12.12~12.18 → 시상식 12.19]',
      content:'2026년 KU 창업 아이디어 경진대회(1차). 서류접수(11.7~11.28) 결과 총 181팀 신청 → 서류심사(12.3~12.5)를 통해 90팀 선발 → 발표심사(12.11, 건국대 창의관 214·215·310호)를 통해 65팀 최종 선발(목표 120팀 참여 대비 151% 달성) → 사업단 평가(입주 적합성·공간배정, 12.12~12.18) → 시상식 및 기업간담회(12.19, 건국대 경영관 301호). 바이오&펫/에코&푸드/AI 3개 분과로 운영. 시상: 대상 비바엘모멘토(정유성), 최우수상 ㈜헬퍼로보틱스(최재원)·밀리사이트테크놀러지스㈜(양종렬), 우수상 ㈜에이비리스터컴퍼니(정현종)·쭉(김효재). 교내 구성원(학생·교원·동문) 및 외국인 창업기업을 포함한 다양한 배경의 참가자를 유치하여 창업 생태계 저변을 확대하고, 대학 특성화 전략과 연계된 창업기업 풀을 체계적으로 확보함.',
      budgetItems:[
@@ -871,7 +890,7 @@ const programs = [
      kpis:[{label:'경진대회 선발(최종 선발팀 수)', target:5, achieved:13, unit:'팀'},{label:'입주기업 수(입주율)', target:13, achieved:13, unit:'팀'},{label:'만족도 조사', target:4.3, achieved:4.7, unit:'점'},{label:'창업지원금 지원기업 수', target:20, achieved:20, unit:'팀'}],
      feedback:'[문제점] 당초 목표(5팀) 대비 많은 13개 팀이 최종 선발·입주하여 우수 창업기업 발굴 측면에서는 우수한 성과를 거두었으나, 선발 규모 확대에 따라 기업별 맞춤형 지원 및 사후 관리에 투입되는 운영 자원이 상대적으로 분산되는 한계가 있었음. 선발기업 전원에게 공유오피스 형태의 입주공간만 제공하여 성장 단계·사업 특성에 따른 공간 지원 다양성이 부족했음. 창업지원금 지원 종료 이후 일부 기업의 경우 후속 투자 유치 및 판로 개척으로의 연계가 미흡한 측면이 확인됨.\n[개선계획] 기업의 성장 단계와 사업 특성을 고려하여 독립형 입주공간 등 보다 다양한 형태의 공간 지원 방안을 확대 검토. 선발-육성-사업화-투자 연계의 전주기 지원체계를 더욱 고도화할 계획임.',
      reportFile:{name:'KU_캠퍼스타운_창업경진대회_및_창업지원금_지원_결과보고서_2차.pdf', dataUrl:KU_CONTEST_R2_PDF_URL}},
-    {key:'r3', label:'3차', period:'2026.6.11 ~ 2026.7.22 (공고·서류접수 → 서류평가 → 발표평가 → 결과발표)',
+    {key:'r3', label:'3차', excludeFromTotal:true, excludeReason:'그 밖의 사업 운영 경비', period:'2026.6.11 ~ 2026.7.22 (공고·서류접수 → 서류평가 → 발표평가 → 결과발표)',
      content:'입주기업 추가 모집(바이오·펫·에코푸드·AI 분야 유망 창업기업 발굴). 공고 및 서류접수(6.11~7.3) 결과 총 84개 팀 지원 → 서류평가(7.8~7.10)를 통해 15개 팀이 발표평가 진출 → 발표평가(7.20) 결과 AI·로봇·자원순환 등 유망 분야 6개 팀 최종 선발(목표 5팀 대비 120% 달성). 선발기업: 주식회사 그루누이, ㈜클레빌, REBLOCK, 디지로그 주식회사, 로봇컴 주식회사, 날리자쿠(합격기업 ‘주식회사 디에프알엔’ 입주 포기로 예비합격 기업 1개 대체 선발). 건국대 앵커(RISE)사업 18과제 핵심성과지표(창업기업 육성 팀수 67개 기업/111%, 교내창업 기업 발굴 비율 52.2%/104%) 달성에 기여.',
      budgetItems:[{label:'서류평가비(70,000원×3일×6명)',amount:1260,exec:1260},{label:'발표평가비(100,000원×4시간×3명)',amount:1200,exec:1200}],
      kpis:[{label:'입주기업 선발', target:5, achieved:6, unit:'팀'}],
@@ -935,7 +954,7 @@ const programs = [
     {label:'KU플리마켓 운영건수', target:1, achieved:1, unit:'건'}
   ],
   note:'ANCHOR과제 18(핵심②·자율②, 시제품제작·IP출원) KPI와 직접 연동. KU플리마켓(5월)은 완료, 반함축제·KU Dream Fair 등 나머지 축제(9~11월)는 진행 예정.',
-  budget:29950,
+  budget:28600,
   budgetItems:[
     {label:'일감호축전·성신예술제 판촉물',amount:5000},
     {label:'스타시티 KUration Market 용역',amount:12980},
@@ -1054,8 +1073,8 @@ if(programs.find(p=>p.id===13)){ const p13 = programs.find(p=>p.id===13); p13.st
 if(programs.find(p=>p.id===10)){ const p10 = programs.find(p=>p.id===10); p10.status='진행'; p10.manualProgress=50; }
 
 function fmt(n){ return Number(n).toLocaleString('ko-KR'); }
+function won(n){ return Number(Math.round((n||0)*1000)).toLocaleString('ko-KR'); }
 function programBudgetTotal(p){
-  if(p.rounds){ return p.rounds.filter(r=>!r.excludeFromTotal).reduce((s,r)=> s + (r.budgetItems||[]).reduce((s2,bi)=>s2+(Number(bi.amount)||0),0), 0); }
   return p.budget;
 }
 function programBudgetExecSum(p){
@@ -1091,34 +1110,51 @@ function markProgramDirty(){
 ========================================================= */
 function renderOrgFacRows(){
   const orgWrap = document.getElementById('orgRows');
+  let orgAmt=0, orgExecT=0;
   orgWrap.innerHTML = orgItems.map((it,idx)=>{
     const p = it.amount ? Math.round((it.exec||0)/it.amount*1000)/10 : 0;
     const rem = it.amount - (it.exec||0);
-    return `<div class="subitem-row org-row"><span>${it.label}</span><span>${fmt(it.amount)}천원</span>
-      <input type="number" min="0" class="num-in" style="width:88px;" value="${it.exec||0}" onchange="updateOrgExec(${idx}, this.value)">
-      <span class="exec-pct" style="color:${p>=100?'#166B3E':'#1B2B22'}">${p}%</span>
-      <span style="text-align:right;color:${rem<0?'var(--red)':'var(--ink-soft)'};">${fmt(rem)}</span></div>`;
-  }).join('');
+    orgAmt += it.amount; orgExecT += (it.exec||0);
+    const isMajor = (it.label==='인건비' || it.label==='인센티브');
+    const divider = (idx===1) ? 'border-bottom:2px solid var(--line);padding-bottom:19px;margin-bottom:4px;' : '';
+    return `<div class="subitem-row org-row" style="${isMajor?'font-weight:800;color:var(--forest-deep);':''}${divider}"><span>${it.label}</span><span style="text-align:right;${isMajor?'font-weight:800;':''}">${won(it.amount)}원</span>
+      <span style="text-align:right;font-weight:${isMajor?'800':'700'};${isMajor?'color:var(--forest-deep);':''}">${won(it.exec||0)}원</span>
+      <span class="exec-pct" style="text-align:right;font-weight:${isMajor?'800':'inherit'};color:${p>=100?'#166B3E':'#1B2B22'}">${p}%</span>
+      <span style="text-align:right;color:${rem<0?'var(--red)':'var(--ink-soft)'};">${won(rem)}원</span></div>`;
+  }).join('') + `<div class="subitem-row org-row" style="font-weight:800;border-top:2px solid var(--line);color:var(--ink);">
+      <span>총계</span><span style="text-align:right;">${won(orgAmt)}원</span><span style="text-align:right;">${won(orgExecT)}원</span>
+      <span class="exec-pct" style="text-align:right;color:${orgAmt&&orgExecT/orgAmt*100>=100?'#166B3E':'#1B2B22'}">${orgAmt?Math.round(orgExecT/orgAmt*1000)/10:0}%</span>
+      <span style="text-align:right;">${won(orgAmt-orgExecT)}원</span></div>`;
 
   const univWrap = document.getElementById('facUnivRows');
+  let univAmt=0, univExecT=0;
   univWrap.innerHTML = facUnivItems.map((it,idx)=>{
     const p = it.amount ? Math.round((it.exec||0)/it.amount*1000)/10 : 0;
     const rem = it.amount - (it.exec||0);
-    return `<div class="subitem-row"><span>${it.label}</span><span>${fmt(it.amount)}천원</span>
-      <input type="number" min="0" class="num-in" style="width:88px;" value="${it.exec||0}" onchange="updateFacExec('univ', ${idx}, this.value)">
-      <span class="exec-pct" style="color:${p>=100?'#166B3E':'#1B2B22'}">${p}%</span>
-      <span style="text-align:right;color:${rem<0?'var(--red)':'var(--ink-soft)'};">${fmt(rem)}</span></div>`;
-  }).join('');
+    univAmt += it.amount; univExecT += (it.exec||0);
+    return `<div class="subitem-row"><span>${it.label}${it.counterpart?'<br><span style="font-size:9.5px;font-weight:700;color:var(--amber);">●대응자금 포함</span>':''}</span><span style="text-align:right;">${won(it.amount)}원</span>
+      <span style="text-align:right;font-weight:700;">${won(it.exec||0)}원</span>
+      <span class="exec-pct" style="text-align:right;color:${p>=100?'#166B3E':'#1B2B22'}">${p}%</span>
+      <span style="text-align:right;color:${rem<0?'var(--red)':'var(--ink-soft)'};">${won(rem)}원</span></div>`;
+  }).join('') + `<div class="subitem-row" style="font-weight:800;border-top:2px solid var(--line);color:var(--ink);">
+      <span>총계</span><span style="text-align:right;">${won(univAmt)}원</span><span style="text-align:right;">${won(univExecT)}원</span>
+      <span class="exec-pct" style="text-align:right;">${univAmt?Math.round(univExecT/univAmt*1000)/10:0}%</span>
+      <span style="text-align:right;">${won(univAmt-univExecT)}원</span></div>`;
 
   const guWrap = document.getElementById('facGuRows');
+  let guAmt=0, guExecT=0;
   guWrap.innerHTML = facGuItems.map((it,idx)=>{
     const p = it.amount ? Math.round((it.exec||0)/it.amount*1000)/10 : 0;
     const rem = it.amount - (it.exec||0);
-    return `<div class="subitem-row"><span>${it.label}</span><span>${fmt(it.amount)}천원</span>
-      <input type="number" min="0" class="num-in" style="width:88px;" value="${it.exec||0}" onchange="updateFacExec('gu', ${idx}, this.value)">
-      <span class="exec-pct" style="color:${p>=100?'#166B3E':'#1B2B22'}">${p}%</span>
-      <span style="text-align:right;color:${rem<0?'var(--red)':'var(--ink-soft)'};">${fmt(rem)}</span></div>`;
-  }).join('');
+    guAmt += it.amount; guExecT += (it.exec||0);
+    return `<div class="subitem-row gu-row"><span>${it.label}${it.counterpart?'<br><span style="font-size:9.5px;font-weight:700;color:var(--amber);">●대응자금 포함</span>':''}</span><span style="text-align:right;">${won(it.amount)}원</span>
+      <span style="text-align:right;font-weight:700;">${won(it.exec||0)}원</span>
+      <span class="exec-pct" style="text-align:right;color:${p>=100?'#166B3E':'#1B2B22'}">${p}%</span>
+      <span style="text-align:right;color:${rem<0?'var(--red)':'var(--ink-soft)'};">${won(rem)}원</span></div>`;
+  }).join('') + `<div class="subitem-row gu-row" style="font-weight:800;border-top:2px solid var(--line);color:var(--ink);">
+      <span>총계</span><span style="text-align:right;">${won(guAmt)}원</span><span style="text-align:right;">${won(guExecT)}원</span>
+      <span class="exec-pct" style="text-align:right;">${guAmt?Math.round(guExecT/guAmt*1000)/10:0}%</span>
+      <span style="text-align:right;">${won(guAmt-guExecT)}원</span></div>`;
 
   renderCounterpartRows();
 }
@@ -1132,28 +1168,29 @@ function renderCounterpartRows(){
     const rem = it.amount - (it.exec||0);
     totalAmt += it.amount; totalExec += (it.exec||0);
     return `<tr>
-      <td>${it.label}</td>
+      <td>${it.label}<br><span style="font-size:9.5px;font-weight:700;color:var(--ink-soft);">(창업지원시설운영 예산에 포함 · 별도 집계)</span></td>
       <td>${it.program}</td>
-      <td style="text-align:right;">${fmt(it.amount)}</td>
+      <td style="text-align:right;">${won(it.amount)}</td>
       <td style="text-align:right;">
-        <input type="number" min="0" class="num-in" style="width:90px;text-align:right;" value="${it.exec||0}" onchange="updateCounterpartExec(${idx}, this.value)">
+        <span style="font-weight:700;">${won(it.exec||0)}원</span>
       </td>
-      <td class="exec-pct" style="text-align:center;color:${pct>=100?'#166B3E':'#B4432F'}">${pct}%</td>
-      <td style="text-align:right;color:${rem<0?'var(--red)':'inherit'};">${fmt(rem)}</td>
+      <td class="exec-pct" style="text-align:right;color:${pct>=100?'#166B3E':'#B4432F'}">${pct}%</td>
+      <td style="text-align:right;color:${rem<0?'var(--red)':'inherit'};">${won(rem)}</td>
     </tr>`;
   }).join('') + `<tr style="font-weight:800;border-top:2px solid var(--line);">
       <td colspan="2">총계</td>
-      <td style="text-align:right;">${fmt(totalAmt)}</td>
-      <td style="text-align:right;">${fmt(totalExec)}</td>
-      <td style="text-align:center;">${totalAmt?Math.round(totalExec/totalAmt*1000)/10:0}%</td>
-      <td style="text-align:right;">${fmt(totalAmt-totalExec)}</td>
+      <td style="text-align:right;">${won(totalAmt)}</td>
+      <td style="text-align:right;">${won(totalExec)}</td>
+      <td style="text-align:right;">${totalAmt?Math.round(totalExec/totalAmt*1000)/10:0}%</td>
+      <td style="text-align:right;">${won(totalAmt-totalExec)}</td>
     </tr>`;
 }
-function updateCounterpartExec(idx, val){ counterpartItems[idx].exec = Number(val)||0; renderCounterpartRows(); renderBudget(); markBudgetDirty(); }
-function updateOrgExec(idx, val){ orgItems[idx].exec = Number(val)||0; renderOrgFacRows(); renderBudget(); markBudgetDirty(); }
+function updateCounterpartExec(idx, val){ counterpartItems[idx].exec = (Number(val)||0)/1000; renderCounterpartRows(); renderBudget(); markBudgetDirty(); }
+function parseWon(val){ return Number(String(val).replace(/[^0-9.\-]/g,''))||0; }
+function updateOrgExec(idx, val){ orgItems[idx].exec = parseWon(val)/1000; renderOrgFacRows(); renderBudget(); markBudgetDirty(); }
 function updateFacExec(which, idx, val){
-  if(which==='univ') facUnivItems[idx].exec = Number(val)||0;
-  else facGuItems[idx].exec = Number(val)||0;
+  if(which==='univ') facUnivItems[idx].exec = parseWon(val)/1000;
+  else facGuItems[idx].exec = parseWon(val)/1000;
   renderOrgFacRows(); renderBudget(); markBudgetDirty();
 }
 
@@ -1161,18 +1198,43 @@ function renderBudget(){
   const orgExec = itemsExecSum(orgItems);
   const facExec = itemsExecSum(facUnivItems) + itemsExecSum(facGuItems);
   const progExec = programs.reduce((s,p)=>s+programBudgetExecSum(p),0);
-  const counterpartExec = counterpartItems.reduce((s,it)=>s+(it.exec||0),0);
-  const totalExec = orgExec + facExec + progExec + counterpartExec;
-  const totalBudget = 1500000;
-  const totalPct = Math.round(totalExec/totalBudget*1000)/10;
+  const totalExec = orgExec + facExec + progExec;
+
+  const orgAmt = orgItems.reduce((s,it)=>s+it.amount,0);
+  const facAmt = facUnivItems.reduce((s,it)=>s+it.amount,0) + facGuItems.reduce((s,it)=>s+it.amount,0);
+  const facUnivAmt = facUnivItems.reduce((s,it)=>s+it.amount,0);
+  const facGuAmt = facGuItems.reduce((s,it)=>s+it.amount,0);
+  const counterpartAmt = counterpartItems.reduce((s,it)=>s+it.amount,0);
+  const setTxt = (id,val)=>{ const el=document.getElementById(id); if(el) el.textContent = val; };
+  setTxt('orgHeadingAmt', won(orgAmt));
+  setTxt('facHeadingAmt', won(facAmt));
+  setTxt('facUnivHeadingAmt', won(facUnivAmt));
+  setTxt('facGuHeadingAmt', won(facGuAmt));
+  setTxt('counterpartHeadingAmt', won(counterpartAmt));
+  const catLiveAmt = {};
+  BUDGET_CATS_META.forEach(c=>{
+    if(c.key==='orgops') catLiveAmt[c.key] = orgAmt;
+    else if(c.key==='facops') catLiveAmt[c.key] = facAmt;
+    else catLiveAmt[c.key] = programs.filter(p=>p.cat===c.key).reduce((s,p)=>s+programBudgetTotal(p),0);
+  });
+  const totalBudget = Object.values(catLiveAmt).reduce((a,b)=>a+b,0);
+  const totalPct = totalBudget ? Math.round(totalExec/totalBudget*1000)/10 : 0;
   const totalRemain = totalBudget - totalExec;
+  const diffFromOrig = totalBudget - ORIG_TOTAL_BUDGET;
+  document.getElementById('totalBudgetBig').textContent = won(totalBudget);
 
   document.getElementById('totalExecTxt').innerHTML = `
-    <span class="hero-stat-line exec">집행액 <span class="v">${fmt(totalExec)}</span>천원</span>
-    <span class="hero-stat-line remain${totalRemain<0?' neg':''}">잔여액 <span class="v">${fmt(totalRemain)}</span>천원</span>
+    <span class="hero-stat-line exec">집행액 <span class="v">${won(totalExec)}</span>원</span>
+    <span class="hero-stat-line remain${totalRemain<0?' neg':''}">잔여액 <span class="v">${won(totalRemain)}</span>원</span>
   `;
   document.getElementById('totalRingTxt').textContent = totalPct+'%';
   document.getElementById('totalRing').style.setProperty('--p', Math.min(totalPct,100)+'%');
+  const diffEl = document.getElementById('budgetDiffNote');
+  if(diffEl){
+    diffEl.textContent = diffFromOrig===0
+      ? `최초 승인 예산(${won(ORIG_TOTAL_BUDGET)}원)과 일치합니다.`
+      : `최초 승인 예산 ${won(ORIG_TOTAL_BUDGET)}원 대비 ${diffFromOrig>0?'+':''}${won(diffFromOrig)}원 (신규 편성·추가모집 등 반영, 현재 총액 ${won(totalBudget)}원)`;
+  }
 
   const catWrap = document.getElementById('catRows');
   catWrap.innerHTML='';
@@ -1181,16 +1243,17 @@ function renderBudget(){
     if(c.key==='orgops') exec = orgExec;
     else if(c.key==='facops') exec = facExec;
     else exec = programs.filter(p=>p.cat===c.key).reduce((s,p)=>s+programBudgetExecSum(p),0);
-    const pct = c.amount ? Math.round(exec/c.amount*1000)/10 : 0;
-    const remain = c.amount - exec;
+    const amt = catLiveAmt[c.key];
+    const pct = amt ? Math.round(exec/amt*1000)/10 : 0;
+    const remain = amt - exec;
     const row = document.createElement('div');
     row.className='cat-row';
     row.innerHTML = `
       <div><span class="cat-dot" style="background:${c.color}"></span><span class="cat-name">${c.label}</span></div>
-      <div class="cat-figs">배정 ${fmt(c.amount)}천원</div>
-      <div class="cat-figs">집행 ${fmt(exec)}천원</div>
+      <div class="cat-figs" style="text-align:right;">배정 ${won(amt)}원${amt!==c.origAmount?`<br><span style="color:var(--amber);font-size:10.8px;">(최초 ${won(c.origAmount)}원)</span>`:''}</div>
+      <div class="cat-figs" style="text-align:right;">집행 ${won(exec)}원</div>
       <div class="cat-pct" style="color:${pct>=100?'#166B3E':(pct>0?'#2E5FA3':'#5B6B62')}">${pct}%</div>
-      <div class="cat-figs" style="text-align:right;color:${remain<0?'var(--red)':'var(--ink-soft)'};">잔여 ${fmt(remain)}천원</div>
+      <div class="cat-figs" style="text-align:right;color:${remain<0?'var(--red)':'var(--ink-soft)'};">잔여 ${won(remain)}원</div>
     `;
     catWrap.appendChild(row);
   });
@@ -1206,14 +1269,30 @@ function renderBudget(){
     if(pct>90) tr.className='row-highlight';
     tr.innerHTML = `
       <td><span class="catchip ${p.cat}">${CAT_META[p.cat].label}</span></td>
-      <td style="font-weight:600;">${p.name}${p.rounds?' <span style="font-size:10px;color:var(--ink-soft);">(2~3차 기준, 1차 2025예산 제외)</span>':''}</td>
-      <td style="text-align:right;">${fmt(budgetTot)}</td>
-      <td style="text-align:right;">${fmt(exec)}</td>
-      <td class="exec-pct" style="color:${pct>=100?'#166B3E':'#B4432F'}">${pct}%</td>
-      <td style="text-align:right;color:${remain<0?'var(--red)':'inherit'};">${fmt(remain)}</td>
+      <td style="font-weight:600;">${p.name}${p.rounds?' <span style="font-size:10px;color:var(--ink-soft);">(2차 기준, 1차·3차 집계제외)</span>':''}</td>
+      <td style="text-align:right;">${won(budgetTot)}</td>
+      <td style="text-align:right;">${won(exec)}</td>
+      <td class="exec-pct" style="text-align:right;color:${pct>=100?'#166B3E':'#B4432F'}">${pct}%</td>
+      <td style="text-align:right;color:${remain<0?'var(--red)':'inherit'};">${won(remain)}</td>
     `;
     tbody.appendChild(tr);
   });
+
+  const progTotalAmt = programs.reduce((s,p)=>s+programBudgetTotal(p),0);
+  const progTotalExec = programs.reduce((s,p)=>s+programBudgetExecSum(p),0);
+  const progTotalPct = progTotalAmt ? Math.round(progTotalExec/progTotalAmt*1000)/10 : 0;
+  const progTotalRemain = progTotalAmt - progTotalExec;
+  const totalTr = document.createElement('tr');
+  totalTr.style.fontWeight='800';
+  totalTr.style.borderTop='2px solid var(--line)';
+  totalTr.innerHTML = `
+    <td colspan="2">총계 (14개 프로그램)</td>
+    <td style="text-align:right;">${won(progTotalAmt)}</td>
+    <td style="text-align:right;">${won(progTotalExec)}</td>
+    <td class="exec-pct" style="text-align:right;color:${progTotalPct>=100?'#166B3E':'#B4432F'}">${progTotalPct}%</td>
+    <td style="text-align:right;color:${progTotalRemain<0?'var(--red)':'inherit'};">${won(progTotalRemain)}</td>
+  `;
+  tbody.appendChild(totalTr);
 }
 
 /* ---------- 12월말까지 남은 D-Day ---------- */
@@ -1224,7 +1303,7 @@ function renderYearEndCountdown(){
   const yearEnd = new Date(now.getFullYear(), 11, 31, 23, 59, 59);
   let days = Math.ceil((yearEnd - now) / (1000*60*60*24));
   if(days < 0) days = 0;
-  el.innerHTML = `<span style="font-size:22px;font-weight:800;">D-${days}</span><span style="font-size:11px;margin-left:6px;color:#BFE0CD;">12.31까지</span>`;
+  el.innerHTML = `<span style="font-size:34px;font-weight:800;">D-${days}</span><span style="font-size:12.5px;margin-left:8px;color:#BFE0CD;">12.31까지</span>`;
 }
 
 /* =========================================================
@@ -1403,7 +1482,7 @@ function roundAggregate(p){
   const withContent = rs.filter(r=>r.content && r.content.trim());
   const content = withContent.length ? withContent.map(r=>`[${r.label}] ${r.content}`).join('\n\n') : '입력된 결과보고서 내용 없음';
   const budgetItems = [];
-  rs.forEach(r=>{ (r.budgetItems||[]).forEach(bi=>{ budgetItems.push({label:`[${r.label}]${r.excludeFromTotal?' (2025년 예산·집계제외)':''} ${bi.label}`, amount:Number(bi.amount)||0, exec:Number(bi.exec)||0, excluded:!!r.excludeFromTotal}); }); });
+  rs.forEach(r=>{ (r.budgetItems||[]).forEach(bi=>{ budgetItems.push({label:`[${r.label}]${r.excludeFromTotal?` (${r.excludeReason||'집계제외'})`:''} ${bi.label}`, amount:Number(bi.amount)||0, exec:Number(bi.exec)||0, excluded:!!r.excludeFromTotal, excludeReason:r.excludeReason}); }); });
   const kpiMap = {};
   rs.forEach(r=>{ (r.kpis||[]).forEach(k=>{
     const mk = k.label+'|'+k.unit;
@@ -1608,7 +1687,7 @@ function openDetail(id){
       return `<div class="budgetline-row" style="background:var(--amber-bg);opacity:.85;">
       <span style="color:var(--amber);">${brLabel(bi.label)}</span><span style="text-align:right;color:var(--amber);">${fmt(bi.amount)}천원</span>
       <span style="text-align:right;color:var(--amber);">${fmt(bi.exec||0)}천원</span>
-      <span class="exec-pct" style="color:var(--amber);">집계제외<br><span class="kpi-under-tag" style="background:var(--amber);color:#fff;">2025예산</span></span></div>`;
+      <span class="exec-pct" style="color:var(--amber);">집계제외<br><span class="kpi-under-tag" style="background:var(--amber);color:#fff;">${bi.excludeReason||'집계제외'}</span></span></div>`;
     }
     return `<div class="budgetline-row">
       <span>${brLabel(bi.label)}</span><span style="text-align:right;">${fmt(bi.amount)}천원</span>
@@ -1721,7 +1800,7 @@ function openDetail(id){
           <div class="detail-block-title">소요예산 · 산출근거별 집행 현황${p.rounds ? ` <span style="font-weight:400;color:var(--ink-soft);">(${isRoundTotal ? '1~3차 통합, 읽기전용' : activeRound.label+' 기준'})</span>` : ''}${isDone && !p.rounds ? ' <span style="font-weight:400;color:var(--ink-soft);">(완료, 읽기전용)</span>' : ''}</div>
           <div class="budgetline-head"><span>산출근거 항목</span><span style="text-align:right;">배정</span><span style="text-align:right;">${numsLocked?'집행액':'집행액 입력'}</span><span style="text-align:center;">집행률</span></div>
           ${budgetRows}
-          ${(isRoundTotal && budgetSrc.some(bi=>bi.excluded)) ? `<div class="sec-note" style="margin:6px 0;color:var(--amber);">🟧 표시 항목(1차)은 2025년 사업예산으로 집행되어 2026년 배정액·집행액 집계에서 제외되었습니다.</div>` : ''}
+          ${(isRoundTotal && budgetSrc.some(bi=>bi.excluded)) ? `<div class="sec-note" style="margin:6px 0;color:var(--amber);">🟧 표시 항목(1차·3차)은 각각 2025년 예산 집행분 및 그 밖의 사업 운영 경비로 분류되어 2026년 배정액·집행액 집계에서 제외되었습니다.</div>` : ''}
           <div class="budgetline-row total-row" style="font-weight:800;margin-top:4px;">
             <span>합계</span><span style="text-align:right;">${fmt(budgetTotal)}천원</span><span style="text-align:right;">${fmt(execSum)}천원</span>
             <span class="exec-pct" style="color:${pct>=100?'#166B3E':'#B4432F'}">${pct}%${pct<100?'<br><span class="kpi-under-tag">미달성</span>':''}</span>
@@ -1769,6 +1848,7 @@ renderManagerFilterBar();
 renderStatusCounts();
 renderGantt();
 renderFeedbackSummary();
+
 </script>
 </body>
 </html>

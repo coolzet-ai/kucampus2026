@@ -275,12 +275,39 @@
   .sync-badge{font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;background:#EEF1EC;color:var(--ink-soft);margin-left:8px;}
   .sync-badge.on{background:var(--leaf-light);color:#166B3E;}
   @media (max-width:860px){
-    .shell{flex-direction:column;} .sidebar{width:100%;flex:none;position:relative;height:auto;padding:16px;}
-    .main{padding:22px 18px 60px;} .grid-4,.grid-3,.grid-2{grid-template-columns:1fr 1fr;}
+    .shell{flex-direction:column;}
+    .sidebar{width:100%;flex:none;position:sticky;top:0;z-index:50;height:auto;padding:10px 12px;overflow-y:visible;}
+    .brand{padding:0 4px 8px;margin-bottom:8px;border-bottom:none;display:flex;align-items:center;justify-content:space-between;gap:10px;}
+    .brand-title{font-size:14px;line-height:1.2;}
+    .brand-mark,.brand-sub{display:none;}
+    .navlist{list-style:none;margin:0;padding:0;display:flex;overflow-x:auto;gap:6px;-webkit-overflow-scrolling:touch;scrollbar-width:thin;padding-bottom:6px;}
+    .navlist li{margin-bottom:0;flex:0 0 auto;border-top:none !important;padding-top:0 !important;margin-top:0 !important;}
+    .navlist button{width:auto;white-space:nowrap;padding:8px 12px;font-size:12px;flex-direction:row;}
+    .sidebar-foot{display:none;}
+    .main{padding:16px 14px 50px;}
+    .topbar{flex-direction:column;align-items:flex-start;gap:8px;}
+    .grid-4,.grid-3,.grid-2{grid-template-columns:1fr 1fr;}
+    * { word-break:keep-all; overflow-wrap:break-word; }
+
+    #ganttWrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+    #ganttWrap .gantt-row{min-width:520px;}
+    #catRows{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+    #catRows .cat-row{min-width:480px;}
+    #orgRows,#facUnivRows,#facGuRows{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+    #orgRows .subitem-row,#facUnivRows .subitem-row,#facGuRows .subitem-row{min-width:460px;}
+    .card table{min-width:520px;}
+
     .gantt-row{grid-template-columns:110px 1fr 44px 44px 44px 44px;font-size:10.5px;}
-    .cat-row{grid-template-columns:1fr;} .stage-row{grid-template-columns:repeat(2,1fr);}
+    .cat-row{grid-template-columns:1.4fr .7fr .7fr .55fr .55fr;}
+    .stage-row{grid-template-columns:repeat(2,1fr);}
     .budgetline-row,.budgetline-head,.kpirow,.kpirow-head{grid-template-columns:1.4fr .7fr .7fr .6fr;font-size:11px;}
     .subitem-row,.subitem-head{grid-template-columns:1.2fr .6fr .6fr .5fr .5fr;font-size:10px;}
+
+    .hero-stat-line{width:100%;}
+    .budget-hero{flex-direction:column;align-items:stretch;}
+    .ring-wrap{flex-direction:column;align-items:flex-start;}
+    .filterbar,.gov-filterbar{overflow-x:auto;flex-wrap:nowrap;-webkit-overflow-scrolling:touch;padding-bottom:6px;}
+    .filterbar .filterbtn,.gov-filterbar .filterbtn{flex:0 0 auto;}
   }
 </style>
 </head>
@@ -455,7 +482,7 @@
       </div>
 
       <h2 class="sec-h">대학 대응자금 투입 및 자치구 사업비 지원 (<span id="counterpartHeadingAmt">300,000,000</span>원)</h2>
-      <div class="card" style="margin-bottom:20px;">
+      <div class="card" style="margin-bottom:20px;overflow-x:auto;">
         <div class="sec-note" style="margin-top:0;">대학 대응자금 투입 시기('26.4월 완료) 기준 집행 현황입니다. 배정 금액은 「Unicorn Seed 프로그램」 및 창업지원시설운영(스타시티 스타트업 존·K-이노베이션 스테이션 센터) 예산 중 대응자금으로 배정된 부분입니다. <b>이 금액은 창업지원시설운영·Unicorn Seed 프로그램 예산에 이미 포함되어 있으므로, 상단 "전체 예산 집행률" 및 6개 카테고리 집계에서는 별도로 합산하지 않습니다(중복 계산 방지).</b></div>
         <table>
           <thead><tr><th>항목</th><th>프로그램명</th><th style="text-align:right;">배정(원)</th><th style="text-align:right;">집행(원)</th><th style="text-align:right;">집행률</th><th style="text-align:right;">잔여(원)</th></tr></thead>
@@ -586,7 +613,26 @@
         <div class="view-desc">건국대학교 캠퍼스타운사업단 입주기업 디렉토리(공간별·분야별·오피스구분·교내창업여부 등)를 연계합니다.</div>
       </div>
       <div class="previewcard">
-        <div class="shot"><span class="bignote">🏢</span><span>이 환경에서는 외부 사이트 실시간 미리보기가 표시되지 않습니다</span></div>
+        <div class="shot" style="height:auto;padding:24px 20px;background:linear-gradient(135deg,#F7FBF8 0%,#EDF4EF 100%);">
+          <svg viewBox="0 0 640 300" style="width:100%;max-width:560px;height:auto;">
+            <rect x="0" y="0" width="640" height="300" rx="14" fill="#EEF3EE" stroke="#DCE6DE" stroke-width="1"/>
+            <line x1="60" y1="40" x2="60" y2="260" stroke="#C9D6CC" stroke-width="2"/>
+            <line x1="60" y1="150" x2="580" y2="150" stroke="#C9D6CC" stroke-width="2" stroke-dasharray="4 4"/>
+            <text x="320" y="24" text-anchor="middle" font-size="12" fill="#5B6B62" font-weight="700">건국대학교 캠퍼스타운 입주공간 배치도 (개념도)</text>
+
+            <!-- pins -->
+            <g font-family="sans-serif">
+              <circle cx="150" cy="90" r="9" fill="#0F4D33"/><text x="150" y="76" text-anchor="middle" font-size="11" font-weight="700" fill="#0A3624">스타시티 스타트업 존</text>
+              <circle cx="290" cy="90" r="9" fill="#2E8B57"/><text x="290" y="76" text-anchor="middle" font-size="11" font-weight="700" fill="#0A3624">K-바이오 이노베이션 허브</text>
+              <circle cx="430" cy="90" r="9" fill="#2E8B57"/><text x="430" y="76" text-anchor="middle" font-size="11" font-weight="700" fill="#0A3624">K-이노베이션 스테이션 센터</text>
+              <circle cx="150" cy="210" r="7" fill="#6B4FA0"/><text x="150" y="230" text-anchor="middle" font-size="11" font-weight="700" fill="#0A3624">KU 스타트업 존</text>
+              <circle cx="290" cy="210" r="7" fill="#6B4FA0"/><text x="290" y="230" text-anchor="middle" font-size="11" font-weight="700" fill="#0A3624">KU청년창업스튜디오</text>
+              <circle cx="430" cy="210" r="7" fill="#B8792B"/><text x="430" y="230" text-anchor="middle" font-size="11" font-weight="700" fill="#0A3624">창의관 창업지원시설</text>
+              <circle cx="540" cy="150" r="8" fill="#2E5FA3"/><text x="540" y="136" text-anchor="middle" font-size="11" font-weight="700" fill="#0A3624">사업단 사업센터</text>
+            </g>
+            <text x="320" y="284" text-anchor="middle" font-size="10.5" fill="#8A9A8E">실제 지리적 좌표가 아닌 공간 구성을 보여주는 개념도입니다 · 총 67개 입주기업(2026.9.9 기준)</text>
+          </svg>
+        </div>
         <div class="body">
           <h4>입주기업 디렉토리 · coolzet-ai.github.io/KU</h4>
           <p>K-이노베이션 스테이션 센터부터 창의관까지 6개 공간, 총 67개 입주기업(2026.9.9 기준)을 아래 기준으로 조회할 수 있는 외부 디렉토리입니다.</p>
@@ -609,7 +655,35 @@
         <div class="view-desc">서울 창업 생태계 유관기관(서울시캠퍼스타운·중기부 산하기관·서울시 창업지원기관 등 30여 개) 2026년 하반기 프로그램 캘린더를 연계합니다.</div>
       </div>
       <div class="previewcard">
-        <div class="shot"><span class="bignote">🗓️</span><span>이 환경에서는 외부 사이트 실시간 미리보기가 표시되지 않습니다</span></div>
+        <div class="shot" style="height:auto;padding:24px 20px;background:linear-gradient(135deg,#F5F8FC 0%,#EAF0F8 100%);">
+          <svg viewBox="0 0 640 320" style="width:100%;max-width:560px;height:auto;">
+            <text x="320" y="22" text-anchor="middle" font-size="12" fill="#5B6B62" font-weight="700">서울 창업 생태계 유관기관 분포 (5개 생활권역 기준)</text>
+            <!-- simplified seoul zones as rounded blocks -->
+            <g font-family="sans-serif">
+              <rect x="230" y="40" width="180" height="70" rx="12" fill="#E7EEF8" stroke="#2E5FA3" stroke-width="1.5"/>
+              <text x="320" y="65" text-anchor="middle" font-size="12" font-weight="800" fill="#2E5FA3">도심권</text>
+              <text x="320" y="82" text-anchor="middle" font-size="9.5" fill="#5B6B62">종로·중구·용산</text>
+
+              <rect x="420" y="40" width="180" height="90" rx="12" fill="#DCEEE2" stroke="#2E8B57" stroke-width="1.5"/>
+              <text x="510" y="65" text-anchor="middle" font-size="12" font-weight="800" fill="#166B3E">동북권</text>
+              <text x="510" y="82" text-anchor="middle" font-size="9.5" fill="#5B6B62">성동·광진·동대문 등</text>
+              <text x="510" y="98" text-anchor="middle" font-size="9.5" fill="#5B6B62">건국대학교 위치</text>
+
+              <rect x="40" y="40" width="170" height="70" rx="12" fill="#EEE8F6" stroke="#6B4FA0" stroke-width="1.5"/>
+              <text x="125" y="65" text-anchor="middle" font-size="12" font-weight="800" fill="#6B4FA0">서북권</text>
+              <text x="125" y="82" text-anchor="middle" font-size="9.5" fill="#5B6B62">은평·서대문·마포</text>
+
+              <rect x="40" y="160" width="230" height="100" rx="12" fill="#FBF0DF" stroke="#B8792B" stroke-width="1.5"/>
+              <text x="155" y="185" text-anchor="middle" font-size="12" font-weight="800" fill="#B8792B">서남권</text>
+              <text x="155" y="202" text-anchor="middle" font-size="9.5" fill="#5B6B62">양천·강서·구로·영등포 등</text>
+
+              <rect x="330" y="160" width="270" height="100" rx="12" fill="#F8E9E5" stroke="#B4432F" stroke-width="1.5"/>
+              <text x="465" y="185" text-anchor="middle" font-size="12" font-weight="800" fill="#B4432F">동남권</text>
+              <text x="465" y="202" text-anchor="middle" font-size="9.5" fill="#5B6B62">서초·강남·송파·강동</text>
+            </g>
+            <text x="320" y="300" text-anchor="middle" font-size="10.5" fill="#8A9A8E">서울캠퍼스타운 13개 참여대학 · 중기부 산하기관·AC·VC 등 30여 개 기관 분포 개념도</text>
+          </svg>
+        </div>
         <div class="body">
           <h4>유관기관 프로그램 캘린더 · coolzet-ai.github.io/OneHealth</h4>
           <p>서울캠퍼스타운 참여대학(13개교) 및 중기부 산하기관·AC·VC 등 30여 개 기관을 전수 조사한 2026년 하반기 공고 스냅샷입니다. 종료된 일정은 접속 시점 기준으로 자동 제외됩니다.</p>
@@ -636,14 +710,38 @@
         <a class="openbtn" href="https://campustown.konkuk.ac.kr/" target="_blank" rel="noopener" style="background:#fff;color:var(--forest-deep);">campustown.konkuk.ac.kr ↗</a>
       </div>
       <div class="previewcard">
-        <div class="shot"><span class="bignote">🌐</span><span>이 환경에서는 외부 사이트 실시간 미리보기가 표시되지 않습니다</span></div>
+        <div class="shot" style="height:auto;padding:30px 20px;background:linear-gradient(135deg,#0F4D33 0%,#0A3624 100%);">
+          <svg viewBox="0 0 220 220" style="width:150px;height:150px;">
+            <circle cx="110" cy="110" r="104" fill="none" stroke="#EFF6F1" stroke-width="3"/>
+            <circle cx="110" cy="110" r="92" fill="none" stroke="#9FCBAE" stroke-width="1.5"/>
+            <path id="topArc" d="M 38 110 A 72 72 0 0 1 182 110" fill="none"/>
+            <path id="botArc" d="M 46 130 A 64 64 0 0 0 174 130" fill="none"/>
+            <text font-size="12.5" fill="#EFF6F1" font-weight="700" letter-spacing="1.5">
+              <textPath href="#topArc" startOffset="50%" text-anchor="middle">KONKUK UNIVERSITY</textPath>
+            </text>
+            <text font-size="10.5" fill="#9FCBAE" font-weight="600" letter-spacing="1">
+              <textPath href="#botArc" startOffset="50%" text-anchor="middle">KOREA</textPath>
+            </text>
+            <!-- simple building/torch icon -->
+            <g transform="translate(110,105)">
+              <rect x="-26" y="-6" width="52" height="26" rx="2" fill="#EFF6F1"/>
+              <rect x="-20" y="-18" width="8" height="14" fill="#EFF6F1"/>
+              <rect x="-4" y="-24" width="8" height="20" fill="#EFF6F1"/>
+              <rect x="12" y="-18" width="8" height="14" fill="#EFF6F1"/>
+              <circle cx="0" cy="-30" r="4" fill="#FBF0DF"/>
+            </g>
+            <text x="110" y="150" text-anchor="middle" font-size="15" font-weight="800" fill="#EFF6F1">건국대학교</text>
+            <text x="110" y="164" text-anchor="middle" font-size="9.5" fill="#9FCBAE">1931</text>
+          </svg>
+          <div style="color:#EFF6F1;font-size:12px;margin-top:14px;">건국대학교 캠퍼스타운사업본부 공식 홈페이지</div>
+        </div>
         <div class="body">
           <h4>건국대학교 캠퍼스타운사업본부 공식 홈페이지</h4>
           <p>사업 공고, 입주기업 모집요강, 프로그램 신청서 접수 등 공식 행정 정보는 사업단 홈페이지에서 확인하실 수 있습니다.</p>
           <a class="openbtn" href="https://campustown.konkuk.ac.kr/" target="_blank" rel="noopener">새 탭에서 홈페이지 열기 ↗</a>
         </div>
       </div>
-      <div class="notice-inline">참고 : 위 3개(입주기업 현황·유관기관 캘린더·사업단 홈페이지) 화면은 보안 정책상 이 대시보드 안에서 실시간으로 불러와 보여줄 수 없어, 새 탭 링크로 안내하는 방식으로 대체했습니다.</div>
+      <div class="notice-inline">참고 : 위 3개(입주기업 현황·유관기관 캘린더·사업단 홈페이지) 화면은 보안 정책상 이 대시보드 안에서 실시간으로 불러올 수 없어, 실제 화면 대신 개념도·상징 이미지로 대체 표시했습니다. 실시간 정보는 새 탭 링크에서 확인해주세요.</div>
     </section>
 
     <!-- ============ 10. 서울캠퍼스타운 홈페이지 ============ -->

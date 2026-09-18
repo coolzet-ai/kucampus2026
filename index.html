@@ -90,6 +90,14 @@
   tbody td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:middle;}
   tbody tr:hover{background:#FAFBF8;}
   .catchip{font-size:10.3px;font-weight:700;padding:3px 8px;border-radius:20px;white-space:nowrap;display:inline-block;}
+  .grade-badge{font-size:10.5px;font-weight:800;padding:3px 10px;border-radius:20px;display:inline-block;white-space:nowrap;}
+  .grade-badge.best{background:#DCF3E4;color:#146C3A;}
+  .grade-badge.good{background:var(--blue-bg,#E7EEF8);color:#2E5FA3;}
+  .kv2{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dashed var(--line);font-size:12.5px;}
+  .kv2 b{color:var(--ink-soft);font-weight:700;font-size:11.8px;}
+  .stat-mini{background:#FAFBF9;border:1px solid var(--line);border-radius:12px;padding:16px;text-align:center;}
+  .stat-mini .big{font-size:20px;font-weight:800;color:var(--forest-deep);}
+  .stat-mini .lbl{font-size:11px;color:var(--ink-soft);margin-top:4px;}
   .catchip.공통{color:#166B3E;background:var(--leaf-light);} .catchip.자율{color:var(--blue);background:var(--blue-bg);}
   .catchip.AI{color:var(--violet);background:var(--violet-bg);} .catchip.ANCHOR{color:var(--amber);background:var(--amber-bg);}
   .audchip{font-size:10.5px;font-weight:600;padding:3px 8px;border-radius:20px;background:#EEF1EC;color:var(--ink-soft);display:inline-block;margin:0 4px 4px 0;}
@@ -339,6 +347,9 @@
       <li><button data-view="v8"><span class="num">8</span>유관기관 캘린더</button></li>
       <li><button data-view="v9"><span class="num">9</span>사업단 홈페이지</button></li>
       <li><button data-view="v10"><span class="num">10</span>서울캠퍼스타운 홈페이지</button></li>
+      <li style="border-top:1px solid rgba(255,255,255,.14);margin-top:10px;padding-top:10px;">
+        <button data-view="v11" style="padding-left:12px;">[참고] 2025년 결과보고</button>
+      </li>
     </ul>
     <div class="sidebar-foot">
       자료 근거 : 2026년 9월 지표점검회의(2026.8.31 기준) 및 건국대학교 캠퍼스타운사업 세부실행계획서(변경후)<br><br>
@@ -787,6 +798,100 @@
       <div class="card">
         <p style="font-size:13px;margin-top:0;">서울대는 전용 캠퍼스타운 사이트를, 국민대·한양대·연세대는 대학 창업지원단(스타트업 라운지) 홈페이지를 통해 캠퍼스타운을 운영하고 있습니다. <b>2026년 선정 13개 대학 전체 목록</b>은 서울캠퍼스타운 공식 사이트에서 확인할 수 있습니다.</p>
         <a class="openbtn" href="https://campustown.seoul.go.kr/site/main/university/list" target="_blank" rel="noopener">전체 참여대학 목록 보기 ↗</a>
+      </div>
+    </section>
+
+    <!-- ============ [참고] 2025년 결과보고 ============ -->
+    <section class="view" id="v11">
+      <div class="view-head">
+        <div class="view-kicker">[참고] 2025 RESULT REPORT · K-이노베이션 스테이션 캠퍼스타운 조성(창업형)</div>
+        <div class="view-title">[참고] 2025년 결과보고</div>
+        <div class="view-desc">「2025년 건국대학교 캠퍼스타운 사업 결과보고서(창업형)」(2026.6 제출) 원문을 기준으로 정리했습니다. 사업비 집행결과 세부내역은 원문의 복잡한 표 구조를 텍스트로 재구성한 것이라 일부 항목은 원문과 약간의 오차가 있을 수 있어, 정밀 대사가 필요한 경우 원문 대조를 권장합니다.</div>
+      </div>
+
+      <h2 class="sec-h" style="margin-top:0;">① 사업비 집행결과</h2>
+      <div class="grid grid-4" style="margin-bottom:20px;">
+        <div class="stat-mini"><div class="big">1,250,000,000원</div><div class="lbl">교부액(A)</div></div>
+        <div class="stat-mini"><div class="big">1,161,566,384원</div><div class="lbl">집행액(B)</div></div>
+        <div class="stat-mini"><div class="big" style="color:#166B3E;">92.9%</div><div class="lbl">실 집행률 [(B/A)×100]</div></div>
+        <div class="stat-mini"><div class="big" style="color:var(--amber);">88,433,616원</div><div class="lbl">집행잔액(사업 종료 후 발생)</div></div>
+      </div>
+      <div class="sec-note" style="margin-top:0;">보조금 통장 해지일 2026.4.30 (집행잔액 88,433,616원, 결산이자 16,831,690원, 수익금 1,237원) · 이월액 없음</div>
+
+      <h3 class="sub-h">창업지원시설별 예산 집행 현황</h3>
+      <div class="card" style="overflow-x:auto;margin-bottom:20px;">
+        <table>
+          <thead><tr><th>시설명</th><th style="text-align:right;">예산액</th><th style="text-align:right;">집행액</th><th style="text-align:center;">집행률</th></tr></thead>
+          <tbody id="facilityExecBody"></tbody>
+        </table>
+      </div>
+
+      <h3 class="sub-h">프로그램별 예산 집행 현황 (13개 프로그램 + 사업단 운영)</h3>
+      <div class="card" style="overflow-x:auto;margin-bottom:26px;">
+        <table>
+          <thead><tr><th>프로그램명</th><th style="text-align:right;">예산액</th><th style="text-align:right;">집행액</th><th style="text-align:center;">집행률</th></tr></thead>
+          <tbody id="programExecBody"></tbody>
+        </table>
+      </div>
+
+      <h2 class="sec-h">② 사업실행에 대한 자체평가</h2>
+      <div class="sec-note" style="margin-top:0;">'25년 사업실적을 토대로 5단계(매우우수/우수/보통/미흡/매우미흡)로 자체 평가한 결과입니다.</div>
+      <div class="card" style="overflow-x:auto;margin-bottom:16px;">
+        <table>
+          <thead><tr><th>프로그램명</th><th>핵심 성과</th><th style="text-align:center;">평가</th></tr></thead>
+          <tbody id="selfEvalBody"></tbody>
+        </table>
+      </div>
+      <h3 class="sub-h">주요 정량 지표 (계획 대비 실적)</h3>
+      <div class="card" style="overflow-x:auto;margin-bottom:26px;">
+        <table>
+          <thead><tr><th>프로그램명</th><th>평가지표</th><th style="text-align:center;">계획</th><th style="text-align:center;">실적</th></tr></thead>
+          <tbody id="quantEvalBody"></tbody>
+        </table>
+        <div class="sec-note" style="margin-top:10px;">오픈 이노베이션 참여기업 수는 계획(70팀) 대비 181팀(259%)으로 가장 높은 초과 달성률을 기록했고, 반대로 KU 스타트업 스케일업의 펀딩업 투자유치는 계획(2건) 대비 0건에 그쳐 유일한 미달 지표였습니다.</div>
+      </div>
+
+      <h2 class="sec-h">③ 전담조직 구성원</h2>
+      <div class="card" style="overflow-x:auto;margin-bottom:26px;">
+        <table>
+          <thead><tr><th>성명</th><th>계약기간</th><th style="text-align:right;">계약금액(연)</th><th style="text-align:right;">지급총액</th><th>비고</th></tr></thead>
+          <tbody id="staffBody"></tbody>
+        </table>
+        <div class="sec-note" style="margin-top:10px;">개인정보 보호를 위해 생년월일·연락처는 대시보드에 표시하지 않았습니다(원문 결과보고서 참고).</div>
+      </div>
+
+      <h2 class="sec-h">④ 자산 물품 임차내역 및 사용 현황</h2>
+      <div class="card" style="overflow-x:auto;margin-bottom:26px;">
+        <table>
+          <thead><tr><th>물품명</th><th>규격/모델명</th><th style="text-align:right;">연간 임차료</th><th>임차기간</th><th style="text-align:center;">수량</th><th>사용 현황</th></tr></thead>
+          <tbody id="leaseBody"></tbody>
+        </table>
+        <div class="sec-note" style="margin-top:10px;">2025년 물품임차비 집행 총액(시설별 합산) : 16,969,100원</div>
+      </div>
+
+      <h2 class="sec-h">⑤ 시설별 공간운영비(공과금·관리비 등) 납부 현황</h2>
+      <div class="card" style="overflow-x:auto;margin-bottom:26px;">
+        <table>
+          <thead><tr><th>시설명</th><th>소유현황</th><th>규모(입주공간)</th><th style="text-align:center;">입주기업</th><th style="text-align:right;">연간 공간운영비</th></tr></thead>
+          <tbody id="facUtilBody"></tbody>
+        </table>
+        <div class="sec-note" style="margin-top:10px;">사업단 사업센터(창의관 318호, 68.6㎡)는 "창업지원공간 통합관리" 항목(연 80,113,770원)에 포함되어 별도 산출되지 않습니다.</div>
+      </div>
+
+      <h2 class="sec-h">⑥ 입주기업수 통계</h2>
+      <div class="grid grid-4" style="margin-bottom:16px;">
+        <div class="stat-mini"><div class="big">166팀</div><div class="lbl">누적 입주기업 수 (2017~2025)</div></div>
+        <div class="stat-mini"><div class="big">48팀</div><div class="lbl">2025년 신규 입주</div></div>
+        <div class="stat-mini"><div class="big">68팀</div><div class="lbl">2025.12 기준 재적 입주기업</div></div>
+        <div class="stat-mini"><div class="big">20팀</div><div class="lbl">스타시티 스타트업 존(최다 입주공간)</div></div>
+      </div>
+      <div class="card" style="margin-bottom:16px;">
+        <h3 class="sub-h">연도별 누적 입주기업 추이</h3>
+        <div id="tenantYearChart"></div>
+      </div>
+      <div class="card">
+        <h3 class="sub-h">공간별 입주기업 현황 (2025.12 기준)</h3>
+        <div id="tenantSpaceChart"></div>
       </div>
     </section>
 
@@ -1968,6 +2073,178 @@ function updateFeedback(id, val){ programs.find(p=>p.id===id).feedback = val; re
 /* =========================================================
    INIT
 ========================================================= */
+/* =========================================================
+   [참고] 2025년 결과보고 데이터 및 렌더링
+========================================================= */
+const R2025_facilityExec = [
+  {name:'K-이노베이션 스테이션 센터', amt:47500000, exec:37162560},
+  {name:'스타시티 스타트업 존', amt:75500000, exec:66363140},
+  {name:'K-바이오 이노베이션 허브', amt:21600000, exec:19671280},
+  {name:'KU 스타트업 존', amt:4000000, exec:3196000},
+  {name:'KU청년창업스튜디오', amt:7000000, exec:3387940},
+  {name:'창업지원공간 통합관리(사업단 사업센터 등)', amt:87800000, exec:80113770},
+];
+const R2025_programExec = [
+  {name:'2025 KU 창업 아이디어 경진대회', amt:127160000, exec:127103109},
+  {name:'KU 마라톤 컨설팅', amt:50000000, exec:50000000},
+  {name:'KU 스타트업 스케일업', amt:74280000, exec:74280000},
+  {name:'KU Global Start-up Academy', amt:49600000, exec:49600000},
+  {name:'KU 캠퍼스타운 Family Showcase', amt:48500000, exec:48492880},
+  {name:'KU 사업화 지원 프로그램', amt:250840000, exec:235716685},
+  {name:'KU 스타트업 IP 서포트 프로그램', amt:19200000, exec:19200000},
+  {name:'스타시티 스타트업 존 Home Coming Day', amt:10000000, exec:10000000},
+  {name:'동북권 캠퍼스타운 서밋', amt:10000000, exec:10000000},
+  {name:'KU 창업스쿨', amt:61680000, exec:61680000},
+  {name:'오픈 이노베이션', amt:20000000, exec:20000000},
+  {name:'2026 KU 창업 아이디어 경진대회(선발업무)', amt:8690000, exec:8575800},
+  {name:'사업단 운영', amt:276650000, exec:239060620},
+];
+const R2025_selfEval = [
+  {name:'KU 창업 아이디어 경진대회', summary:'경진대회로 우수기업을 발굴하고 보육체계를 구성해 성장 도모 구조 수립', grade:'매우우수'},
+  {name:'KU 마라톤 컨설팅', summary:'4개월 장기 1:1 컨설팅 + 기업별 전담 멘토 배치로 밀착 성장 지원', grade:'매우우수'},
+  {name:'KU 스타트업 스케일업', summary:'IR캠프→펀딩업 단계형 구조, 10명 이상 AC/VC 심사위원 밀도 높은 상담', grade:'우수'},
+  {name:'KU 사업화 지원 프로그램', summary:'시제품 제작·홍보비 등 기업별 맞춤 지원으로 실질적 사업화 성과 도출', grade:'우수'},
+  {name:'KU Global Start-up Academy', summary:'외국인 유학생 맞춤 창업교육으로 국내 창업시장 진입장벽 완화', grade:'매우우수'},
+  {name:'KU 캠퍼스타운 Family Showcase', summary:'지역 연계 실전 시장검증 기회 제공, 유관기관 협업으로 비용 절감', grade:'우수'},
+  {name:'KU 스타트업 IP 서포트 프로그램', summary:'IP 기초교육부터 실제 출원·취득까지 연계된 통합 지원체계 구축', grade:'매우우수'},
+  {name:'스타시티 스타트업 존 Home Coming Day', summary:'공유주방 활용 시식회로 소비자 반응 확인 및 시장 검증 수행', grade:'우수'},
+  {name:'KU 창업스쿨', summary:'분야별·성장단계별 맞춤 교육으로 실무 중심 역량 강화', grade:'매우우수'},
+  {name:'동북권 캠퍼스타운 서밋', summary:'4개 대학 공동 IR 발표대회로 권역 내 협력구조 강화', grade:'우수'},
+  {name:'오픈 이노베이션', summary:'대기업 리버스피칭·1:1 상담회로 실질적 협업 논의 강화', grade:'매우우수'},
+  {name:'2026 KU 창업 아이디어 경진대회', summary:'차년도 입주기업 사전 선발로 보육 공백 최소화', grade:'매우우수'},
+];
+const R2025_quantEval = [
+  {name:'KU 창업 아이디어 경진대회', metric:'입주기업 선발 수', plan:'60팀 이상', actual:'70팀'},
+  {name:'KU 창업 아이디어 경진대회', metric:'참여 만족도', plan:'4.3점 이상', actual:'4.86점'},
+  {name:'KU 마라톤 컨설팅', metric:'참여 기업 수 / 만족도', plan:'25팀 / 4.3점', actual:'25팀 / 4.9점'},
+  {name:'KU 스타트업 스케일업', metric:'IR Camp 참여·만족도', plan:'20팀 / 4.3점', actual:'20팀 / 4.85점'},
+  {name:'KU 스타트업 스케일업', metric:'펀딩업 투자유치 건수', plan:'2건', actual:'0건 (미달성)'},
+  {name:'KU 사업화 지원 프로그램', metric:'참여기업 / 시제품 제작', plan:'40팀 / 30개 이상', actual:'40팀 / 38개'},
+  {name:'KU Global Start-up Academy', metric:'참여인원 / 만족도', plan:'30명 / 4.0점', actual:'34명 / 4.68점'},
+  {name:'Family Showcase', metric:'드림페어 참여기업 / 만족도', plan:'20팀 이상 / 4.3점', actual:'23팀 / 4.3점'},
+  {name:'IP 서포트 프로그램', metric:'참여기업 / 만족도', plan:'15팀 / 4.3점', actual:'16팀 / 4.7점'},
+  {name:'Home Coming Day', metric:'참여기업 / 만족도', plan:'20팀 이상 / 4.2점', actual:'21팀 / 4.9점'},
+  {name:'KU 창업스쿨', metric:'AI 창업실무 참여자(입주기업)', plan:'25명 이상', actual:'99명'},
+  {name:'KU 창업스쿨', metric:'재학생 창업아카데미 참여', plan:'80명 이상', actual:'94명'},
+  {name:'동북권 캠퍼스타운 서밋', metric:'참여인원 / 만족도', plan:'200명 / 4.3점', actual:'200명 / 4.5점'},
+  {name:'오픈 이노베이션', metric:'참여팀 수', plan:'70팀 이상', actual:'181팀 (259%)'},
+];
+const R2025_staff = [
+  {name:'이반석', period:'2022.4.15~2025.12.31', contract:30600000, paid:35100000, note:'인센티브 포함'},
+  {name:'김승재', period:'2024.3.1~2025.12.31', contract:36720000, paid:15300000, note:'5월 퇴사'},
+  {name:'홍시연', period:'2024.3.1~2025.12.31', contract:27540000, paid:31790000, note:'인센티브 포함'},
+  {name:'박지연', period:'2024.3.15~2025.12.31', contract:30600000, paid:34600000, note:'인센티브 포함'},
+  {name:'김재권', period:'2025.3.15~2025.12.31', contract:30000000, paid:27417000, note:'인센티브 포함'},
+  {name:'김형진', period:'2025.5.15~2025.12.31', contract:27000000, paid:20775000, note:'인센티브 포함'},
+];
+const R2025_lease = [
+  {name:'공기청정기', model:'노블 공기청정기', annual:490800, period:"'22.10.27~'27.10.27", qty:1, use:'사업단 사업센터'},
+  {name:'정수기', model:'아이콘 정수기2', annual:416900, period:"'22.12.13~'27.12.12", qty:1, use:'K-바이오 이노베이션 허브'},
+  {name:'정수기', model:'아이콘 정수기', annual:427900, period:"'23.8.14~'28.8.13", qty:1, use:'스타시티 스타트업 존'},
+  {name:'정수기', model:'일반 냉온수기', annual:623700, period:"'22.11.10~'25.11.9", qty:1, use:'K-이노베이션 스테이션 센터'},
+  {name:'복합기', model:'신도리코 D420', annual:2376000, period:"'23.6.1~'26.5.31", qty:2, use:'스타시티 스타트업 존'},
+  {name:'복합기', model:'신도리코 N501', annual:6278000, period:"'22.12.12~'25.12.11", qty:1, use:'K-바이오 이노베이션 허브'},
+  {name:'복합기', model:'신도리코 D450', annual:570727, period:"'22.11.7~'25.11.6", qty:2, use:'사업단 사업센터·K-이노베이션 스테이션 센터'},
+  {name:'파티션 등', model:'파티션·책상·의자', annual:3372600, period:"'24.4.30~'24.12.31", qty:1, use:'K-이노베이션 스테이션 센터'},
+  {name:'파티션 등', model:'파티션·책상·의자', annual:2983200, period:"'24.6.1~'24.12.31", qty:1, use:'K-바이오 이노베이션 허브'},
+];
+const R2025_facUtil = [
+  {name:'K-이노베이션 스테이션 센터', own:'자치구소유', size:'지상3층 381.74㎡', tenants:16, annual:37162560},
+  {name:'K-바이오 이노베이션 허브', own:'대학소유', size:'지상6층 471.68㎡', tenants:18, annual:19671280},
+  {name:'스타시티 스타트업 존', own:'법인소유', size:'지하1층 436㎡', tenants:20, annual:66363140},
+  {name:'KU청년창업스튜디오', own:'대학소유', size:'지상2층 65.2㎡', tenants:2, annual:3387940},
+  {name:'KU 스타트업 존', own:'대학소유', size:'지상3층 339.77㎡', tenants:12, annual:3196000},
+];
+const R2025_tenantYears = [
+  {year:'2022년(사업개시)', cum:35},
+  {year:'2023년', cum:69, add:34},
+  {year:'2024년', cum:118, add:49},
+  {year:'2025년', cum:166, add:48},
+];
+const R2025_tenantSpace = [
+  {name:'스타시티 스타트업 존', count:20, color:'#0F4D33'},
+  {name:'K-바이오 이노베이션 허브', count:18, color:'#2E8B57'},
+  {name:'K-이노베이션 스테이션 센터', count:16, color:'#6B4FA0'},
+  {name:'KU 스타트업 존', count:12, color:'#2E5FA3'},
+  {name:'KU청년창업스튜디오', count:2, color:'#B8792B'},
+];
+
+function renderR2025(){
+  const facBody = document.getElementById('facilityExecBody');
+  if(facBody){
+    facBody.innerHTML = R2025_facilityExec.map(f=>{
+      const pct = Math.round(f.exec/f.amt*1000)/10;
+      return `<tr><td>${f.name}</td><td style="text-align:right;">${fmt(f.amt)}원</td><td style="text-align:right;">${fmt(f.exec)}원</td><td class="exec-pct" style="text-align:center;color:${pct>=90?'#166B3E':'#B4432F'}">${pct}%</td></tr>`;
+    }).join('');
+  }
+  const progBody = document.getElementById('programExecBody');
+  if(progBody){
+    const pAmt = R2025_programExec.reduce((s,p)=>s+p.amt,0);
+    const pExec = R2025_programExec.reduce((s,p)=>s+p.exec,0);
+    const fAmt = R2025_facilityExec.reduce((s,f)=>s+f.amt,0);
+    const fExec = R2025_facilityExec.reduce((s,f)=>s+f.exec,0);
+    progBody.innerHTML = R2025_programExec.map(p=>{
+      const pct = Math.round(p.exec/p.amt*1000)/10;
+      return `<tr><td>${p.name}</td><td style="text-align:right;">${fmt(p.amt)}원</td><td style="text-align:right;">${fmt(p.exec)}원</td><td class="exec-pct" style="text-align:center;color:${pct>=90?'#166B3E':'#B4432F'}">${pct}%</td></tr>`;
+    }).join('') + `<tr style="font-weight:800;border-top:2px solid var(--line);">
+      <td>총계 (시설 6개 + 프로그램 13개)</td>
+      <td style="text-align:right;">${fmt(fAmt+pAmt)}원</td>
+      <td style="text-align:right;">${fmt(fExec+pExec)}원</td>
+      <td class="exec-pct" style="text-align:center;color:#166B3E;">${Math.round((fExec+pExec)/(fAmt+pAmt)*1000)/10}%</td>
+    </tr>`;
+  }
+  const evalBody = document.getElementById('selfEvalBody');
+  if(evalBody){
+    evalBody.innerHTML = R2025_selfEval.map(e=>{
+      const cls = e.grade==='매우우수' ? 'best' : 'good';
+      return `<tr><td style="font-weight:700;">${e.name}</td><td style="font-size:12.3px;color:var(--ink-soft);">${e.summary}</td><td style="text-align:center;"><span class="grade-badge ${cls}">${e.grade}</span></td></tr>`;
+    }).join('');
+  }
+  const quantBody = document.getElementById('quantEvalBody');
+  if(quantBody){
+    quantBody.innerHTML = R2025_quantEval.map(q=>{
+      const under = q.actual.includes('미달성');
+      return `<tr><td>${q.name}</td><td style="font-size:12.3px;color:var(--ink-soft);">${q.metric}</td><td style="text-align:center;">${q.plan}</td><td style="text-align:center;font-weight:700;color:${under?'var(--red)':'#166B3E'};">${q.actual}</td></tr>`;
+    }).join('');
+  }
+  const staffBody = document.getElementById('staffBody');
+  if(staffBody){
+    staffBody.innerHTML = R2025_staff.map(s=>{
+      return `<tr><td style="font-weight:700;">${s.name}</td><td style="font-size:12px;">${s.period}</td><td style="text-align:right;">${fmt(s.contract)}원</td><td style="text-align:right;">${fmt(s.paid)}원</td><td style="font-size:11.5px;color:var(--ink-soft);">${s.note}</td></tr>`;
+    }).join('');
+  }
+  const leaseBody = document.getElementById('leaseBody');
+  if(leaseBody){
+    leaseBody.innerHTML = R2025_lease.map(l=>{
+      return `<tr><td>${l.name}</td><td style="font-size:12px;color:var(--ink-soft);">${l.model}</td><td style="text-align:right;">${fmt(l.annual)}원</td><td style="font-size:11.5px;">${l.period}</td><td style="text-align:center;">${l.qty}</td><td style="font-size:12px;">${l.use}</td></tr>`;
+    }).join('');
+  }
+  const utilBody = document.getElementById('facUtilBody');
+  if(utilBody){
+    utilBody.innerHTML = R2025_facUtil.map(u=>{
+      return `<tr><td style="font-weight:700;">${u.name}</td><td>${u.own}</td><td style="font-size:12px;color:var(--ink-soft);">${u.size}</td><td style="text-align:center;">${u.tenants}팀</td><td style="text-align:right;">${fmt(u.annual)}원</td></tr>`;
+    }).join('');
+  }
+  const yearChart = document.getElementById('tenantYearChart');
+  if(yearChart){
+    const maxCum = Math.max(...R2025_tenantYears.map(y=>y.cum));
+    yearChart.innerHTML = R2025_tenantYears.map(y=>`
+      <div style="margin-bottom:12px;">
+        <div style="display:flex;justify-content:space-between;font-size:12.3px;margin-bottom:4px;"><span>${y.year}${y.add?` (신규 +${y.add}팀)`:''}</span><b>누적 ${y.cum}팀</b></div>
+        <div class="bar-track" style="height:12px;"><div class="bar-fill" style="width:${y.cum/maxCum*100}%;"></div></div>
+      </div>`).join('');
+  }
+  const spaceChart = document.getElementById('tenantSpaceChart');
+  if(spaceChart){
+    const maxCnt = Math.max(...R2025_tenantSpace.map(s=>s.count));
+    spaceChart.innerHTML = R2025_tenantSpace.map(s=>`
+      <div style="margin-bottom:12px;">
+        <div style="display:flex;justify-content:space-between;font-size:12.3px;margin-bottom:4px;"><span>${s.name}</span><b>${s.count}팀</b></div>
+        <div class="bar-track" style="height:12px;"><div class="bar-fill" style="width:${s.count/maxCnt*100}%;background:${s.color};"></div></div>
+      </div>`).join('');
+  }
+}
+
 renderOrgFacRows();
 renderBudget();
 renderYearEndCountdown();
@@ -1977,6 +2254,7 @@ renderManagerFilterBar();
 renderStatusCounts();
 renderGantt();
 renderFeedbackSummary();
+renderR2025();
 
 </script>
 </body>

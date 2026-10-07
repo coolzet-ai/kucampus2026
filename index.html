@@ -353,6 +353,21 @@
   #adminBar{display:none;margin:10px 4px 0;padding:8px 10px;border-radius:8px;background:rgba(255,255,255,.10);color:#DCEEE3;font-size:11.3px;line-height:1.5;}
   #adminBar.on{display:block;}
   #adminBar button{margin-top:4px;background:#FFE9B8;color:#5A3A00;border:none;border-radius:6px;padding:3px 9px;font-size:11px;font-weight:700;cursor:pointer;}
+  @media (min-width:981px){
+    #v1 .view-head{margin-bottom:10px;}
+    #v1 .view-title{font-size:23px;margin:3px 0 4px;}
+    #v1 .view-desc{font-size:13px;line-height:1.5;}
+    #v1 .kpi-groupbar{margin:12px 0 8px;}
+    #v1 .grid{grid-template-columns:repeat(6,1fr);gap:12px;}
+    #v1 .grid>.kpi-card{grid-column:span 2;padding:13px 18px 14px;}
+    #v1 .grid>.kpi-card:last-child:nth-child(3n+1){grid-column:span 6;}
+    #v1 .grid>.kpi-card:nth-last-child(2):nth-child(3n+1),
+    #v1 .grid>.kpi-card:nth-last-child(2):nth-child(3n+1)+.kpi-card{grid-column:span 3;}
+    #v1 .kpi-tag{margin-bottom:6px;}
+    #v1 .kpi-name{min-height:0;margin-bottom:6px;}
+    #v1 .kpi-figure .cur{font-size:24px;}
+    #v1 .kpi-h2{margin-top:6px;}
+  }
 </style>
 </head>
 <body>
